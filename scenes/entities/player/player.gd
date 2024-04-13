@@ -335,7 +335,7 @@ func _input(event):
 		
 		
 	# FIRE PISTOL INPUT
-	if holding_pistol and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+	if holding_pistol and event is InputEventAction and event.action == "fire_pistol":
 		if event.is_pressed():
 			# Check if this click is within the threshold to be considered a double-click
 			var current_time = Time.get_ticks_msec() / 1000.0
@@ -359,7 +359,7 @@ func _input(event):
 				print("Fire pistol released")
 				pistol_continuous_firing = false
 		
-	if holding_shotgun and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
+	if holding_shotgun and event is InputEventAction and event.action == "fire_shotgun":
 		if event.is_pressed():
 			var current_time = Time.get_ticks_msec() / 1000.0
 			# Check for double-click to toggle automatic mode

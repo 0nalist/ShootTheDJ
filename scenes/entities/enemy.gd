@@ -9,6 +9,9 @@ extends CharacterBody3D
 # Can still be damaged while paused
 # 
 
+# NAVIGATION causes HEAVY lag when >25 enemies navigating
+##Add navigation to 2nd priority thread
+
 signal hurt_player
 
 @onready var bass_on_hit_player = $BassOnHit

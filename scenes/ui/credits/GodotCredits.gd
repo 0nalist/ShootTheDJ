@@ -55,8 +55,9 @@ var credits = [
 		"Art Direction",
 		"Sam"
 	],[
-		"Assets",
+		"Art & Assets",
 		"Wildenza -- PSX Asset Pack",
+		'"Nun PSX style Lowpoly" (https://skfb.ly/oMBzG) by Gabrielonstartdesk',
 		"Lukky -- Arms Mesh",
 		"Sam",
 	],[

@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://c3cibwa0258ev"]
+[gd_scene load_steps=75 format=3 uid="uid://c3cibwa0258ev"]
 
 [ext_resource type="Script" path="res://scenes/world.gd" id="1_0gs5r"]
 [ext_resource type="Script" path="res://addons/qodot/src/nodes/qodot_map.gd" id="1_ypnyy"]
@@ -20,9 +20,11 @@
 [ext_resource type="Resource" uid="uid://dm7h0f5874x24" path="res://scenes/resources/collectables/collectable resources/coin1.tres" id="30_hxx0d"]
 [ext_resource type="Texture2D" uid="uid://dixjfkdk2leot" path="res://textures/RetroPixel/SAND_1A.PNG" id="31_4njwu"]
 [ext_resource type="Resource" uid="uid://c1drmafn531t2" path="res://scenes/resources/collectables/collectable resources/healthPotion5.tres" id="31_y2s66"]
+[ext_resource type="PackedScene" uid="uid://b8nr5kmd075rd" path="res://assets/Characters/Roma/roma_nun.tscn" id="32_stm12"]
 [ext_resource type="Texture2D" uid="uid://c43kba62no0eu" path="res://textures/RetroPixel/PIPES_1A.PNG" id="32_u35sj"]
 [ext_resource type="Texture2D" uid="uid://ccfbnkkhjr8c4" path="res://textures/RetroPixel/SLIME_1A.PNG" id="33_865qp"]
 [ext_resource type="Resource" uid="uid://bsiqlkkf37hn7" path="res://scenes/resources/collectables/weapon collectables/pistol1.tres" id="33_lqmpe"]
+[ext_resource type="PackedScene" uid="uid://bwrt2lgi4rhm8" path="res://assets/Characters/OfficeLady/office_lady.tscn" id="33_xw106"]
 [ext_resource type="Texture2D" uid="uid://ci6y3x8prb814" path="res://textures/RetroPixel/LIGHT_1B.PNG" id="34_ghjeh"]
 [ext_resource type="Texture2D" uid="uid://bqbcln27v7072" path="res://textures/RetroPixel/RIVET_1A.PNG" id="35_lts4v"]
 [ext_resource type="Texture2D" uid="uid://b6cakeo8sad0f" path="res://textures/RetroPixel/PAPER_1E.PNG" id="36_ywy75"]
@@ -452,6 +454,13 @@ data = PackedVector3Array(166.266, 10.3472, -17.2722, 166.266, 6.3472, -17.2722,
 [sub_resource type="SphereShape3D" id="SphereShape3D_cmrt2"]
 radius = 0.568989
 
+[sub_resource type="Curve" id="Curve_7oxr3"]
+_data = [Vector2(0.571429, 0.602041), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="CurveTexture" id="CurveTexture_y8jco"]
+curve = SubResource("Curve_7oxr3")
+
 [node name="World" type="Node3D"]
 process_mode = 1
 script = ExtResource("1_0gs5r")
@@ -755,7 +764,14 @@ collectable_resource = ExtResource("33_lqmpe")
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(0.996691, -0.0344883, 0.0736019, -0.0729998, 0.0184067, 0.997162, -0.0357452, -0.999236, 0.0158282, -21.0888, 65.5718, 63.1533)
 light_energy = 3.229
+light_projector = SubResource("CurveTexture_y8jco")
 light_size = 1.0
 shadow_enabled = true
+
+[node name="Roma" parent="." instance=ExtResource("32_stm12")]
+transform = Transform3D(-0.579102, 0, 0.375154, 0, 0.69, 0, -0.375154, 0, -0.579102, -39.8297, 58.1258, 64.563)
+
+[node name="OfficeLady" parent="." instance=ExtResource("33_xw106")]
+transform = Transform3D(0.715181, 0, 0.69894, 0, 1, 0, -0.69894, 0, 0.715181, -36.8075, 59.3258, 51.6662)
 
 [editable path="Level2/Enemy39"]

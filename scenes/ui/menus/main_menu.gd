@@ -38,7 +38,8 @@ var splash_texts = [
 	"- i know it needs more cowbell -",
 	"- like for a 'tbh' -",
 	"- 100% bug free! -",
-	"- ALPHA 0.0.1 releasing Mayday -"
+	"- ALPHA 0.0.1 releasing Mayday -",
+	"- needs more game juice -"
 	
 	
 ]

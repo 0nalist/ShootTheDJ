@@ -140,6 +140,7 @@ func _ready():
 	drum_machine_factory_reset()
 	
 	pistol_cooldown_timer.wait_time = cooldown_timer
+	shotgun_cooldown_timer.wait_time = cooldown_timer
 
 
 
@@ -147,29 +148,33 @@ func _ready():
 # ========= B E A T S H O T   L O G I C ========== #
 
 var current_sixteenth: int = 0
+var cooldown_timer = BeatManager.sixteenth_duration * 1.73  # Cooldown after first shot
+const DOUBLE_CLICK_THRESHOLD = 0.25  # 250 milliseconds between clicks
+
+#PISTOL variables
 var single_shot_queued := false
 var pistol_continuous_firing := false
 var pistol_cooldown = false
-var cooldown_timer = BeatManager.sixteenth_duration * 1.47  # Cooldown after first shot
 var next_shot_sixteenth := 0
 var pistol_shot_queue = []  # Array to hold queued shots
 var max_queued_pistol_shots = 1  # Maximum number of shots that can be queued
-
-var last_click_time := 0.0
-const DOUBLE_CLICK_THRESHOLD = 0.25  # 250 milliseconds between clicks
+var last_pistol_click_time := 0.0
 var is_pistol_continuous_firing_enabled := false
-var hat_pats = {"pistol": [1,2,3,4,5, 7, 11, 15]}  # Example pattern for the pistol
-
+var hat_pat = {"pistol": [1,2,3,4,5, 7, 11, 15]}  # Example pattern for the pistol
+@onready var pistol_cooldown_timer = $Head/MainCamera/GunRay/PistolCooldownTimer
 
 #SHOTGUN variables
-var dead_shot_pats = [5, 13]
-var close_enough_pats = [4, 6, 12, 14]
+var dead_shot_pat = [5, 13]
+var close_enough_pat = [4, 6, 12, 14]
 var shotgun_shot_queue = []  # Queue for shotgun shots
+var last_shotgun_click_time := 0.0
+var shotgun_cooldown = false
 var shotgun_automatic = false  # Toggle for automatic firing
+@onready var shotgun_cooldown_timer = $Head/MainCamera/GunRay/ShotgunCooldownTimer
 
 
 
-@onready var pistol_cooldown_timer = $Head/MainCamera/GunRay/PistolCooldownTimer
+
 
 func debug_kick():
 	one_kick_punch.play()
@@ -182,7 +187,7 @@ func _on_sixteenth(sixteenth):
 	if sixteenth in [1,5,9,13]:
 		debug_kick()
 	if shotgun_automatic:
-		if current_sixteenth in dead_shot_pats:
+		if current_sixteenth in dead_shot_pat:
 			fire_shotgun(false)  # Critical hit if automatic
 
 func process_queued_shots():
@@ -195,7 +200,7 @@ func process_queued_shots():
 			i += 1
 	for j in range(shotgun_shot_queue.size()):
 		if shotgun_shot_queue[j] == current_sixteenth:
-			fire_shotgun(current_sixteenth in dead_shot_pats)
+			fire_shotgun(current_sixteenth in dead_shot_pat)
 			shotgun_shot_queue.remove_at(j)
 			break
 
@@ -224,11 +229,11 @@ func queue_pistol_shot_on_pattern():
 			pistol_shot_queue.append(next_sixteenth)
 
 func find_next_valid_pistol_sixteenth():
-	var current_index = hat_pats["pistol"].find(current_sixteenth)
-	if current_index == -1 or current_index + 1 >= hat_pats["pistol"].size():
-		return hat_pats["pistol"][0]  # Wrap around if needed
+	var current_index = hat_pat["pistol"].find(current_sixteenth)
+	if current_index == -1 or current_index + 1 >= hat_pat["pistol"].size():
+		return hat_pat["pistol"][0]  # Wrap around if needed
 	else:
-		return hat_pats["pistol"][current_index + 1]
+		return hat_pat["pistol"][current_index + 1]
 
 
 # ====== SHOTGUN functions ========
@@ -240,20 +245,29 @@ func fire_shotgun(is_critical):
 		damage *= 2  # Double damage for critical hits
 	print("Shotgun fired at sixteenth:", current_sixteenth, "Critical Hit:", is_critical)
 	gun_camera.fire_shotgun()  # Animation handling
+	shotgun_cooldown = true
+	shotgun_cooldown_timer.start()
+
+
+func _on_shotgun_cooldown_timer_timeout():
+	shotgun_cooldown = false
+	if shotgun_automatic:  # If still holding down, queue next patterned shot
+		queue_shotgun_shot()
+
 
 func toggle_shotgun_automatic():
 	shotgun_automatic = !shotgun_automatic
 	print("Shotgun automatic mode toggled:", shotgun_automatic)
 
 func queue_shotgun_shot():
-	if not shotgun_automatic and current_sixteenth not in (dead_shot_pats + close_enough_pats):
+	if not shotgun_automatic and current_sixteenth not in (dead_shot_pat + close_enough_pat):
 		var next_shot = find_next_dead_shot()
 		if next_shot != -1:
 			shotgun_shot_queue.append(next_shot)
 			
 
 func find_next_dead_shot():
-	var indices = dead_shot_pats
+	var indices = dead_shot_pat
 	for idx in indices:
 		if idx > current_sixteenth:
 			return idx
@@ -313,7 +327,7 @@ func _input(event):
 		if event.is_pressed():
 			# Check if this click is within the threshold to be considered a double-click
 			var current_time = Time.get_ticks_msec() / 1000.0
-			if current_time - last_click_time <= DOUBLE_CLICK_THRESHOLD:
+			if current_time - last_pistol_click_time <= DOUBLE_CLICK_THRESHOLD:
 				# Toggle continuous firing
 				is_pistol_continuous_firing_enabled = !is_pistol_continuous_firing_enabled
 				pistol_continuous_firing = is_pistol_continuous_firing_enabled
@@ -326,7 +340,7 @@ func _input(event):
 					if not is_pistol_continuous_firing_enabled:
 						pistol_continuous_firing = true
 			# Update last click time
-			last_click_time = current_time
+			last_pistol_click_time = current_time
 		else:
 			# Handle mouse release for non-toggled mode
 			if not is_pistol_continuous_firing_enabled:
@@ -344,12 +358,35 @@ func _input(event):
 		
 		
 		# FIRE SHOTGUN INPUT
-	if event.is_action_pressed("fire_shotgun"):
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
+		if event.is_pressed():
+			var current_time = Time.get_ticks_msec() / 1000.0  # Current time in seconds
+			# Check if the click is within the double-click threshold
+			if current_time - last_shotgun_click_time < DOUBLE_CLICK_THRESHOLD:
+				# Toggle automatic firing mode
+				toggle_shotgun_automatic()
+				print("Shotgun automatic mode toggled:", shotgun_automatic)
+			else:
+				# Normal shotgun firing logic
+				if not shotgun_automatic and not shotgun_cooldown:
+					if current_sixteenth in (dead_shot_pat + close_enough_pat):
+						fire_shotgun(current_sixteenth in dead_shot_pat)
+					else:
+						# Queue the next shot if the current sixteenth is not on any pattern
+						queue_shotgun_shot()
+			# Update the last click time
+			last_shotgun_click_time = current_time
+		else:
+			if not shotgun_automatic:
+				# Reset logic if needed when the button is released
+				print("Shotgun fire button released")
+	
+	'''if event.is_action_pressed("fire_shotgun"):
 		if not event.is_echo():
-			if current_sixteenth in (dead_shot_pats + close_enough_pats):
-				fire_shotgun(current_sixteenth in dead_shot_pats)
+			if current_sixteenth in (dead_shot_pat + close_enough_pat):
+				fire_shotgun(current_sixteenth in dead_shot_pat)
 			elif not shotgun_automatic:
-				queue_shotgun_shot()
+				queue_shotgun_shot()'''
 		
 		
 	if Input.is_action_just_pressed("slide"):
@@ -489,38 +526,38 @@ func start_stop_weapons_3slot():
 
 var one_slot_current = 0
 func cycle_one():
-	one_slot_current = (one_slot_current + 1) % hat_pats.size()
-	if one_slot_current > hat_pats.size():
+	one_slot_current = (one_slot_current + 1) % hat_pat.size()
+	if one_slot_current > hat_pat.size():
 		one_slot_current = 0
 
 var two_slot_current = 0
 func cycle_two():
-	two_slot_current = (two_slot_current + 1) % snare_pats.size()
-	if two_slot_current > snare_pats.size():
+	two_slot_current = (two_slot_current + 1) % snare_pat.size()
+	if two_slot_current > snare_pat.size():
 		two_slot_current = 0
 
 var three_slot_current = 0
 func cycle_three():
-	three_slot_current = (three_slot_current + 1) % kick_pats.size()
-	if three_slot_current > kick_pats.size():
+	three_slot_current = (three_slot_current + 1) % kick_pat.size()
+	if three_slot_current > kick_pat.size():
 		three_slot_current = 0
 
 var hat_patterns: Array = [[],[],[]]
 var user_hats: Array = []
-var snare_pats: Array = [[]]
-var kick_pats: Array = [[],[]]
+var snare_pat: Array = [[]]
+var kick_pat: Array = [[],[]]
 
 func set_user_hats():
 	user_hats.append(1)
 	print(user_hats)
 
 func drum_machine_factory_reset():
-	hat_pats[0] = [3,7,11,15]
-	hat_pats[1] = [1,2,3,5,6,7,9,10,11,12,13,14]
-	hat_pats[2] = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
-	snare_pats[0] = [5,13]
-	kick_pats[0] = [1,11]
-	kick_pats[1] = [1,5,9,13]
+	hat_pat[0] = [3,7,11,15]
+	hat_pat[1] = [1,2,3,5,6,7,9,10,11,12,13,14]
+	hat_pat[2] = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
+	snare_pat[0] = [5,13]
+	kick_pat[0] = [1,11]
+	kick_pat[1] = [1,5,9,13]
 
 func shoot_play_closed_hihat():
 	#one_hi_hat_hit.play()
@@ -573,3 +610,4 @@ func _on_restart_button_button_up():
 
 func _on_quit_button_pressed():
 	restart()
+

@@ -98,6 +98,14 @@ var credits = [
 		'Morrissey',
 		#"My parents",
 		#"My friends",
+	],[
+		"DISCLAIMERS",
+		'no DJs were harmed in the production of this game',
+		"No AI generated art or images were used",
+		"ChatGPT was used for debugging",
+	],[
+		"Copyright",
+		'Sam'
 	]
 ]
 

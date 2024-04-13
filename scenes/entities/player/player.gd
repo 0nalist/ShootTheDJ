@@ -148,7 +148,7 @@ func _ready():
 
 var current_sixteenth: int = 0
 var single_shot_queued := false
-var continuous_firing := false
+var pistol_continuous_firing := false
 var pistol_cooldown = false
 var cooldown_timer = BeatManager.sixteenth_duration * 1.47  # Cooldown after first shot
 var next_shot_sixteenth := 0
@@ -157,9 +157,17 @@ var max_queued_pistol_shots = 1  # Maximum number of shots that can be queued
 
 var last_click_time := 0.0
 const DOUBLE_CLICK_THRESHOLD = 0.25  # 250 milliseconds between clicks
-var is_continuous_firing_enabled := false
-
+var is_pistol_continuous_firing_enabled := false
 var hat_pats = {"pistol": [1,2,3,4,5, 7, 11, 15]}  # Example pattern for the pistol
+
+
+#SHOTGUN variables
+var dead_shot_pats = [5, 13]
+var close_enough_pats = [4, 6, 12, 14]
+var shotgun_shot_queue = []  # Queue for shotgun shots
+var shotgun_automatic = false  # Toggle for automatic firing
+
+
 
 @onready var pistol_cooldown_timer = $Head/MainCamera/GunRay/PistolCooldownTimer
 
@@ -168,12 +176,14 @@ func debug_kick():
 
 func _on_sixteenth(sixteenth):
 	current_sixteenth = sixteenth
-	print("Current Sixteenth: ", sixteenth)  # Debug output
 	process_queued_shots()
-	if continuous_firing:
-		queue_shot_on_pattern()
+	if pistol_continuous_firing:
+		queue_pistol_shot_on_pattern()
 	if sixteenth in [1,5,9,13]:
 		debug_kick()
+	if shotgun_automatic:
+		if current_sixteenth in dead_shot_pats:
+			fire_shotgun(false)  # Critical hit if automatic
 
 func process_queued_shots():
 	var i = 0
@@ -183,14 +193,20 @@ func process_queued_shots():
 			pistol_shot_queue.remove_at(i)  # Remove shot from queue after firing
 		else:
 			i += 1
+	for j in range(shotgun_shot_queue.size()):
+		if shotgun_shot_queue[j] == current_sixteenth:
+			fire_shotgun(current_sixteenth in dead_shot_pats)
+			shotgun_shot_queue.remove_at(j)
+			break
 
+
+# ===== PISTOL functions ======
 func fire_pistol():
 	BeatManager.emit_signal("play_sound", "ONEHIHATHIT")
 	print("Pistol fired at sixteenth: ", current_sixteenth)
 	gun_camera.fire_pistol()  # Assuming this method manages the animation
 	if gun_ray.is_colliding() and gun_ray.get_collider().has_method("take_damage"):
 		gun_ray.get_collider().take_damage(pistol_damage)
-		print("hihathit")
 		heal(.1)
 	velocity *= 0.95
 	pistol_cooldown = true
@@ -198,22 +214,50 @@ func fire_pistol():
 
 func _on_pistol_cooldown_timer_timeout():
 	pistol_cooldown = false
-	if continuous_firing:  # If still holding down, queue next patterned shot
-		queue_shot_on_pattern()
+	if pistol_continuous_firing:  # If still holding down, queue next patterned shot
+		queue_pistol_shot_on_pattern()
 
-func queue_shot_on_pattern():
+func queue_pistol_shot_on_pattern():
 	if pistol_shot_queue.size() < max_queued_pistol_shots and not pistol_shot_queue.has(current_sixteenth):
-		var next_sixteenth = find_next_valid_sixteenth()
+		var next_sixteenth = find_next_valid_pistol_sixteenth()
 		if next_sixteenth != -1 and !pistol_shot_queue.has(next_sixteenth):
 			pistol_shot_queue.append(next_sixteenth)
-			print("Shot queued for sixteenth: ", next_sixteenth)
 
-func find_next_valid_sixteenth():
+func find_next_valid_pistol_sixteenth():
 	var current_index = hat_pats["pistol"].find(current_sixteenth)
 	if current_index == -1 or current_index + 1 >= hat_pats["pistol"].size():
 		return hat_pats["pistol"][0]  # Wrap around if needed
 	else:
 		return hat_pats["pistol"][current_index + 1]
+
+
+# ====== SHOTGUN functions ========
+
+func fire_shotgun(is_critical):
+	BeatManager.emit_signal("play_sound", "CLAP")
+	var damage = shotgun_damage
+	if is_critical:
+		damage *= 2  # Double damage for critical hits
+	print("Shotgun fired at sixteenth:", current_sixteenth, "Critical Hit:", is_critical)
+	gun_camera.fire_shotgun()  # Animation handling
+
+func toggle_shotgun_automatic():
+	shotgun_automatic = !shotgun_automatic
+	print("Shotgun automatic mode toggled:", shotgun_automatic)
+
+func queue_shotgun_shot():
+	if not shotgun_automatic and current_sixteenth not in (dead_shot_pats + close_enough_pats):
+		var next_shot = find_next_dead_shot()
+		if next_shot != -1:
+			shotgun_shot_queue.append(next_shot)
+			
+
+func find_next_dead_shot():
+	var indices = dead_shot_pats
+	for idx in indices:
+		if idx > current_sixteenth:
+			return idx
+	return indices[0]  # Wrap around to the first index if current is beyond the last
 
 
 
@@ -262,42 +306,50 @@ func _input(event):
 		head.rotation.x = clamp(head.rotation.x, deg_to_rad(-89), deg_to_rad(89))
 		gun_camera.sway(Vector2(event.relative.x, event.relative.y))
 		
+		
+		
+	# FIRE PISTOL INPUT
 	if holding_pistol and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.is_pressed():
 			# Check if this click is within the threshold to be considered a double-click
 			var current_time = Time.get_ticks_msec() / 1000.0
 			if current_time - last_click_time <= DOUBLE_CLICK_THRESHOLD:
 				# Toggle continuous firing
-				is_continuous_firing_enabled = !is_continuous_firing_enabled
-				continuous_firing = is_continuous_firing_enabled
-				print("Continuous firing toggled:", is_continuous_firing_enabled)
+				is_pistol_continuous_firing_enabled = !is_pistol_continuous_firing_enabled
+				pistol_continuous_firing = is_pistol_continuous_firing_enabled
+				print("Continuous firing toggled:", is_pistol_continuous_firing_enabled)
 			else:
 				# Not a double click, handle normal firing
 				if not pistol_cooldown:
 					print("Fire pistol pressed")
 					fire_pistol()  # Fire immediately on press
-					if not is_continuous_firing_enabled:
-						continuous_firing = true
+					if not is_pistol_continuous_firing_enabled:
+						pistol_continuous_firing = true
 			# Update last click time
 			last_click_time = current_time
 		else:
 			# Handle mouse release for non-toggled mode
-			if not is_continuous_firing_enabled:
+			if not is_pistol_continuous_firing_enabled:
 				print("Fire pistol released")
-				continuous_firing = false
-		
-		
-		
-		
+				pistol_continuous_firing = false
 		'''
 	if event.is_action_pressed("fire_pistol"):
 		if holding_pistol and not event.is_echo() and not pistol_cooldown:
 			print("Fire pistol pressed")
 			fire_pistol()  # Fire immediately on press
-			continuous_firing = true
+			pistol_continuous_firing = true
 	elif event.is_action_released("fire_pistol"):
 		print("Fire pistol released")
-		continuous_firing = false'''
+		pistol_continuous_firing = false'''
+		
+		
+		# FIRE SHOTGUN INPUT
+	if event.is_action_pressed("fire_shotgun"):
+		if not event.is_echo():
+			if current_sixteenth in (dead_shot_pats + close_enough_pats):
+				fire_shotgun(current_sixteenth in dead_shot_pats)
+			elif not shotgun_automatic:
+				queue_shotgun_shot()
 		
 		
 	if Input.is_action_just_pressed("slide"):

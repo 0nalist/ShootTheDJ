@@ -67,17 +67,19 @@ func play_sound_effect(sound_name):
 		add_child(sound_player)  # Add it to the scene
 		sound_player.play()  # Play the sound
 		# Automatically remove it after playback finishes
-		#sound_player.connect("finished", _on_sound_finished)##NOT WORKING, SHOULD DEFINITELY FIX TODO
+#		sound_player.connect("finished", _on_sound_finished)##NOT WORKING, SHOULD DEFINITELY FIX TODO
 
 func _on_sound_finished(sound_player):
 	sound_player.queue_free()
 
-
+#Pretty sure this does nothing, no connections
 func _on_Player_shoot(weapon_type):
 	if weapon_type == "pistol":
 		play_sound_effect("ONEHIHATHIT")
+		print("PLAYERSHOOTPIST")
 	elif weapon_type == "shotgun":
 		play_sound_effect("CLAP")
+		print("PLAYERSHOOTSHOTGUN")
 
 
 

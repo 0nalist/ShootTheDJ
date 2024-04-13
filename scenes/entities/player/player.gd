@@ -139,8 +139,8 @@ func _ready():
 	
 	drum_machine_factory_reset()
 	
-	pistol_cooldown_timer.wait_time = cooldown_timer
-	shotgun_cooldown_timer.wait_time = cooldown_timer
+	pistol_cooldown_timer.wait_time = pistol_cooldown_time
+	shotgun_cooldown_timer.wait_time = shotgun_cooldown_time
 
 
 
@@ -148,7 +148,8 @@ func _ready():
 # ========= B E A T S H O T   L O G I C ========== #
 
 var current_sixteenth: int = 0
-var cooldown_timer = BeatManager.sixteenth_duration * 1.73  # Cooldown after first shot
+var pistol_cooldown_time = BeatManager.sixteenth_duration * 1.73  # Cooldown after first shot
+var shotgun_cooldown_time = BeatManager.sixteenth_duration * 3.89
 const DOUBLE_CLICK_THRESHOLD = 0.25  # 250 milliseconds between clicks
 
 #PISTOL variables
@@ -182,21 +183,18 @@ func debug_kick():
 func _on_sixteenth(sixteenth):
 	current_sixteenth = sixteenth
 	process_queued_shots()
-	if pistol_continuous_firing:
+	
+	#PISTOL check
+	if holding_pistol and pistol_continuous_firing:
 		queue_pistol_shot_on_pattern()
 	
+	#DEBUG kick
 	if sixteenth in [1,5,9,13]:
 		debug_kick()
 	
-	if shotgun_automatic and current_sixteenth in dead_shot_pat:
-		fire_shotgun(false)
-	if not shotgun_automatic and not shotgun_cooldown:
-		if current_sixteenth in (dead_shot_pat + close_enough_pat):
-			fire_shotgun(current_sixteenth in dead_shot_pat)
-	'''
-	if shotgun_automatic:
-		if current_sixteenth in dead_shot_pat:
-			fire_shotgun(false)  # Critical hit if automatic'''
+	#SHOTGUN check
+	if shotgun_automatic and current_sixteenth in dead_shot_pat and not shotgun_cooldown:
+		fire_shotgun(false)  # Pass true for critical hit
 
 func process_queued_shots():
 	var i = 0
@@ -247,12 +245,18 @@ func find_next_valid_pistol_sixteenth():
 # ====== SHOTGUN functions ========
 
 func fire_shotgun(is_critical):
-	BeatManager.emit_signal("play_sound", "CLAP")
+	if shotgun_cooldown or !holding_shotgun:
+		return
+	
 	var damage = shotgun_damage
+	BeatManager.emit_signal("play_sound", "CLAP")
 	if is_critical:
 		damage *= 2  # Double damage for critical hits
 	print("Shotgun fired at sixteenth:", current_sixteenth, "Critical Hit:", is_critical)
 	gun_camera.fire_shotgun()  # Animation handling
+	if gun_ray.is_colliding() and gun_ray.get_collider().has_method("take_damage"):
+		gun_ray.get_collider().take_damage(shotgun_damage)
+		heal(.1)
 	shotgun_cooldown = true
 	shotgun_cooldown_timer.start()
 
@@ -275,12 +279,11 @@ func queue_shotgun_shot():
 			
 
 func find_next_dead_shot():
-	var indices = dead_shot_pat
-	for idx in indices:
-		if idx > current_sixteenth:
-			return idx
-	return indices[0]  # Wrap around to the first index if current is beyond the last
-
+	var upcoming_shots = dead_shot_pat.filter(func(x): return x > current_sixteenth)
+	if upcoming_shots.size() > 0:
+		return upcoming_shots[0]
+	return dead_shot_pat[0]  # Wrap to the first shot if current is beyond the last
+	
 
 
 
@@ -322,6 +325,7 @@ func _physics_process(delta):
 func _input(event):
 	if dead:
 		return
+		
 	if event is InputEventMouseMotion:
 		rotate_y(deg_to_rad(-event.relative.x * mouse_sens))
 		head.rotate_x(deg_to_rad(-event.relative.y * mouse_sens))
@@ -354,19 +358,29 @@ func _input(event):
 			if not is_pistol_continuous_firing_enabled:
 				print("Fire pistol released")
 				pistol_continuous_firing = false
-		'''
-	if event.is_action_pressed("fire_pistol"):
-		if holding_pistol and not event.is_echo() and not pistol_cooldown:
-			print("Fire pistol pressed")
-			fire_pistol()  # Fire immediately on press
-			pistol_continuous_firing = true
-	elif event.is_action_released("fire_pistol"):
-		print("Fire pistol released")
-		pistol_continuous_firing = false'''
+		
+	if holding_shotgun and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
+		if event.is_pressed():
+			var current_time = Time.get_ticks_msec() / 1000.0
+			# Check for double-click to toggle automatic mode
+			if current_time - last_shotgun_click_time < DOUBLE_CLICK_THRESHOLD:
+				toggle_shotgun_automatic()
+			else:
+				# Manual firing logic when automatic mode is off
+				if not shotgun_automatic and current_sixteenth in (dead_shot_pat + close_enough_pat) and not shotgun_cooldown:
+					fire_shotgun(current_sixteenth in dead_shot_pat)
+					shotgun_cooldown = true  # Start cooldown
+				elif not shotgun_automatic:
+					queue_shotgun_shot()  # Queue next valid shot if not in pattern
+			last_shotgun_click_time = current_time
+		else:
+			# Additional logic if needed when button is released
+			pass
 		
 		
-		# FIRE SHOTGUN INPUT
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
+		
+		'''# FIRE SHOTGUN INPUTOLD 1
+	if holding_shotgun and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
 		if event.is_pressed():
 			var current_time = Time.get_ticks_msec() / 1000.0  # Current time in seconds
 			# Check if the click is within the double-click threshold
@@ -379,6 +393,7 @@ func _input(event):
 				if not shotgun_automatic and not shotgun_cooldown:
 					if current_sixteenth in (dead_shot_pat + close_enough_pat):
 						fire_shotgun(current_sixteenth in dead_shot_pat)
+						shotgun_cooldown = true
 					else:
 						# Queue the next shot if the current sixteenth is not on any pattern
 						queue_shotgun_shot()
@@ -388,7 +403,10 @@ func _input(event):
 			if not shotgun_automatic:
 				# Reset logic if needed when the button is released
 				print("Shotgun fire button released")
+	'''
 	
+	
+	#old 2
 	'''if event.is_action_pressed("fire_shotgun"):
 		if not event.is_echo():
 			if current_sixteenth in (dead_shot_pat + close_enough_pat):

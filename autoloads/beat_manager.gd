@@ -114,3 +114,31 @@ func process_queue():
 func execute_action(action_data: Dictionary):
 	# Implement action execution logic here
 	print("Executing action:", action_data)
+
+
+
+
+
+
+
+###### GENERATE BASSLINE to play on enemy hits
+'''
+
+func generate_bassline():
+	pick random between different note variation patterns
+	pick random notes to fill variation pattern
+	return bassline
+
+
+bassline object variables:
+	length: how many beats?
+	number of unique notes: how many unique audio files are loaded?
+	
+
+
+
+
+
+
+
+'''

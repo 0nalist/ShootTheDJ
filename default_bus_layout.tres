@@ -1,0 +1,77 @@
+[gd_resource type="AudioBusLayout" load_steps=4 format=3 uid="uid://dh1c4lko6q1rj"]
+
+[sub_resource type="AudioEffectEQ10" id="AudioEffectEQ10_7o2oc"]
+resource_name = "EQ10"
+band_db/31_hz = -60.0
+band_db/62_hz = -18.5
+band_db/125_hz = -12.6
+band_db/250_hz = -10.6
+band_db/500_hz = -30.5
+band_db/1000_hz = -32.4
+band_db/2000_hz = -20.0
+band_db/4000_hz = -19.2
+
+[sub_resource type="AudioEffectFilter" id="AudioEffectFilter_6t2lg"]
+resource_name = "Filter"
+cutoff_hz = 135.0
+
+[sub_resource type="AudioEffectHighPassFilter" id="AudioEffectHighPassFilter_txv70"]
+resource_name = "HighPassFilter"
+cutoff_hz = 840.0
+
+[resource]
+bus/0/volume_db = -4.25003
+bus/1/name = &"Bkg Music"
+bus/1/solo = false
+bus/1/mute = false
+bus/1/bypass_fx = false
+bus/1/volume_db = -0.725993
+bus/1/send = &"Master"
+bus/2/name = &"Drumshots"
+bus/2/solo = false
+bus/2/mute = false
+bus/2/bypass_fx = false
+bus/2/volume_db = 0.0
+bus/2/send = &"Master"
+bus/3/name = &"Kicks"
+bus/3/solo = false
+bus/3/mute = false
+bus/3/bypass_fx = false
+bus/3/volume_db = 0.0
+bus/3/send = &"Master"
+bus/4/name = &"Hats"
+bus/4/solo = false
+bus/4/mute = false
+bus/4/bypass_fx = false
+bus/4/volume_db = 4.82901
+bus/4/send = &"Master"
+bus/5/name = &"Snare"
+bus/5/solo = false
+bus/5/mute = false
+bus/5/bypass_fx = false
+bus/5/volume_db = 0.0
+bus/5/send = &"Master"
+bus/6/name = &"sfx"
+bus/6/solo = false
+bus/6/mute = false
+bus/6/bypass_fx = false
+bus/6/volume_db = 0.0
+bus/6/send = &"Master"
+bus/7/name = &"bassfx"
+bus/7/solo = false
+bus/7/mute = false
+bus/7/bypass_fx = false
+bus/7/volume_db = 0.0672607
+bus/7/send = &"Master"
+bus/7/effect/0/effect = SubResource("AudioEffectEQ10_7o2oc")
+bus/7/effect/0/enabled = false
+bus/7/effect/1/effect = SubResource("AudioEffectFilter_6t2lg")
+bus/7/effect/1/enabled = false
+bus/7/effect/2/effect = SubResource("AudioEffectHighPassFilter_txv70")
+bus/7/effect/2/enabled = false
+bus/8/name = &"bass"
+bus/8/solo = false
+bus/8/mute = false
+bus/8/bypass_fx = false
+bus/8/volume_db = -5.93075
+bus/8/send = &"bassfx"

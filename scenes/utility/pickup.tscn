@@ -1,0 +1,90 @@
+[gd_scene load_steps=7 format=3 uid="uid://d4hwgbj3reakd"]
+
+[ext_resource type="Texture2D" uid="uid://th5rtnxoiu7h" path="res://assets/art/weapons/shotgunshootingFixed-Sheet-Sheet.png" id="2_2lig2"]
+
+[sub_resource type="GDScript" id="GDScript_2ehr7"]
+script/source = "extends Area3D
+class_name Pickup
+
+@onready var label_3d = $Label3D
+
+@export var label_text: Resource
+
+
+'''
+func _on_body_entered(body):
+	if body.is_in_group(\"player\"):
+		
+		body.collect(self)
+		#delay
+		queue_free()
+'''
+
+func _physics_process(delta):
+	rotate(Vector3(0,1,0), 1*delta)
+	
+	#do a sinewave up/down sway
+
+
+
+func _on_pickup_area_body_entered(body):
+	if body.is_in_group(\"player\"):
+		print(\"showlabel\")
+		label_3d.show()
+		
+		
+
+
+func _on_pickup_area_body_exited(body):
+	if body.is_in_group(\"player\"):
+		label_3d.hide()
+"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qgwl1"]
+size = Vector3(2.40808, 1, 2.61087)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4rxgy"]
+atlas = ExtResource("2_2lig2")
+region = Rect2(0, 0, 84, 84)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7p0te"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4rxgy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xavk6"]
+
+[node name="Pickup" type="Area3D"]
+collision_mask = 3
+script = SubResource("GDScript_2ehr7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.026062, 0.414513, 0.0388947)
+shape = SubResource("BoxShape3D_qgwl1")
+
+[node name="Sprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.425991, 0)
+sprite_frames = SubResource("SpriteFrames_7p0te")
+
+[node name="PickupArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.79237, 0)
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PickupArea"]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
+shape = SubResource("BoxShape3D_xavk6")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.783192, 0)
+visible = false
+billboard = 1
+text = "Press [e] to equip"
+
+[connection signal="body_entered" from="PickupArea" to="." method="_on_pickup_area_body_entered"]
+[connection signal="body_exited" from="PickupArea" to="." method="_on_pickup_area_body_exited"]

@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://diu4nmlrkjnr2"]
+
+[ext_resource type="PackedScene" uid="uid://cgg12n5orc5jr" path="res://assets/art/weapons/Shotgun.fbx" id="1_xqrjc"]
+[ext_resource type="Texture2D" uid="uid://dc1dnhek3x6nv" path="res://assets/art/weapons/PSX RETRO/psx textures/Shotgun_Texture.png" id="2_tvlxp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8karx"]
+albedo_texture = ExtResource("2_tvlxp")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7veld"]
+load_path = "res://.godot/imported/Shotgun_Texture.png-1bff2b046e873f186bf16d9eb2b1d3e5.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cn54k"]
+albedo_texture = SubResource("CompressedTexture2D_7veld")
+
+[node name="PumpShotGun" instance=ExtResource("1_xqrjc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.390283, 0)
+
+[node name="Shotgun" parent="RootNode" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_8karx")
+
+[node name="Shotgun-Detach" parent="RootNode" index="1"]
+transform = Transform3D(100, 0, 0, 0, -1.19209e-05, 100, 0, -100, -1.19209e-05, 1.30385e-08, 0.47858, -9.62233)
+surface_material_override/0 = SubResource("StandardMaterial3D_cn54k")

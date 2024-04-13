@@ -1,0 +1,76 @@
+[gd_scene load_steps=9 format=3 uid="uid://c531ihf0pyk2s"]
+
+[ext_resource type="Texture2D" uid="uid://th5rtnxoiu7h" path="res://assets/art/weapons/shotgunshootingFixed-Sheet-Sheet.png" id="1_dvthc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_135dt"]
+atlas = ExtResource("1_dvthc")
+region = Rect2(0, 0, 84, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_drxyw"]
+atlas = ExtResource("1_dvthc")
+region = Rect2(0, 0, 84, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kt454"]
+atlas = ExtResource("1_dvthc")
+region = Rect2(84, 0, 84, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4gp6b"]
+atlas = ExtResource("1_dvthc")
+region = Rect2(168, 0, 84, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h8ia3"]
+atlas = ExtResource("1_dvthc")
+region = Rect2(252, 0, 84, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dconb"]
+atlas = ExtResource("1_dvthc")
+region = Rect2(0, 0, 84, 84)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_koi6m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_135dt")
+}],
+"loop": false,
+"name": &"equip",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_drxyw")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kt454")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4gp6b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h8ia3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dconb")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 16.0
+}]
+
+[node name="Shotgun" type="Node3D"]
+
+[node name="ShotgunSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0279581, 0.404169, 0)
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_koi6m")
+animation = &"equip"
+autoplay = "idle"
+
+[node name="GunRay" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.588544, -0.144431)
+target_position = Vector3(0, 0, -100)

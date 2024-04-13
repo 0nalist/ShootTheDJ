@@ -1,0 +1,57 @@
+[gd_scene load_steps=4 format=3 uid="uid://3nchcsvlddtd"]
+
+[ext_resource type="Script" path="res://scenes/ui/HUD/health_ui.gd" id="1_0mqy6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wca7y"]
+bg_color = Color(0.513726, 0.513726, 0.513726, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_in7a1"]
+bg_color = Color(0.886275, 0.12549, 0.14902, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="HealthUI" type="Control"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+script = ExtResource("1_0mqy6")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_top = -25.0
+offset_right = 96.0
+grow_vertical = 2
+
+[node name="HealthBar" type="ProgressBar" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxFlat_wca7y")
+theme_override_styles/fill = SubResource("StyleBoxFlat_in7a1")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 28.0
+offset_right = 105.0
+offset_bottom = 23.0

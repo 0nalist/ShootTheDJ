@@ -1,0 +1,209 @@
+[gd_scene load_steps=20 format=3 uid="uid://xl13qf81yghu"]
+
+[ext_resource type="Texture2D" uid="uid://th5rtnxoiu7h" path="res://assets/art/weapons/shotgunshootingFixed-Sheet-Sheet.png" id="1_tges7"]
+[ext_resource type="Texture2D" uid="uid://cqwfvqxj2oxt7" path="res://assets/art/weapons/Untitled design (58).png" id="2_cqbgs"]
+[ext_resource type="Texture2D" uid="uid://cv6j282s8cr2v" path="res://assets/art/weapons/Untitled design (60).png" id="3_5oieh"]
+[ext_resource type="Texture2D" uid="uid://dsp7e3rsdo8ep" path="res://assets/art/weapons/punch-Sheet-Sheet.png" id="4_r6s22"]
+[ext_resource type="PackedScene" uid="uid://dwrsy4loq6pd5" path="res://pistol_usp.tscn" id="5_bpyu3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_drxyw"]
+atlas = ExtResource("1_tges7")
+region = Rect2(0, 0, 84, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kt454"]
+atlas = ExtResource("1_tges7")
+region = Rect2(84, 0, 84, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4gp6b"]
+atlas = ExtResource("1_tges7")
+region = Rect2(168, 0, 84, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h8ia3"]
+atlas = ExtResource("1_tges7")
+region = Rect2(252, 0, 84, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dconb"]
+atlas = ExtResource("1_tges7")
+region = Rect2(0, 0, 84, 84)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_koi6m"]
+animations = [{
+"frames": [],
+"loop": false,
+"name": &"equip",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_drxyw")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kt454")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4gp6b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h8ia3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dconb")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 16.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sungt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_cqbgs")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": false,
+"name": &"equip",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_5oieh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_cqbgs")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 12.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_onud4"]
+atlas = ExtResource("4_r6s22")
+region = Rect2(128, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7254t"]
+atlas = ExtResource("4_r6s22")
+region = Rect2(128, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ucqtj"]
+atlas = ExtResource("4_r6s22")
+region = Rect2(256, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qrqty"]
+atlas = ExtResource("4_r6s22")
+region = Rect2(384, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fxoln"]
+atlas = ExtResource("4_r6s22")
+region = Rect2(256, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_13a82"]
+atlas = ExtResource("4_r6s22")
+region = Rect2(128, 0, 128, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3cbu2"]
+animations = [{
+"frames": [],
+"loop": false,
+"name": &"equip",
+"speed": 16.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_onud4")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7254t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ucqtj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qrqty")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fxoln")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_13a82")
+}],
+"loop": false,
+"name": &"punch",
+"speed": 20.0
+}]
+
+[node name="GunManager" type="Node3D"]
+
+[node name="ShotgunSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.00619638, 0.874333, -0.295708)
+visible = false
+billboard = 1
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_koi6m")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="PistolSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, -0.189159, 0.843244, -0.351231)
+visible = false
+billboard = 1
+sprite_frames = SubResource("SpriteFrames_sungt")
+animation = &"shoot"
+autoplay = "default"
+
+[node name="GunRay" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.588544, -0.144431)
+target_position = Vector3(0, 0, -25)
+collision_mask = 7
+
+[node name="RightFistSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.204514, 0.869316, -0.279192)
+flip_h = true
+billboard = 1
+sprite_frames = SubResource("SpriteFrames_3cbu2")
+animation = &"punch"
+autoplay = "idle"
+
+[node name="MeleeRay" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.492429, -0.235196)
+target_position = Vector3(0, 0, -2)
+collision_mask = 7
+debug_shape_custom_color = Color(0, 1, 0, 1)
+debug_shape_thickness = 4
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 1, 1)
+
+[node name="ShotgunRayContainer" type="Node3D" parent="."]
+
+[node name="RayCast3D" type="RayCast3D" parent="ShotgunRayContainer"]
+target_position = Vector3(0, 0, -100)
+
+[node name="PistolUSP" parent="ShotgunRayContainer" instance=ExtResource("5_bpyu3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.828497, 0)
+visible = false

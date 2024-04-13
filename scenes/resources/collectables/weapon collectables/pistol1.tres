@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BaseCollectableResource" load_steps=3 format=3 uid="uid://bsiqlkkf37hn7"]
+
+[ext_resource type="PackedScene" uid="uid://dwrsy4loq6pd5" path="res://pistol_usp.tscn" id="1_dlr5e"]
+[ext_resource type="Script" path="res://scenes/resources/collectables/base_collectable_resource.gd" id="2_5vpf4"]
+
+[resource]
+script = ExtResource("2_5vpf4")
+collectable_name = "pistol1"
+scene = ExtResource("1_dlr5e")
+scale = 1.0
+tag = "Weapon"
+value = 100

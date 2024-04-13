@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://be5hwnqteq2km"]
+
+[ext_resource type="Script" path="res://scenes/managers/collectable_manager.gd" id="1_hsh52"]
+
+[node name="CollectableManager" type="Node"]
+script = ExtResource("1_hsh52")

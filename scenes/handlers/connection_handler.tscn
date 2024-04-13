@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://vvixco1yroiy"]
+
+[ext_resource type="Script" path="res://scenes/handlers/connection_handler.gd" id="1_v6ylc"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_len4l"]
+
+[node name="ConnectionHandler" type="Area3D"]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("1_v6ylc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0, 0)
+shape = SubResource("SphereShape3D_len4l")

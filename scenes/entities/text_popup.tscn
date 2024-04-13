@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://b66rlnvn6a58l"]
+
+[ext_resource type="Script" path="res://scenes/entities/text_popup.gd" id="1_cki1d"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x7f7n"]
+
+[node name="TextPopup" type="Area3D"]
+script = ExtResource("1_cki1d")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+shape = SubResource("BoxShape3D_x7f7n")
+
+[node name="Label3D" type="Label3D" parent="."]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

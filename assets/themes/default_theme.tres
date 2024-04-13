@@ -1,0 +1,25 @@
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://ug06lexfc7t6"]
+
+[ext_resource type="FontFile" uid="uid://c2k0marrjydpw" path="res://assets/themes/junegull.ttf" id="1_ij3i4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kmaca"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bt5gj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3fpfm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r3mhu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nt1q6"]
+
+[resource]
+default_font = ExtResource("1_ij3i4")
+default_font_size = 16
+Button/colors/font_focus_color = Color(0.87451, 0.670588, 0.152941, 1)
+Button/colors/font_hover_color = Color(1, 0.952941, 0.105882, 1)
+Button/colors/font_pressed_color = Color(0.152941, 0.152941, 0.2, 1)
+Button/styles/disabled = SubResource("StyleBoxEmpty_kmaca")
+Button/styles/focus = SubResource("StyleBoxEmpty_bt5gj")
+Button/styles/hover = SubResource("StyleBoxEmpty_3fpfm")
+Button/styles/normal = SubResource("StyleBoxEmpty_r3mhu")
+Button/styles/pressed = SubResource("StyleBoxEmpty_nt1q6")

@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://o1gpslejoyqb"
+path="res://.godot/imported/braço FPS v2p1.obj-edf5936c72524e712b931340ebf82652.mesh"
+
+[deps]
+
+files=["res://.godot/imported/braço FPS v2p1.obj-edf5936c72524e712b931340ebf82652.mesh"]
+
+source_file="res://assets/art/weapons/arms/braço FPS v2p1.obj"
+dest_files=["res://.godot/imported/braço FPS v2p1.obj-edf5936c72524e712b931340ebf82652.mesh", "res://.godot/imported/braço FPS v2p1.obj-edf5936c72524e712b931340ebf82652.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

@@ -1,0 +1,182 @@
+[gd_scene load_steps=9 format=3 uid="uid://nb8fh2swgkg5"]
+
+[ext_resource type="Theme" uid="uid://ug06lexfc7t6" path="res://assets/themes/default_theme.tres" id="1_1cfbn"]
+[ext_resource type="Script" path="res://scenes/ui/menus/main_menu.gd" id="2_7dula"]
+[ext_resource type="PackedScene" uid="uid://cmmk31d282i46" path="res://scenes/ui/credits/GodotCredits.tscn" id="3_2uppl"]
+[ext_resource type="Texture2D" uid="uid://dtqsk7i6nowna" path="res://assets/art/UI/BOOM.png" id="3_732j2"]
+[ext_resource type="Texture2D" uid="uid://cjm7igm2bwlog" path="res://assets/art/UI/BoomMainMenuBkg.png" id="3_ylqqg"]
+[ext_resource type="Shader" path="res://assets/art/shaders/wavy.gdshader" id="6_ospgj"]
+[ext_resource type="FontFile" uid="uid://boix1hm1wtya1" path="res://SansPosterBold.ttf" id="7_qhc8g"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ar4p6"]
+shader = ExtResource("6_ospgj")
+shader_parameter/height = 5.0
+shader_parameter/frequency = 17.0
+shader_parameter/speed = 5.0
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_1cfbn")
+script = ExtResource("2_7dula")
+credits_scene = ExtResource("3_2uppl")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+color = Color(0, 0.101961, 0.196078, 1)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1402.0
+offset_top = -714.0
+offset_right = 1510.0
+offset_bottom = 918.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_ylqqg")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.36
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/CenterContainer"]
+material = SubResource("ShaderMaterial_ar4p6")
+layout_mode = 2
+mouse_filter = 1
+theme_override_constants/shadow_offset_x = 12
+theme_override_constants/shadow_offset_y = 12
+theme_override_constants/outline_size = 2
+theme_override_constants/shadow_outline_size = 12
+theme_override_constants/line_spacing = 18
+theme_override_fonts/font = ExtResource("7_qhc8g")
+theme_override_font_sizes/font_size = 69
+text = "SHOOT THE DJ"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+visible = false
+texture_filter = 1
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+texture = ExtResource("3_732j2")
+expand_mode = 4
+
+[node name="Control3" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Control4" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Control5" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Control6" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Control2" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "- demo made hastily && with love -"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ButtonsVbox" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="StartGameButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonsVbox"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+focus_neighbor_top = NodePath("../QuitGameButton")
+focus_neighbor_bottom = NodePath("../OptionsButton")
+focus_next = NodePath("../OptionsButton")
+text = "START"
+
+[node name="OptionsButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonsVbox"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+focus_neighbor_top = NodePath("../StartGameButton")
+focus_neighbor_bottom = NodePath("../QuitGameButton")
+focus_next = NodePath("../QuitGameButton")
+text = "OPTIONS"
+
+[node name="CreditsButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonsVbox"]
+layout_mode = 2
+text = "CREDITS"
+
+[node name="QuitGameButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonsVbox"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.0
+focus_neighbor_top = NodePath("../OptionsButton")
+focus_neighbor_bottom = NodePath("../StartGameButton")
+text = "QUIT GAME"
+
+[node name="ColorRect2" type="ColorRect" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonsVbox/StartGameButton" to="." method="_on_start_game_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonsVbox/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonsVbox/CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ButtonsVbox/QuitGameButton" to="." method="_on_quit_game_button_pressed"]

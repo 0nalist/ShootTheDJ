@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=3 uid="uid://cky08585c80pd"]
+
+[ext_resource type="PackedScene" uid="uid://c3cibwa0258ev" path="res://scenes/world.tscn" id="1_gbkgy"]
+[ext_resource type="Script" path="res://scenes/game.gd" id="1_uqieb"]
+[ext_resource type="PackedScene" uid="uid://bhg2324v3ytlt" path="res://scenes/entities/player/player.tscn" id="2_a3irc"]
+[ext_resource type="PackedScene" uid="uid://bw2kfry8rswke" path="res://scenes/ui/UI.tscn" id="4_lwpaa"]
+[ext_resource type="PackedScene" uid="uid://dpyup7xpcik1" path="res://scenes/ui/menus/pause_menu.tscn" id="5_5o6is"]
+
+[node name="Game" type="Node" node_paths=PackedStringArray("ui")]
+process_mode = 3
+script = ExtResource("1_uqieb")
+PlayerScene = ExtResource("2_a3irc")
+WorldScene = ExtResource("1_gbkgy")
+ui = NodePath("UI")
+
+[node name="UI" parent="." instance=ExtResource("4_lwpaa")]
+
+[node name="PauseMenu" parent="UI" node_paths=PackedStringArray("game_manager") instance=ExtResource("5_5o6is")]
+visible = false
+game_manager = NodePath("../..")
+
+[connection signal="start_game" from="UI" to="." method="_on_ui_start_game"]

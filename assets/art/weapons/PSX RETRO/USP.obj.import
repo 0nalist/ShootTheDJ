@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bynrfqx8aeq5p"
+path="res://.godot/imported/USP.obj-c96f2f3bf556be4d054e72600e9d63fd.mesh"
+
+[deps]
+
+files=["res://.godot/imported/USP.obj-c96f2f3bf556be4d054e72600e9d63fd.mesh"]
+
+source_file="res://assets/art/weapons/PSX RETRO/USP.obj"
+dest_files=["res://.godot/imported/USP.obj-c96f2f3bf556be4d054e72600e9d63fd.mesh", "res://.godot/imported/USP.obj-c96f2f3bf556be4d054e72600e9d63fd.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

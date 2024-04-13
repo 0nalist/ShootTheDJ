@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://cu84dhbb53a7e"]
+
+[ext_resource type="AudioStream" uid="uid://5nhko3ym0mka" path="res://assets/audio/samples/onehihathit.ogg" id="1_10eou"]
+[ext_resource type="AudioStream" uid="uid://odf84ih83rrw" path="res://assets/audio/samples/openhihat.ogg" id="2_p15yy"]
+[ext_resource type="AudioStream" uid="uid://7oqrwlail5bf" path="res://assets/audio/samples/onekick.ogg" id="3_n0bl0"]
+[ext_resource type="AudioStream" uid="uid://biada3awi8v8" path="res://assets/audio/samples/claponeshot.ogg" id="4_6ggte"]
+[ext_resource type="AudioStream" uid="uid://o4nj2akeq8u0" path="res://assets/audio/07 Alice Deejay - Better Off Alone.mp3" id="5_217bu"]
+
+[node name="ipod" type="Node"]
+
+[node name="OneHihat1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_10eou")
+bus = &"Hats"
+
+[node name="OpenHiHatHit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_p15yy")
+bus = &"Hats"
+
+[node name="OneKickPunch" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_n0bl0")
+
+[node name="OneClap" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_6ggte")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_217bu")
+bus = &"Bkg Music"

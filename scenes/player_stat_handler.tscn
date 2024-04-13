@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3tql2mce7gn4"]
+
+[ext_resource type="Script" path="res://scenes/player_stat_handler.gd" id="1_ndwo4"]
+
+[node name="PlayerStatHandler" type="Node3D"]
+script = ExtResource("1_ndwo4")

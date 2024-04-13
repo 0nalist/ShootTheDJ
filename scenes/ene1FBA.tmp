@@ -1,0 +1,153 @@
+[gd_scene load_steps=19 format=3 uid="uid://cfmw83061r4u8"]
+
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_idhwe"]
+[ext_resource type="Texture2D" uid="uid://fxcwm6etu3q0" path="res://art/enemies/trolls/troll-brown-NESW.png" id="2_67sm0"]
+[ext_resource type="Texture2D" uid="uid://bp1y7w0qtagx2" path="res://art/enemies/trolls/troll-brown TOPDOWNFACE.png" id="3_eu5fn"]
+[ext_resource type="Script" path="res://scripts/popup_location.gd" id="5_bxlrg"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_st1kb"]
+height = 1.94264
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a81f6"]
+atlas = ExtResource("2_67sm0")
+region = Rect2(0, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n0ksm"]
+atlas = ExtResource("2_67sm0")
+region = Rect2(48, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8kgk6"]
+atlas = ExtResource("2_67sm0")
+region = Rect2(96, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s03na"]
+atlas = ExtResource("2_67sm0")
+region = Rect2(48, 0, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_shxyk"]
+atlas = ExtResource("2_67sm0")
+region = Rect2(48, 128, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hd4s2"]
+atlas = ExtResource("3_eu5fn")
+region = Rect2(96, 128, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tfrhc"]
+atlas = ExtResource("2_67sm0")
+region = Rect2(0, 128, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_au7j1"]
+atlas = ExtResource("2_67sm0")
+region = Rect2(48, 128, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u3kgr"]
+atlas = ExtResource("2_67sm0")
+region = Rect2(96, 128, 48, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j362y"]
+atlas = ExtResource("2_67sm0")
+region = Rect2(48, 128, 48, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ywp0p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a81f6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n0ksm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8kgk6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s03na")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_shxyk")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hd4s2")
+}],
+"loop": false,
+"name": &"topdown",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tfrhc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_au7j1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u3kgr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j362y")
+}],
+"loop": true,
+"name": &"walk_fwd",
+"speed": 6.0
+}]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j38ob"]
+size = Vector3(1.26306, 0.544189, 1.23169)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sf5il"]
+size = Vector3(80.0562, 2.37562, 81.7981)
+
+[node name="Enemy" type="CharacterBody3D"]
+floor_max_angle = 1.0472
+script = ExtResource("1_idhwe")
+player_path = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00182, 0)
+shape = SubResource("CapsuleShape3D_st1kb")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 1.16429, 0)
+billboard = 2
+texture_filter = 2
+sprite_frames = SubResource("SpriteFrames_ywp0p")
+animation = &"attack"
+autoplay = "idle"
+
+[node name="PopupLocation" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.39169, 0)
+script = ExtResource("5_bxlrg")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0.0065918, 1.28991, 0.0698242)
+shape = SubResource("BoxShape3D_j38ob")
+
+[node name="StateLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25005, 0)
+billboard = 1
+text = "state"
+font_size = 40
+
+[node name="DetectionArea3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0675507, 0.687811, 0.209106)
+shape = SubResource("BoxShape3D_sf5il")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
+[connection signal="body_entered" from="DetectionArea3D" to="." method="_on_detection_area_3d_body_entered"]

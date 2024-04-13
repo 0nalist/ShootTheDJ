@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://bnribo8jc2aao"]
+
+[ext_resource type="Script" path="res://scenes/entities/collectables/collectable_entity.gd" id="1_541go"]
+[ext_resource type="Resource" uid="uid://cjncewv8ht1vj" path="res://scenes/resources/collectables/weapon collectables/shotgun1.tres" id="2_vct71"]
+[ext_resource type="Texture2D" uid="uid://c2ph63f5xqk4e" path="res://assets/art/collectables/SimpSplash/SimpSplashYello.png" id="4_4i8po"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_qiexb"]
+
+[sub_resource type="Animation" id="Animation_r2x86"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_in7ij"]
+resource_name = "coin1"
+loop_mode = 1
+step = 0.05
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2365p"]
+_data = {
+"RESET": SubResource("Animation_r2x86"),
+"coin1": SubResource("Animation_in7ij")
+}
+
+[node name="BaseCollectableEntity" type="Area3D"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.0532652, 0)
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_541go")
+collectable_resource = ExtResource("2_vct71")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("SphereShape3D_qiexb")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2365p")
+}
+
+[node name="ipod" type="Node" parent="."]
+
+[node name="HouseFourthPlayer" type="AudioStreamPlayer" parent="ipod"]
+
+[node name="YellowSplash" type="Sprite3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0.00996101)
+billboard = 2
+texture = ExtResource("4_4i8po")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

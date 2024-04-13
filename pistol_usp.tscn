@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://dwrsy4loq6pd5"]
+
+[ext_resource type="PackedScene" uid="uid://c1pdvhmumukjd" path="res://assets/art/weapons/PSX RETRO/USP.fbx" id="1_56ma3"]
+[ext_resource type="Texture2D" uid="uid://defo2tibrouyq" path="res://assets/art/weapons/PSX RETRO/psx textures/USP.png" id="2_0lgyd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0smp6"]
+albedo_texture = ExtResource("2_0lgyd")
+
+[node name="PistolUSP" instance=ExtResource("1_56ma3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.691517, 0.321518)
+
+[node name="USP" parent="RootNode" index="0"]
+transform = Transform3D(10, 0, 0, 0, -4.37114e-07, 10, 0, -10, -4.37114e-07, 0.00660655, 0.756696, -0.272635)
+surface_material_override/0 = SubResource("StandardMaterial3D_0smp6")

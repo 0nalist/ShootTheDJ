@@ -1,0 +1,41 @@
+# Blender MTL File: 'None'
+# Material Count: 3
+
+newmtl PackedMaterial0
+Ns 94.117647
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.000000
+illum 6
+map_Kd personagens\Emanoel\Emanoel_packed0_diffuse.png
+map_Bump personagens\\Emanoel\\Emanoel_packed0_normal.png
+map_Ks personagens\\Emanoel\\Emanoel_packed0_specular.png
+
+newmtl PackedMaterial2
+Ns 94.117647
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.000000
+illum 6
+map_Kd personagens\Emanoel\Emanoel_packed2_diffuse.png
+map_Bump personagens\\Emanoel\\Emanoel_packed2_normal.png
+map_Ks personagens\\Emanoel\\Emanoel_packed2_specular.png
+
+newmtl PackedMaterial3
+Ns 94.117647
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd personagens\Emanoel\Emanoel_packed3_diffuse.png
+map_Bump personagens\\Emanoel\\Emanoel_packed3_normal.png
+map_Ks personagens\\Emanoel\\Emanoel_packed3_specular.png

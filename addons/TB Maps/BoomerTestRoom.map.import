@@ -1,0 +1,14 @@
+[remap]
+
+importer="qodot.map"
+type="Resource"
+uid="uid://cgcr8mfidplu1"
+path="res://.godot/imported/BoomerTestRoom.map-7921fbbbf1621c1f723794685c9bdc2b.tres"
+
+[deps]
+
+source_file="res://addons/TB Maps/BoomerTestRoom.map"
+dest_files=["res://.godot/imported/BoomerTestRoom.map-7921fbbbf1621c1f723794685c9bdc2b.tres"]
+
+[params]
+

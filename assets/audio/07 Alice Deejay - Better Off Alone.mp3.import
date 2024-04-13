@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://o4nj2akeq8u0"
+path="res://.godot/imported/07 Alice Deejay - Better Off Alone.mp3-bcaf5b09ac196f0bf5b17b05dd281b73.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/07 Alice Deejay - Better Off Alone.mp3"
+dest_files=["res://.godot/imported/07 Alice Deejay - Better Off Alone.mp3-bcaf5b09ac196f0bf5b17b05dd281b73.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=137.0
+beat_count=0
+bar_beats=4

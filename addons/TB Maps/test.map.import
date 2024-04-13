@@ -1,0 +1,14 @@
+[remap]
+
+importer="qodot.map"
+type="Resource"
+uid="uid://3wo6eakf0i7g"
+path="res://.godot/imported/test.map-637ad51a7a4cbaf8ed005d77e112523f.tres"
+
+[deps]
+
+source_file="res://addons/TB Maps/test.map"
+dest_files=["res://.godot/imported/test.map-637ad51a7a4cbaf8ed005d77e112523f.tres"]
+
+[params]
+

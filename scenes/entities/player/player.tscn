@@ -1,0 +1,322 @@
+[gd_scene load_steps=21 format=3 uid="uid://bhg2324v3ytlt"]
+
+[ext_resource type="Script" path="res://scenes/entities/player/player.gd" id="1_ih33w"]
+[ext_resource type="AudioStream" uid="uid://5nhko3ym0mka" path="res://assets/audio/samples/onehihathit.ogg" id="3_2uqs6"]
+[ext_resource type="AudioStream" uid="uid://odf84ih83rrw" path="res://assets/audio/samples/openhihat.ogg" id="4_mtbnb"]
+[ext_resource type="PackedScene" uid="uid://dw3mbmktjqhkq" path="res://scenes/view_model.tscn" id="5_a167m"]
+[ext_resource type="AudioStream" uid="uid://7oqrwlail5bf" path="res://assets/audio/samples/onekick.ogg" id="5_ggw1x"]
+[ext_resource type="AudioStream" uid="uid://biada3awi8v8" path="res://assets/audio/samples/claponeshot.ogg" id="6_d76ac"]
+[ext_resource type="AudioStream" uid="uid://o4nj2akeq8u0" path="res://assets/audio/07 Alice Deejay - Better Off Alone.mp3" id="7_3cvqw"]
+[ext_resource type="PackedScene" uid="uid://vvixco1yroiy" path="res://scenes/handlers/connection_handler.tscn" id="7_ub0up"]
+[ext_resource type="Script" path="res://scenes/entities/player/reticle.gd" id="8_ctgyj"]
+[ext_resource type="PackedScene" uid="uid://c3tql2mce7gn4" path="res://scenes/player_stat_handler.tscn" id="8_cv4ps"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3g17x"]
+
+[sub_resource type="Sky" id="Sky_ljs5c"]
+sky_material = SubResource("ProceduralSkyMaterial_3g17x")
+
+[sub_resource type="Environment" id="Environment_gwakr"]
+background_mode = 2
+background_energy_multiplier = 1.86
+sky = SubResource("Sky_ljs5c")
+ssao_enabled = true
+glow_enabled = true
+
+[sub_resource type="World3D" id="World3D_tipn4"]
+environment = SubResource("Environment_gwakr")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_n1olw"]
+height = 2.44876
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_txrvt"]
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r3v58"]
+bg_color = Color(0, 0.721569, 0.337255, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="SystemFont" id="SystemFont_j8sd6"]
+font_names = PackedStringArray("Segoe UI")
+font_weight = 975
+font_stretch = 125
+subpixel_positioning = 0
+msdf_pixel_range = 27
+msdf_size = 58
+oversampling = 10.0
+
+[sub_resource type="SystemFont" id="SystemFont_2lue8"]
+font_names = PackedStringArray("Segoe UI")
+font_weight = 675
+subpixel_positioning = 0
+oversampling = 9.4
+
+[sub_resource type="SystemFont" id="SystemFont_gkiog"]
+font_names = PackedStringArray("Segoe UI")
+font_weight = 675
+font_stretch = 75
+subpixel_positioning = 0
+oversampling = 10.0
+
+[node name="Player" type="CharacterBody3D" groups=["player"]]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 2, 0)
+collision_layer = 2
+collision_mask = 9
+script = ExtResource("1_ih33w")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0119123, 0)
+
+[node name="MainCamera" type="Camera3D" parent="Head"]
+unique_name_in_owner = true
+cull_mask = 1048573
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Head/MainCamera"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SubViewport" type="SubViewport" parent="Head/MainCamera/SubViewportContainer"]
+world_3d = SubResource("World3D_tipn4")
+transparent_bg = true
+handle_input_locally = false
+screen_space_aa = 1
+canvas_item_default_texture_filter = 0
+render_target_update_mode = 4
+
+[node name="view_model_camera" parent="Head/MainCamera/SubViewportContainer/SubViewport" instance=ExtResource("5_a167m")]
+
+[node name="GunRay" type="RayCast3D" parent="Head/MainCamera"]
+target_position = Vector3(0, 0, -100)
+collision_mask = 5
+
+[node name="PistolCooldownTimer" type="Timer" parent="Head/MainCamera/GunRay"]
+
+[node name="MeleeRay" type="RayCast3D" parent="Head/MainCamera"]
+collision_mask = 4
+
+[node name="HeadRays" type="Node3D" parent="Head"]
+
+[node name="HeadRay1" type="RayCast3D" parent="Head/HeadRays"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00593114, 0, 0)
+target_position = Vector3(0, 0, -0.7)
+
+[node name="ReachRay1" type="RayCast3D" parent="Head/HeadRays"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00593114, 0, 0)
+target_position = Vector3(0, 1.6, -0.7)
+
+[node name="HeadRay2" type="RayCast3D" parent="Head/HeadRays"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.369686, 0, 0)
+target_position = Vector3(0, 0, -0.7)
+
+[node name="ReachRays" type="Node3D" parent="Head/HeadRays"]
+
+[node name="ReachRay2" type="RayCast3D" parent="Head/HeadRays/ReachRays"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.369686, 0, 0)
+target_position = Vector3(0, 1.6, -0.7)
+
+[node name="HeadRay3" type="RayCast3D" parent="Head/HeadRays/ReachRays"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.384843, 0, 0)
+target_position = Vector3(0, 0, -0.7)
+
+[node name="ReachRay3" type="RayCast3D" parent="Head/HeadRays/ReachRays"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.384843, 0, 0)
+target_position = Vector3(0, 1.6, -0.7)
+
+[node name="ChestRay3D" type="RayCast3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.671195, 0)
+visible = false
+target_position = Vector3(0, 0, -0.75)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_n1olw")
+
+[node name="ipod" type="Node" parent="."]
+
+[node name="OneHihat1" type="AudioStreamPlayer" parent="ipod"]
+stream = ExtResource("3_2uqs6")
+bus = &"Hats"
+
+[node name="OpenHiHatHit" type="AudioStreamPlayer" parent="ipod"]
+stream = ExtResource("4_mtbnb")
+bus = &"Hats"
+
+[node name="OneKickPunch" type="AudioStreamPlayer" parent="ipod"]
+stream = ExtResource("5_ggw1x")
+
+[node name="OneClap" type="AudioStreamPlayer" parent="ipod"]
+stream = ExtResource("6_d76ac")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ipod"]
+stream = ExtResource("7_3cvqw")
+bus = &"Bkg Music"
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="StaminaBar" type="ProgressBar" parent="HUD"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -15.0
+offset_right = 152.0
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_txrvt")
+theme_override_styles/fill = SubResource("StyleBoxFlat_r3v58")
+show_percentage = false
+
+[node name="Reticle" type="CenterContainer" parent="HUD" node_paths=PackedStringArray("RETICAL_LINES", "PLAYER_CONTROLLER")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.003479
+offset_top = 0.00164795
+offset_right = 39.9965
+offset_bottom = 40.0016
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("8_ctgyj")
+RETICAL_LINES = [NodePath("Top"), NodePath("Right"), NodePath("Bottom"), NodePath("Left")]
+PLAYER_CONTROLLER = NodePath("../..")
+
+[node name="Top" type="Line2D" parent="HUD/Reticle"]
+points = PackedVector2Array(0, -5, 0, -15)
+width = 2.0
+
+[node name="Right" type="Line2D" parent="HUD/Reticle"]
+points = PackedVector2Array(5, 0, 15, 0)
+width = 2.0
+
+[node name="Bottom" type="Line2D" parent="HUD/Reticle"]
+points = PackedVector2Array(0, 5, 0, 15)
+width = 2.0
+
+[node name="Left" type="Line2D" parent="HUD/Reticle"]
+points = PackedVector2Array(-5, 0, -15, 0)
+width = 2.0
+
+[node name="FootCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.998705, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="DeathScreen" type="Control" parent="CanvasLayer"]
+visible = false
+top_level = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="CanvasLayer/DeathScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -216.0
+offset_top = -229.0
+offset_right = -126.0
+offset_bottom = -145.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(4.73584, 4.73584)
+
+[node name="Label" type="Label" parent="CanvasLayer/DeathScreen/Panel"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -38.4542
+offset_top = -35.6653
+offset_right = 39.5458
+offset_bottom = -12.6653
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = SubResource("SystemFont_j8sd6")
+text = "YOU DIED
+"
+
+[node name="RestartButton" type="Button" parent="CanvasLayer/DeathScreen/Panel"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.342
+anchor_right = 0.5
+anchor_bottom = 0.342
+offset_left = -19.239
+offset_top = -0.0108147
+offset_right = 63.761
+offset_bottom = 32.9892
+scale = Vector2(0.456808, 0.456808)
+theme_override_fonts/font = SubResource("SystemFont_2lue8")
+theme_override_font_sizes/font_size = 18
+text = "REBIRTH"
+
+[node name="QuitButton" type="Button" parent="CanvasLayer/DeathScreen/Panel"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.2709
+offset_top = 21.9802
+offset_right = 10.7291
+offset_bottom = 38.9802
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = SubResource("SystemFont_gkiog")
+theme_override_font_sizes/font_size = 6
+text = "QUIT"
+
+[node name="ConnectionHandler" parent="." instance=ExtResource("7_ub0up")]
+collision_layer = 2
+collision_mask = 0
+
+[node name="PlayerStatHandler" parent="." instance=ExtResource("8_cv4ps")]
+unique_name_in_owner = true
+
+[connection signal="timeout" from="Head/MainCamera/GunRay/PistolCooldownTimer" to="." method="_on_pistol_cooldown_timer_timeout"]
+[connection signal="button_up" from="CanvasLayer/DeathScreen/Panel/RestartButton" to="." method="_on_restart_button_button_up"]
+[connection signal="pressed" from="CanvasLayer/DeathScreen/Panel/QuitButton" to="." method="_on_quit_button_pressed"]

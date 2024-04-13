@@ -184,11 +184,19 @@ func _on_sixteenth(sixteenth):
 	process_queued_shots()
 	if pistol_continuous_firing:
 		queue_pistol_shot_on_pattern()
+	
 	if sixteenth in [1,5,9,13]:
 		debug_kick()
+	
+	if shotgun_automatic and current_sixteenth in dead_shot_pat:
+		fire_shotgun(false)
+	if not shotgun_automatic and not shotgun_cooldown:
+		if current_sixteenth in (dead_shot_pat + close_enough_pat):
+			fire_shotgun(current_sixteenth in dead_shot_pat)
+	'''
 	if shotgun_automatic:
 		if current_sixteenth in dead_shot_pat:
-			fire_shotgun(false)  # Critical hit if automatic
+			fire_shotgun(false)  # Critical hit if automatic'''
 
 func process_queued_shots():
 	var i = 0

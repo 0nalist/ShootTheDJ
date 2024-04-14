@@ -3,18 +3,18 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://boix1hm1wtya1"
-path="res://.godot/imported/SansPosterBold.ttf-4ee7b7bdc22b1d6b47f59d8c17dbced2.fontdata"
+path="res://.godot/imported/SansPosterBold.ttf-c400b73765568106b7535a008193b93d.fontdata"
 
 [deps]
 
-source_file="res://SansPosterBold.ttf"
-dest_files=["res://.godot/imported/SansPosterBold.ttf-4ee7b7bdc22b1d6b47f59d8c17dbced2.fontdata"]
+source_file="res://assets/themes/SansPosterBold.ttf"
+dest_files=["res://.godot/imported/SansPosterBold.ttf-c400b73765568106b7535a008193b93d.fontdata"]
 
 [params]
 
 Rendering=null
 antialiasing=1
-generate_mipmaps=false
+generate_mipmaps=true
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48
@@ -22,7 +22,7 @@ allow_system_fallback=true
 force_autohinter=false
 hinting=1
 subpixel_positioning=1
-oversampling=0.0
+oversampling=10.0
 Fallbacks=null
 fallbacks=[]
 Compress=null

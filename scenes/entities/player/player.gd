@@ -255,7 +255,7 @@ func fire_shotgun(is_critical):
 	print("Shotgun fired at sixteenth:", current_sixteenth, "Critical Hit:", is_critical)
 	gun_camera.fire_shotgun()  # Animation handling
 	if gun_ray.is_colliding() and gun_ray.get_collider().has_method("take_damage"):
-		gun_ray.get_collider().take_damage(shotgun_damage)
+		gun_ray.get_collider().take_damage(damage)
 		heal(.1)
 	shotgun_cooldown = true
 	shotgun_cooldown_timer.start()
@@ -315,7 +315,7 @@ func _physics_process(delta):
 	velocity.x *= FRICTION
 	velocity.z *= FRICTION
 	# WALL FRICTION FROM WALLJUMP KIT
-	if current_state == WALL:
+	if current_state == WALL and not is_on_floor():
 		velocity.y *= WALL_FRICTION
 	# HEADBOB
 	if not sliding:
@@ -335,7 +335,7 @@ func _input(event):
 		
 		
 	# FIRE PISTOL INPUT
-	if holding_pistol and event is InputEventAction and event.action == "fire_pistol":
+	if holding_pistol and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.is_pressed():
 			# Check if this click is within the threshold to be considered a double-click
 			var current_time = Time.get_ticks_msec() / 1000.0
@@ -359,7 +359,7 @@ func _input(event):
 				print("Fire pistol released")
 				pistol_continuous_firing = false
 		
-	if holding_shotgun and event is InputEventAction and event.action == "fire_shotgun":
+	if holding_shotgun and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
 		if event.is_pressed():
 			var current_time = Time.get_ticks_msec() / 1000.0
 			# Check for double-click to toggle automatic mode

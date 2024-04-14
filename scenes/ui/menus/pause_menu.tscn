@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/ui/menus/pause_menu.gd" id="1_3cpp3"]
 [ext_resource type="Theme" uid="uid://ug06lexfc7t6" path="res://assets/themes/default_theme.tres" id="2_5eq7r"]
-[ext_resource type="FontFile" uid="uid://boix1hm1wtya1" path="res://SansPosterBold.ttf" id="3_7bfet"]
+[ext_resource type="FontFile" uid="uid://boix1hm1wtya1" path="res://assets/themes/SansPosterBold.ttf" id="3_7bfet"]
 
 [node name="PauseMenu" type="Control"]
 process_mode = 2

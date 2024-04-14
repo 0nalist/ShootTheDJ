@@ -5,8 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://cmmk31d282i46" path="res://scenes/ui/credits/GodotCredits.tscn" id="3_2uppl"]
 [ext_resource type="Texture2D" uid="uid://dtqsk7i6nowna" path="res://assets/art/UI/BOOM.png" id="3_732j2"]
 [ext_resource type="Texture2D" uid="uid://cjm7igm2bwlog" path="res://assets/art/UI/BoomMainMenuBkg.png" id="3_ylqqg"]
+[ext_resource type="FontFile" uid="uid://boix1hm1wtya1" path="res://assets/themes/SansPosterBold.ttf" id="6_hitcf"]
 [ext_resource type="Shader" path="res://assets/art/shaders/wavy.gdshader" id="6_ospgj"]
-[ext_resource type="FontFile" uid="uid://boix1hm1wtya1" path="res://SansPosterBold.ttf" id="7_qhc8g"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ar4p6"]
 shader = ExtResource("6_ospgj")
@@ -83,7 +83,7 @@ theme_override_constants/shadow_offset_y = 12
 theme_override_constants/outline_size = 2
 theme_override_constants/shadow_outline_size = 12
 theme_override_constants/line_spacing = 18
-theme_override_fonts/font = ExtResource("7_qhc8g")
+theme_override_fonts/font = ExtResource("6_hitcf")
 theme_override_font_sizes/font_size = 69
 text = "SHOOT THE DJ"
 

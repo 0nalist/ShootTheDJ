@@ -40,10 +40,13 @@ var credits = [
 		"SHOOT THE DJ",
 		
 	],[
-		"Director",
+		"Game Director",
 		"Sam"
 	],[
 		"Executive Producer",
+		"Sam"
+	],[
+		"Produced by",
 		"Sam"
 	],[
 		"Game Design",
@@ -57,12 +60,13 @@ var credits = [
 	],[
 		"Art & Assets",
 		"Wildenza -- PSX Asset Pack",
-		'"Nun PSX style Lowpoly" (https://skfb.ly/oMBzG) by Gabrielonstartdesk',
+		"Gabrielonstartdesk -- Nun PSX style Lowpoly (https://skfb.ly/oMBzG)",
 		"Lukky -- Arms Mesh",
 		"Sam",
 	],[
 		"Textures & Shaders",
 		"Little Martian - Retro Pixel Textures Pack",
+		"eldskald - Complete Cel Shader",
 		"Sam",
 	],[
 		"Music",

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bhg2324v3ytlt"]
+[gd_scene load_steps=22 format=3 uid="uid://bhg2324v3ytlt"]
 
 [ext_resource type="Script" path="res://scenes/entities/player/player.gd" id="1_ih33w"]
 [ext_resource type="AudioStream" uid="uid://5nhko3ym0mka" path="res://assets/audio/samples/onehihathit.ogg" id="3_2uqs6"]
@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://vvixco1yroiy" path="res://scenes/handlers/connection_handler.tscn" id="7_ub0up"]
 [ext_resource type="Script" path="res://scenes/entities/player/reticle.gd" id="8_ctgyj"]
 [ext_resource type="PackedScene" uid="uid://c3tql2mce7gn4" path="res://scenes/player_stat_handler.tscn" id="8_cv4ps"]
+[ext_resource type="FontFile" uid="uid://boix1hm1wtya1" path="res://assets/themes/SansPosterBold.ttf" id="9_by3j0"]
+[ext_resource type="PackedScene" uid="uid://cv5kq374nfp3f" path="res://assets/Characters/chad/chad.tscn" id="11_nh5ux"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3g17x"]
 
@@ -52,15 +54,6 @@ corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 
-[sub_resource type="SystemFont" id="SystemFont_j8sd6"]
-font_names = PackedStringArray("Segoe UI")
-font_weight = 975
-font_stretch = 125
-subpixel_positioning = 0
-msdf_pixel_range = 27
-msdf_size = 58
-oversampling = 10.0
-
 [sub_resource type="SystemFont" id="SystemFont_2lue8"]
 font_names = PackedStringArray("Segoe UI")
 font_weight = 675
@@ -85,7 +78,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0119123, 0)
 
 [node name="MainCamera" type="Camera3D" parent="Head"]
 unique_name_in_owner = true
-cull_mask = 1048573
+cull_mask = 524285
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="Head/MainCamera"]
 anchors_preset = 15
@@ -251,10 +244,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -216.0
-offset_top = -229.0
-offset_right = -126.0
-offset_bottom = -145.0
+offset_left = -232.0
+offset_top = -199.0
+offset_right = -131.0
+offset_bottom = -115.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(4.73584, 4.73584)
@@ -267,13 +260,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -38.4542
-offset_top = -35.6653
-offset_right = 39.5458
-offset_bottom = -12.6653
+offset_left = -43.5219
+offset_top = -32.0757
+offset_right = 46.4781
+offset_bottom = -9.07568
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = SubResource("SystemFont_j8sd6")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_by3j0")
+theme_override_font_sizes/font_size = 0
 text = "YOU DIED
 "
 
@@ -281,14 +276,10 @@ text = "YOU DIED
 texture_filter = 1
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.342
-anchor_right = 0.5
-anchor_bottom = 0.342
-offset_left = -19.239
-offset_top = -0.0108147
-offset_right = 63.761
-offset_bottom = 32.9892
+offset_left = 30.6176
+offset_top = 35.4742
+offset_right = 113.618
+offset_bottom = 68.4742
 scale = Vector2(0.456808, 0.456808)
 theme_override_fonts/font = SubResource("SystemFont_2lue8")
 theme_override_font_sizes/font_size = 18
@@ -302,10 +293,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -12.2709
-offset_top = 21.9802
-offset_right = 10.7291
-offset_bottom = 38.9802
+offset_left = -11.225
+offset_top = 13.7451
+offset_right = 11.775
+offset_bottom = 30.7451
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = SubResource("SystemFont_gkiog")
@@ -318,6 +309,10 @@ collision_mask = 0
 
 [node name="PlayerStatHandler" parent="." instance=ExtResource("8_cv4ps")]
 unique_name_in_owner = true
+visible = false
+
+[node name="Chad" parent="." instance=ExtResource("11_nh5ux")]
+transform = Transform3D(-0.2, 0, -1.74846e-08, 0, 0.2, 0, 1.74846e-08, 0, -0.2, 0.0438089, -0.906829, 0.682025)
 
 [connection signal="timeout" from="Head/MainCamera/GunRay/PistolCooldownTimer" to="." method="_on_pistol_cooldown_timer_timeout"]
 [connection signal="timeout" from="Head/MainCamera/GunRay/ShotgunCooldownTimer" to="." method="_on_shotgun_cooldown_timer_timeout"]

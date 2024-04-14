@@ -16,7 +16,7 @@ extends CenterContainer
 func _ready():
 	queue_redraw()
 
-func _process(delta):
+func _process(_delta):
 	adjust_reticle_lines()
 
 func _draw():

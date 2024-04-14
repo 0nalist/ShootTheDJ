@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="CurrencyResource" load_steps=3 format=3 uid="uid://c1drmafn531t2"]
 
-[ext_resource type="PackedScene" uid="uid://b48c7fgjncdkk" path="res://ciggies.tscn" id="1_egapu"]
+[ext_resource type="PackedScene" uid="uid://b48c7fgjncdkk" path="res://assets/art/collectables/health/ciggies.tscn" id="1_egapu"]
 [ext_resource type="Script" path="res://scenes/resources/collectables/currency_resource.gd" id="2_j82ej"]
 
 [resource]

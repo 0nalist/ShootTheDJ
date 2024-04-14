@@ -179,6 +179,7 @@ var shotgun_automatic = false  # Toggle for automatic firing
 
 func debug_kick():
 	one_kick_punch.play()
+	gun_camera.punch_fist()
 
 func _on_sixteenth(sixteenth):
 	current_sixteenth = sixteenth

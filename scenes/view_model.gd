@@ -37,6 +37,10 @@ func sway(sway_amount):
 	
 
 
+#TEMP FOR 2D fist
+@onready var right_fist_sprite_3d = $FPSRig/GunManager/RightFistSprite3D
+func punch_fist():
+	right_fist_sprite_3d.play("punch")
 
 
 func fire_shotgun():

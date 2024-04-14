@@ -1,15 +1,20 @@
-[gd_scene load_steps=138 format=3 uid="uid://dw3mbmktjqhkq"]
+[gd_scene load_steps=157 format=3 uid="uid://dw3mbmktjqhkq"]
 
 [ext_resource type="Script" path="res://scenes/view_model.gd" id="1_f2b3u"]
 [ext_resource type="Texture2D" uid="uid://dc1dnhek3x6nv" path="res://assets/art/weapons/PSX RETRO/psx textures/Shotgun_Texture.png" id="1_g03ht"]
 [ext_resource type="Material" uid="uid://b78m16k77inid" path="res://assets/materials/hand_material.tres" id="2_kys57"]
 [ext_resource type="Shader" path="res://assets/art/shaders/cel shader/outline.gdshader" id="3_a1kj4"]
 [ext_resource type="Texture2D" uid="uid://defo2tibrouyq" path="res://assets/art/weapons/PSX RETRO/psx textures/USP.png" id="5_bmog4"]
+[ext_resource type="Texture2D" uid="uid://th5rtnxoiu7h" path="res://assets/art/weapons/shotgunshootingFixed-Sheet-Sheet.png" id="6_t33hv"]
 [ext_resource type="AudioStream" uid="uid://5nhko3ym0mka" path="res://assets/audio/samples/onehihathit.ogg" id="6_xur3y"]
+[ext_resource type="Texture2D" uid="uid://cqwfvqxj2oxt7" path="res://assets/art/weapons/Untitled design (58).png" id="7_6bujd"]
 [ext_resource type="AudioStream" uid="uid://odf84ih83rrw" path="res://assets/audio/samples/openhihat.ogg" id="7_485mg"]
+[ext_resource type="Texture2D" uid="uid://cv6j282s8cr2v" path="res://assets/art/weapons/Untitled design (60).png" id="8_7hs1n"]
 [ext_resource type="AudioStream" uid="uid://7oqrwlail5bf" path="res://assets/audio/samples/onekick.ogg" id="8_42jot"]
+[ext_resource type="Texture2D" uid="uid://dsp7e3rsdo8ep" path="res://assets/art/weapons/punch-Sheet-Sheet.png" id="9_fefma"]
 [ext_resource type="AudioStream" uid="uid://biada3awi8v8" path="res://assets/audio/samples/claponeshot.ogg" id="9_iijeg"]
 [ext_resource type="AudioStream" uid="uid://o4nj2akeq8u0" path="res://assets/audio/07 Alice Deejay - Better Off Alone.mp3" id="10_eupw8"]
+[ext_resource type="PackedScene" uid="uid://dwrsy4loq6pd5" path="res://pistol_usp.tscn" id="10_mg1rq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r40ct"]
 resource_name = "Material.002"
@@ -55,6 +60,8 @@ shader = ExtResource("3_a1kj4")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8karx"]
 next_pass = SubResource("ShaderMaterial_i0e25")
+diffuse_mode = 3
+specular_mode = 1
 albedo_texture = ExtResource("1_g03ht")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_hidmf"]
@@ -1555,6 +1562,146 @@ _data = {
 "fire": SubResource("Animation_f4xj8")
 }
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_drxyw"]
+atlas = ExtResource("6_t33hv")
+region = Rect2(0, 0, 84, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kt454"]
+atlas = ExtResource("6_t33hv")
+region = Rect2(84, 0, 84, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4gp6b"]
+atlas = ExtResource("6_t33hv")
+region = Rect2(168, 0, 84, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h8ia3"]
+atlas = ExtResource("6_t33hv")
+region = Rect2(252, 0, 84, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dconb"]
+atlas = ExtResource("6_t33hv")
+region = Rect2(0, 0, 84, 84)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_koi6m"]
+animations = [{
+"frames": [],
+"loop": false,
+"name": &"equip",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_drxyw")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kt454")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4gp6b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h8ia3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dconb")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 16.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sungt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_6bujd")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": false,
+"name": &"equip",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_7hs1n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_6bujd")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 12.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_onud4"]
+atlas = ExtResource("9_fefma")
+region = Rect2(128, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7254t"]
+atlas = ExtResource("9_fefma")
+region = Rect2(128, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ucqtj"]
+atlas = ExtResource("9_fefma")
+region = Rect2(256, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qrqty"]
+atlas = ExtResource("9_fefma")
+region = Rect2(384, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fxoln"]
+atlas = ExtResource("9_fefma")
+region = Rect2(256, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_13a82"]
+atlas = ExtResource("9_fefma")
+region = Rect2(128, 0, 128, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3cbu2"]
+animations = [{
+"frames": [],
+"loop": false,
+"name": &"equip",
+"speed": 16.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_onud4")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7254t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ucqtj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qrqty")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fxoln")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_13a82")
+}],
+"loop": false,
+"name": &"punch",
+"speed": 20.0
+}]
+
 [node name="view_model_camera" type="Camera3D"]
 top_level = true
 current = true
@@ -1839,6 +1986,71 @@ libraries = {
 
 [node name="PistolCooldownTimer" type="Timer" parent="FPSRig/Pistol"]
 one_shot = true
+
+[node name="GunManager" type="Node3D" parent="FPSRig"]
+
+[node name="ShotgunSprite3D" type="AnimatedSprite3D" parent="FPSRig/GunManager"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.00619638, 0.874333, -0.295708)
+visible = false
+billboard = 1
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_koi6m")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="PistolSprite3D" type="AnimatedSprite3D" parent="FPSRig/GunManager"]
+transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, -0.189159, 0.843244, -0.351231)
+visible = false
+billboard = 1
+sprite_frames = SubResource("SpriteFrames_sungt")
+animation = &"shoot"
+autoplay = "default"
+
+[node name="GunRay" type="RayCast3D" parent="FPSRig/GunManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.588544, -0.144431)
+target_position = Vector3(0, 0, -25)
+collision_mask = 7
+
+[node name="RightFistSprite3D" type="AnimatedSprite3D" parent="FPSRig/GunManager"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.0525831, -0.192223, -0.762863)
+flip_h = true
+billboard = 1
+sprite_frames = SubResource("SpriteFrames_3cbu2")
+animation = &"punch"
+autoplay = "idle"
+frame = 4
+frame_progress = 1.0
+
+[node name="MeleeRay" type="RayCast3D" parent="FPSRig/GunManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.492429, -0.235196)
+target_position = Vector3(0, 0, -2)
+collision_mask = 7
+debug_shape_custom_color = Color(0, 1, 0, 1)
+debug_shape_thickness = 4
+
+[node name="ColorRect" type="ColorRect" parent="FPSRig/GunManager"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 1, 1)
+
+[node name="ShotgunRayContainer" type="Node3D" parent="FPSRig/GunManager"]
+
+[node name="RayCast3D" type="RayCast3D" parent="FPSRig/GunManager/ShotgunRayContainer"]
+target_position = Vector3(0, 0, -100)
+
+[node name="PistolUSP" parent="FPSRig/GunManager/ShotgunRayContainer" instance=ExtResource("10_mg1rq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.828497, 0)
+visible = false
 
 [node name="ipod" type="Node" parent="."]
 

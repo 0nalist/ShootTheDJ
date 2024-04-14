@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://scenes/view_model.gd" id="1_f2b3u"]
 [ext_resource type="Texture2D" uid="uid://dc1dnhek3x6nv" path="res://assets/art/weapons/PSX RETRO/psx textures/Shotgun_Texture.png" id="1_g03ht"]
-[ext_resource type="Shader" path="res://assets/art/shaders/outline.gdshader" id="2_itfss"]
 [ext_resource type="Material" uid="uid://b78m16k77inid" path="res://assets/materials/hand_material.tres" id="2_kys57"]
+[ext_resource type="Shader" path="res://assets/art/shaders/cel shader/outline.gdshader" id="3_a1kj4"]
 [ext_resource type="Texture2D" uid="uid://defo2tibrouyq" path="res://assets/art/weapons/PSX RETRO/psx textures/USP.png" id="5_bmog4"]
 [ext_resource type="AudioStream" uid="uid://5nhko3ym0mka" path="res://assets/audio/samples/onehihathit.ogg" id="6_xur3y"]
 [ext_resource type="AudioStream" uid="uid://odf84ih83rrw" path="res://assets/audio/samples/openhihat.ogg" id="7_485mg"]
@@ -51,9 +51,7 @@ shadow_mesh = SubResource("ArrayMesh_5dy8c")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_i0e25"]
 render_priority = 0
-shader = ExtResource("2_itfss")
-shader_parameter/outline_color = null
-shader_parameter/outline_width = 1.0
+shader = ExtResource("3_a1kj4")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8karx"]
 next_pass = SubResource("ShaderMaterial_i0e25")
@@ -833,9 +831,7 @@ shadow_mesh = SubResource("ArrayMesh_0lapx")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cmek8"]
 render_priority = 0
-shader = ExtResource("2_itfss")
-shader_parameter/outline_color = null
-shader_parameter/outline_width = 1.0
+shader = ExtResource("3_a1kj4")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ohtup"]
 next_pass = SubResource("ShaderMaterial_cmek8")
@@ -877,9 +873,7 @@ shadow_mesh = SubResource("ArrayMesh_yimnf")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_37b8s"]
 render_priority = 0
-shader = ExtResource("2_itfss")
-shader_parameter/outline_color = null
-shader_parameter/outline_width = 1.0
+shader = ExtResource("3_a1kj4")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u5ss0"]
 next_pass = SubResource("ShaderMaterial_37b8s")

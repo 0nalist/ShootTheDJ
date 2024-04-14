@@ -1,12 +1,10 @@
 [gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://b78m16k77inid"]
 
-[ext_resource type="Shader" path="res://assets/art/shaders/outline.gdshader" id="1_ur7kf"]
+[ext_resource type="Shader" path="res://assets/art/shaders/cel shader/outline.gdshader" id="1_lnoo8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ltgoe"]
 render_priority = 0
-shader = ExtResource("1_ur7kf")
-shader_parameter/outline_color = null
-shader_parameter/outline_width = 1.0
+shader = ExtResource("1_lnoo8")
 
 [resource]
 next_pass = SubResource("ShaderMaterial_ltgoe")

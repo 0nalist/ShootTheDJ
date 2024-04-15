@@ -109,7 +109,7 @@ var one_shooting = false
 var two_shooting = true
 var three_shooting = true
 
-var holding_pistol = false
+#var holding_pistol = false
 var holding_shotgun = false
 var holding_right_fist = true
 
@@ -139,30 +139,69 @@ func _ready():
 	
 	drum_machine_factory_reset()
 	
-	pistol_cooldown_timer.wait_time = pistol_cooldown_time
 	shotgun_cooldown_timer.wait_time = shotgun_cooldown_time
 
 
+#NEW PISTOL LOGIC
+var holding_pistol := false
+var pistol_on_cooldown := false
 
+
+var pistol_firing := false
+var pistol_firing_duration: int = 16 #BEATS
+var pistol_sixteenths_elapsed: int = 0
+var pistol_cooldown_duration: int = 4 # BEATS
+var pistol_cooldown_counter: int = 0 # BEATS
+
+var pistol_fill_firing := false
+var pistol_fill_counter : int= 0
+
+var pistol_pat = [3, 7, 11, 15]
+var pistol_fill_pat = [1,2,4,5,6,8,9,10,12,13,14,16]
+
+func check_pistol_shots():
+	if current_sixteenth in pistol_pat:
+		fire_pistol()
+	elif current_sixteenth in pistol_fill_pat and pistol_fill_firing:
+		fire_pistol()
+	if pistol_sixteenths_elapsed / 4 >= pistol_firing_duration:
+		pistol_firing = false
+		pistol_on_cooldown = true
+		pistol_cooldown_counter = 0
+
+func fire_pistol():
+	BeatManager.emit_signal("play_sound", "ONEHIHATHIT")
+	print("Pistol fired at sixteenth: ", current_sixteenth)
+	gun_camera.fire_pistol()  # Assuming this method manages the animation
+	if gun_ray.is_colliding() and gun_ray.get_collider().has_method("take_damage"):
+		gun_ray.get_collider().take_damage(pistol_damage)
+		heal(.1)
+	if pistol_fill_firing:
+		velocity *= 0.95
+		pistol_fill_counter += 1
+	if Input.is_action_pressed("fire_pistol"): #This probably shouldnt go herevv
+		pistol_fill_firing = true
+	else: pistol_fill_firing = false
+
+func process_pistol_input():
+	if pistol_on_cooldown or not holding_pistol:
+		return
+	if pistol_firing:
+		pistol_fill_firing = true
+	if not pistol_firing:
+		pistol_firing = true
+		pistol_sixteenths_elapsed = 0
+
+
+#var hat_pat = {"pistol": [1,2,3,4,5, 7, 11, 15]}  # Example pattern for the pistol
 
 # ========= B E A T S H O T   L O G I C ========== #
 
 var current_sixteenth: int = 0
-var pistol_cooldown_time = BeatManager.sixteenth_duration * 1.73  # Cooldown after first shot
 var shotgun_cooldown_time = BeatManager.sixteenth_duration * 3.89
 const DOUBLE_CLICK_THRESHOLD = 0.25  # 250 milliseconds between clicks
 
 #PISTOL variables
-var single_shot_queued := false
-var pistol_continuous_firing := false
-var pistol_cooldown = false
-var next_shot_sixteenth := 0
-var pistol_shot_queue = []  # Array to hold queued shots
-var max_queued_pistol_shots = 1  # Maximum number of shots that can be queued
-var last_pistol_click_time := 0.0
-var is_pistol_continuous_firing_enabled := false
-var hat_pat = {"pistol": [1,2,3,4,5, 7, 11, 15]}  # Example pattern for the pistol
-@onready var pistol_cooldown_timer = $Head/MainCamera/GunRay/PistolCooldownTimer
 
 #SHOTGUN variables
 var dead_shot_pat = [5, 13]
@@ -174,37 +213,21 @@ var shotgun_automatic = false  # Toggle for automatic firing
 @onready var shotgun_cooldown_timer = $Head/MainCamera/GunRay/ShotgunCooldownTimer
 
 
-
-
-
-func debug_kick():
-	one_kick_punch.play()
-	gun_camera.punch_fist()
-
 func _on_sixteenth(sixteenth):
 	current_sixteenth = sixteenth
-	process_queued_shots()
 	
-	#PISTOL check
-	if holding_pistol and pistol_continuous_firing:
-		queue_pistol_shot_on_pattern()
-	
-	#DEBUG kick
 	if sixteenth in [1,5,9,13]:
 		debug_kick()
+	
+	if pistol_firing and holding_pistol and not pistol_on_cooldown:
+		pistol_sixteenths_elapsed += 1
+		check_pistol_shots()
 	
 	#SHOTGUN check
 	if shotgun_automatic and current_sixteenth in dead_shot_pat and not shotgun_cooldown:
 		fire_shotgun(false)  # Pass true for critical hit
 
 func process_queued_shots():
-	var i = 0
-	while i < pistol_shot_queue.size():
-		if pistol_shot_queue[i] == current_sixteenth:
-			fire_pistol()
-			pistol_shot_queue.remove_at(i)  # Remove shot from queue after firing
-		else:
-			i += 1
 	for j in range(shotgun_shot_queue.size()):
 		if shotgun_shot_queue[j] == current_sixteenth:
 			fire_shotgun(current_sixteenth in dead_shot_pat)
@@ -212,35 +235,12 @@ func process_queued_shots():
 			break
 
 
-# ===== PISTOL functions ======
-func fire_pistol():
-	BeatManager.emit_signal("play_sound", "ONEHIHATHIT")
-	print("Pistol fired at sixteenth: ", current_sixteenth)
-	gun_camera.fire_pistol()  # Assuming this method manages the animation
-	if gun_ray.is_colliding() and gun_ray.get_collider().has_method("take_damage"):
-		gun_ray.get_collider().take_damage(pistol_damage)
-		heal(.1)
-	velocity *= 0.95
-	pistol_cooldown = true
-	pistol_cooldown_timer.start()
+func debug_kick():
+	one_kick_punch.play()
+	gun_camera.punch_fist()
 
-func _on_pistol_cooldown_timer_timeout():
-	pistol_cooldown = false
-	if pistol_continuous_firing:  # If still holding down, queue next patterned shot
-		queue_pistol_shot_on_pattern()
 
-func queue_pistol_shot_on_pattern():
-	if pistol_shot_queue.size() < max_queued_pistol_shots and not pistol_shot_queue.has(current_sixteenth):
-		var next_sixteenth = find_next_valid_pistol_sixteenth()
-		if next_sixteenth != -1 and !pistol_shot_queue.has(next_sixteenth):
-			pistol_shot_queue.append(next_sixteenth)
-
-func find_next_valid_pistol_sixteenth():
-	var current_index = hat_pat["pistol"].find(current_sixteenth)
-	if current_index == -1 or current_index + 1 >= hat_pat["pistol"].size():
-		return hat_pat["pistol"][0]  # Wrap around if needed
-	else:
-		return hat_pat["pistol"][current_index + 1]
+# ===== PISTOL functions =====
 
 
 # ====== SHOTGUN functions ========
@@ -294,6 +294,12 @@ func _on_beat():
 	beat += 1
 	print(beat)
 
+
+func _process(delta):
+	if Input.is_action_just_pressed("fire_pistol"):
+		process_pistol_input()
+
+
 func _physics_process(delta):
 	gun_camera.global_transform = main_camera.global_transform
 	update_stamina()
@@ -336,29 +342,13 @@ func _input(event):
 		
 		
 	# FIRE PISTOL INPUT
-	if holding_pistol and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+	if event.is_action("fire_pistol"):
+		print("Fired pistol")
 		if event.is_pressed():
-			# Check if this click is within the threshold to be considered a double-click
-			var current_time = Time.get_ticks_msec() / 1000.0
-			if current_time - last_pistol_click_time <= DOUBLE_CLICK_THRESHOLD:
-				# Toggle continuous firing
-				is_pistol_continuous_firing_enabled = !is_pistol_continuous_firing_enabled
-				pistol_continuous_firing = is_pistol_continuous_firing_enabled
-				print("Continuous firing toggled:", is_pistol_continuous_firing_enabled)
-			else:
-				# Not a double click, handle normal firing
-				if not pistol_cooldown:
-					print("Fire pistol pressed")
-					fire_pistol()  # Fire immediately on press
-					if not is_pistol_continuous_firing_enabled:
-						pistol_continuous_firing = true
-			# Update last click time
-			last_pistol_click_time = current_time
-		else:
-			# Handle mouse release for non-toggled mode
-			if not is_pistol_continuous_firing_enabled:
-				print("Fire pistol released")
-				pistol_continuous_firing = false
+			### RETURN TO HERE TO CONTINUE PISTOL
+			pass
+			
+			
 		
 	if holding_shotgun and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
 		if event.is_pressed():
@@ -423,13 +413,14 @@ func _input(event):
 	if Input.is_action_just_pressed("esc"):
 		pass
 
+'''
 func camera_look(movement: Vector2):
 	camera_rotation += movement
 	camera_rotation.y = clamp(camera_rotation.y, -1.5, 1.6)
 	transform.basis = Basis()
 	main_camera.transform.basis = Basis()
 	rotate_object_local(Vector3(0,1,0), -camera_rotation.x)
-	main_camera.rotate_object_local(Vector3(1,0,0), -camera_rotation.y)
+	main_camera.rotate_object_local(Vector3(1,0,0), -camera_rotation.y)'''
 
 func _headbob(time) -> Vector3:
 	var pos = Vector3.ZERO
@@ -554,8 +545,8 @@ func start_stop_weapons_3slot():
 
 var one_slot_current = 0
 func cycle_one():
-	one_slot_current = (one_slot_current + 1) % hat_pat.size()
-	if one_slot_current > hat_pat.size():
+	#one_slot_current = (one_slot_current + 1) % hat_pat.size()
+	#if one_slot_current > hat_pat.size():
 		one_slot_current = 0
 
 var two_slot_current = 0
@@ -579,13 +570,18 @@ func set_user_hats():
 	user_hats.append(1)
 	print(user_hats)
 
+
+var hat_pat = []
+
 func drum_machine_factory_reset():
+	pass
+	'''
 	hat_pat[0] = [3,7,11,15]
 	hat_pat[1] = [1,2,3,5,6,7,9,10,11,12,13,14]
 	hat_pat[2] = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
 	snare_pat[0] = [5,13]
 	kick_pat[0] = [1,11]
-	kick_pat[1] = [1,5,9,13]
+	kick_pat[1] = [1,5,9,13]'''
 
 func shoot_play_closed_hihat():
 	#one_hi_hat_hit.play()

@@ -53,7 +53,6 @@ func fire_pistol():
 func equip_shotgun():
 	$FPSRig/Shotun.visible = true
 	shotgun_animation_player.queue("equip")
-	
 
 func equip_pistol():
 	$FPSRig/Pistol.visible = true

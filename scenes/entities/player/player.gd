@@ -126,7 +126,6 @@ func calculate_movement_parameters()->void:
 
 func _ready():
 	$Head/MainCamera/SubViewportContainer/SubViewport.size = DisplayServer.window_get_size() # ALSO DO THIS ON RESIZING
-	
 	# Connect to BeatManager
 	BeatManager.sixteenth.connect(_on_sixteenth)
 	BeatManager.beat.connect(_on_beat)
@@ -150,8 +149,8 @@ var pistol_on_cooldown := false
 var pistol_firing := false
 var pistol_firing_duration: int = 16 #BEATS
 var pistol_sixteenths_elapsed: int = 0
-var pistol_cooldown_duration: int = 4 # BEATS
-var pistol_cooldown_counter: int = 0 # BEATS
+var pistol_cooldown_duration: int = 4 # beats
+var pistol_cooldown_counter: int = 0 # sixteenths
 
 var pistol_fill_firing := false
 var pistol_fill_counter : int= 0
@@ -167,7 +166,7 @@ func check_pistol_shots():
 	if pistol_sixteenths_elapsed / 4 >= pistol_firing_duration:
 		pistol_firing = false
 		pistol_on_cooldown = true
-		pistol_cooldown_counter = 0
+		
 
 func fire_pistol():
 	BeatManager.emit_signal("play_sound", "ONEHIHATHIT")
@@ -177,7 +176,7 @@ func fire_pistol():
 		gun_ray.get_collider().take_damage(pistol_damage)
 		heal(.1)
 	if pistol_fill_firing:
-		velocity *= 0.95
+		velocity *= 0.45
 		pistol_fill_counter += 1
 	if Input.is_action_pressed("fire_pistol"): #This probably shouldnt go herevv
 		pistol_fill_firing = true
@@ -191,9 +190,6 @@ func process_pistol_input():
 	if not pistol_firing:
 		pistol_firing = true
 		pistol_sixteenths_elapsed = 0
-
-
-#var hat_pat = {"pistol": [1,2,3,4,5, 7, 11, 15]}  # Example pattern for the pistol
 
 # ========= B E A T S H O T   L O G I C ========== #
 
@@ -215,6 +211,7 @@ var shotgun_automatic = false  # Toggle for automatic firing
 
 func _on_sixteenth(sixteenth):
 	current_sixteenth = sixteenth
+	#print(sixteenth)
 	
 	if sixteenth in [1,5,9,13]:
 		debug_kick()
@@ -222,6 +219,11 @@ func _on_sixteenth(sixteenth):
 	if pistol_firing and holding_pistol and not pistol_on_cooldown:
 		pistol_sixteenths_elapsed += 1
 		check_pistol_shots()
+	else:
+		pistol_cooldown_counter += 1
+		if pistol_cooldown_counter / 4 >= pistol_cooldown_duration:
+			pistol_on_cooldown = false
+			pistol_cooldown_counter = 0
 	
 	#SHOTGUN check
 	if shotgun_automatic and current_sixteenth in dead_shot_pat and not shotgun_cooldown:
@@ -292,10 +294,10 @@ var beat: int = 0
 
 func _on_beat():
 	beat += 1
-	print(beat)
+	#print(beat)
 
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("fire_pistol"):
 		process_pistol_input()
 

@@ -513,7 +513,8 @@ func slide():
 			accel *= slide_speed
 			get_tree().create_tween().tween_property(main_camera, "position:y", main_camera.position.y-.8, slide_time/2 )
 			await get_tree().create_timer(slide_time).timeout
-			accel = preslide_speed
+			if current_state != AIR:
+				accel = preslide_speed
 			get_tree().create_tween().tween_property(main_camera, "position:y", main_camera.position.y+.8 , slide_time/2 )
 			await get_tree().create_timer(slide_cooldown).timeout
 			sliding = false

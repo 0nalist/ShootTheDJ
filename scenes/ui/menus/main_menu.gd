@@ -13,7 +13,7 @@ signal main_menu_showing()
 
 
 var splash_texts = [
-	"- actual title! -",
+	"- bottom text -",
 	"- demo made hastily && with love -",
 	"- 2d art is placeholder -",
 	"- basic ass features coming soon -",

@@ -55,7 +55,7 @@ var credits = [
 		"Programming",
 		"Sam"
 	],[
-		"Art Direction",
+		"Level Design",
 		"Sam"
 	],[
 		"Art & Assets",
@@ -106,7 +106,7 @@ var credits = [
 		"DISCLAIMERS",
 		'no DJs were harmed in the production of this game',
 		"No AI generated art or images were used",
-		"ChatGPT was used for debugging",
+		"ChatGPT 4 was used to aid programming",
 	],[
 		"Copyright",
 		'Sam'

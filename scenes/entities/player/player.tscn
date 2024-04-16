@@ -29,7 +29,7 @@ glow_enabled = true
 environment = SubResource("Environment_gwakr")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_n1olw"]
-height = 2.44876
+height = 1.71139
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_txrvt"]
 border_width_left = 1
@@ -144,6 +144,7 @@ visible = false
 target_position = Vector3(0, 0, -0.75)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.12192, 0)
 shape = SubResource("CapsuleShape3D_n1olw")
 
 [node name="ipod" type="Node" parent="."]

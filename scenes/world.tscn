@@ -1,4 +1,4 @@
-[gd_scene load_steps=132 format=3 uid="uid://c3cibwa0258ev"]
+[gd_scene load_steps=133 format=3 uid="uid://c3cibwa0258ev"]
 
 [ext_resource type="Script" path="res://scenes/world.gd" id="1_0gs5r"]
 [ext_resource type="Script" path="res://addons/qodot/src/nodes/qodot_map.gd" id="1_ypnyy"]
@@ -37,6 +37,7 @@
 [ext_resource type="Texture2D" uid="uid://cnngq8rvpm6fk" path="res://textures/RetroPixel/CONSOLE_1B.PNG" id="39_lr1hx"]
 [ext_resource type="Texture2D" uid="uid://u01e7l3m2yn1" path="res://textures/RetroPixel/BRICK_1A.PNG" id="39_taxnw"]
 [ext_resource type="Texture2D" uid="uid://dgt7qfvf2pb0k" path="res://textures/RetroPixel/GRASS_1A.PNG" id="40_lyui3"]
+[ext_resource type="PackedScene" uid="uid://bfd5pgdhro81v" path="res://graybox_1.tscn" id="40_ncraf"]
 [ext_resource type="Texture2D" uid="uid://cxuytgjn7lybp" path="res://textures/RetroPixel/TILE_2C.PNG" id="41_0htud"]
 [ext_resource type="Texture2D" uid="uid://bblbh0pibkyds" path="res://textures/RetroPixel/WARN_1A.PNG" id="41_r2pna"]
 
@@ -1222,6 +1223,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52.3371, 59.938, 58.7863)
 collectable_resource = ExtResource("33_lqmpe")
 
 [node name="TheHouse" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -272.101)
 
 [node name="Map" type="Node3D" parent="TheHouse"]
 transform = Transform3D(0.00268776, 0, -0.999996, 0, 1, 0, 0.999996, 0, 0.00268776, -39.0665, 71.9122, -37.4941)
@@ -1706,5 +1708,11 @@ transform = Transform3D(-0.579102, 0, 0.375154, 0, 0.69, 0, -0.375154, 0, -0.579
 
 [node name="OfficeLady" parent="." instance=ExtResource("33_xw106")]
 transform = Transform3D(0.715181, 0, 0.69894, 0, 1, 0, -0.69894, 0, 0.715181, -36.8075, 59.3258, 51.6662)
+
+[node name="GrayBox" type="Node3D" parent="."]
+transform = Transform3D(0.0215008, 0, 0.999769, 0, 1, 0, -0.999769, 0, 0.0215008, 280.342, 38.4342, -41.7343)
+
+[node name="graybox1" parent="GrayBox" instance=ExtResource("40_ncraf")]
+transform = Transform3D(0.600001, 0, -1.86265e-09, 0, 0.6, 0, 1.86265e-09, 0, 0.600001, -21.9985, 18.6852, -135.742)
 
 [editable path="Level2/Enemy39"]

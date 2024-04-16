@@ -43,6 +43,7 @@ var audio_samples = {
 func _ready():
 	set_process(true)  # Make sure processing is enabled
 	connect("play_sound", play_sound_effect,)
+	connect 
 
 
 func _process(delta):
@@ -136,7 +137,28 @@ func execute_action(action_data: Dictionary):
 	print("Executing action:", action_data)
 
 
+##### ITEMS #######
 
+
+func handle_sounds(collectable_resource) -> void:
+	match collectable_resource.collectable_name:
+		"":
+			return
+		"coin":
+			var sound_to_play = house_fourths[randi() % house_fourths.size()]
+			#MAKE THIS QUEUE SOUND TO PLAY ON NEXT BAR OR BEAT
+			house_fourth_player.stream = sound_to_play
+			house_fourth_player.play()
+			
+		"weapon":
+			pass
+
+@onready var house_fourth_player = $ipod/HouseFourthPlayer
+var house_fourths = [
+	preload("res://assets/audio/pickups/coins/housefourth1.ogg"),
+	preload("res://assets/audio/pickups/coins/housefourth2.ogg"),
+	preload("res://assets/audio/pickups/coins/househit3.ogg")
+	 ]
 
 
 

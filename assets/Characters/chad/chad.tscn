@@ -324,6 +324,7 @@ skeleton = NodePath("")
 transform = Transform3D(0.16208, 0, 0, 0, 0.16208, 0, 0, 0, 0.16208, 0, 0, 0)
 
 [node name="Sphere_0" type="MeshInstance3D" parent="Sketchfab_model/Root/chad rig/Sphere"]
+visible = false
 layers = 786432
 mesh = SubResource("ArrayMesh_0kpuk")
 skeleton = NodePath("")

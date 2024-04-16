@@ -14,7 +14,6 @@ var player: Player
 '''
 @onready var SFX_BUS_ID
 @onready var MUSIC_BUS_ID
-
 '''
 
 
@@ -33,10 +32,9 @@ func _ready():
 
 
 
-##This should probably all be housed in a pistolui script
-
+##This should probably all be housed in a pistolui script##
 #Remember to change this if i change label node
-@onready var pistol_cooldown_label = $Control/MarginContainer/PistolCooldown
+@onready var pistol_cooldown_label = $Control/MarginContainer/HBoxContainer2/PistolCooldownUI/VBoxContainer/PistolCooldown
 
 func _on_pistol_cooldown_started(beats_left: int):
 	pistol_cooldown_label.modulate = Color(1, 0, 0)
@@ -48,4 +46,3 @@ func _on_pistol_cooldown_updated(beats_left: int):
 		var posbeats = 16 + beats_left
 		pistol_cooldown_label.text = str(posbeats)
 	else: pistol_cooldown_label.text = str(beats_left)
-

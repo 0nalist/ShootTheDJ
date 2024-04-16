@@ -42,15 +42,12 @@ var sound_finished = false
 var animation_finished = false
 
 func _ready():
+	await get_tree().create_timer(1.0).timeout #Need this or else fail to get player
+	player = get_tree().get_first_node_in_group("player")
+	print(player)
 	#player = get_node("res://scenes/entities/player/player.tscn")
-	
-	await get_tree().create_timer(1.0).timeout #do we need this?
-	
-	#player = get_tree().get_first_node_in_group("player")
-	player = get_tree().get_nodes_in_group("player")[0]
-	
-	#death_rattle.connect("finished", Callable(self, "_on_death_rattle_finished"))
-	#animated_sprite_3d.connect("animation_finished", Callable(self, "_on_animated_sprite_3d_animation_finished"))
+	#await get_tree().create_timer(1.0).timeout #do we need this?
+	#player = get_tree().get_nodes_in_group("player")[0]
 
 
 enum States{

@@ -40,7 +40,8 @@ var splash_texts = [
 	"- 100% bug free! -",
 	"- ALPHA 0.0.1 releasing Mayday -",
 	"- needs more game juice -",
-	"- 99% spaghetti -"
+	"- 99% spaghetti -",
+	"- music only hurts bad people -"
 	
 	
 ]

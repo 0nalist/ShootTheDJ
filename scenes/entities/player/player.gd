@@ -40,6 +40,10 @@ Specialized shopkeepers
 '''
 
 signal collected(collectable)
+signal pistol_cooldown_started(pistol_beats_left)
+signal pistol_cooldown_updated(pistol_beats_left)
+signal pistol_shooting_started(pistol_beats_left)
+signal pistol_shooting_updated(pistol_beats_left)
 
 func collect(collectable):
 	collected.emit(collectable)
@@ -131,7 +135,6 @@ func _ready():
 	BeatManager.beat.connect(_on_beat)
 	
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	
 	calculate_movement_parameters()
 	
 	%StaminaBar.value = stamina # this next
@@ -148,9 +151,11 @@ var pistol_on_cooldown := false
 
 var pistol_firing := false
 var pistol_firing_duration: int = 16 #BEATS
-var pistol_sixteenths_elapsed: int = 0
-var pistol_cooldown_duration: int = 4 # beats
-var pistol_cooldown_counter: int = 0 # sixteenths
+var pistol_sixteenths_elapsed: int = 0 #sixteenths
+
+var pistol_cooldown_beats: int = 4 
+var pistol_cooldown_current_beat: int = 0 
+var pistol_beats_left: int = 0
 
 var pistol_fill_firing := false
 var pistol_fill_counter : int= 0
@@ -165,7 +170,8 @@ func check_pistol_shots():
 		fire_pistol()
 	if pistol_sixteenths_elapsed / 4 >= pistol_firing_duration:
 		pistol_firing = false
-		pistol_on_cooldown = true
+		#pistol_sixteenths_elapsed = 0
+		start_pistol_cooldown()
 		
 
 func fire_pistol():
@@ -190,6 +196,20 @@ func process_pistol_input():
 	if not pistol_firing:
 		pistol_firing = true
 		pistol_sixteenths_elapsed = 0
+
+func start_pistol_cooldown():
+	pistol_on_cooldown = true
+	pistol_cooldown_current_beat = pistol_cooldown_beats
+	pistol_cooldown_started.emit(pistol_cooldown_current_beat)
+
+func update_pistol_cooldown():
+	if pistol_on_cooldown or pistol_firing:
+		pistol_cooldown_current_beat -= 1
+		pistol_cooldown_updated.emit(pistol_cooldown_current_beat)
+		if pistol_cooldown_current_beat == 0:
+			pistol_on_cooldown = false
+
+
 
 # ========= B E A T S H O T   L O G I C ========== #
 
@@ -219,11 +239,11 @@ func _on_sixteenth(sixteenth):
 	if pistol_firing and holding_pistol and not pistol_on_cooldown:
 		pistol_sixteenths_elapsed += 1
 		check_pistol_shots()
-	else:
-		pistol_cooldown_counter += 1
-		if pistol_cooldown_counter / 4 >= pistol_cooldown_duration:
-			pistol_on_cooldown = false
-			pistol_cooldown_counter = 0
+	#else:
+	#	pistol_cooldown_counter += 1
+	#	if pistol_cooldown_counter / 4 >= pistol_cooldown_duration:
+	#		pistol_on_cooldown = false
+	#		pistol_cooldown_counter = 0
 	
 	#SHOTGUN check
 	if shotgun_automatic and current_sixteenth in dead_shot_pat and not shotgun_cooldown:
@@ -294,6 +314,7 @@ var beat: int = 0
 
 func _on_beat():
 	beat += 1
+	update_pistol_cooldown()
 	#print(beat)
 
 

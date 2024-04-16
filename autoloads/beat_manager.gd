@@ -1,6 +1,21 @@
 extends Node
 class_name Beat_Manager_Class
 
+'''
+######## ROOM FOR IMPROVEMENT #############
+
+Not sure if class_name helps-- annoying when it comes up in autofill
+
+NOT AVOIDING LAG lagging beat
+	Probably because the triggers are still done in player script
+	Should I move more beat logic here?
+	Moving math intensive low priority functions (eg enemy navigation) to deprioritized threads could help
+
+
+
+'''
+
+
 
 signal play_sound(name)
 signal beat()
@@ -40,11 +55,14 @@ func _process(delta):
 		while accumulated_time >= sixteenth_duration:
 			accumulated_time -= sixteenth_duration
 			emit_signal("sixteenth", current_sixteenth)
-			if current_sixteenth == 16:
-				emit_signal("beat")
+			if current_sixteenth >= 16:
+				print("bar")
 				current_sixteenth = 1  # Reset after reaching 16
 			else:
 				current_sixteenth += 1
+			if current_sixteenth in [1,5,9,13]:
+				emit_signal("beat")
+				print(beat)
 
 func start_beat_count():
 	running = true

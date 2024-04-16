@@ -4,11 +4,12 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kmaca"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bt5gj"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_djlse"]
+bg_color = Color(0.647059, 0.619608, 0, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3fpfm"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r3mhu"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bbya6"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nt1q6"]
 
@@ -17,9 +18,9 @@ default_font = ExtResource("1_ij3i4")
 default_font_size = 16
 Button/colors/font_focus_color = Color(0.87451, 0.670588, 0.152941, 1)
 Button/colors/font_hover_color = Color(1, 0.952941, 0.105882, 1)
-Button/colors/font_pressed_color = Color(0.152941, 0.152941, 0.2, 1)
+Button/colors/font_pressed_color = Color(0.294118, 0.294118, 0.372549, 1)
 Button/styles/disabled = SubResource("StyleBoxEmpty_kmaca")
-Button/styles/focus = SubResource("StyleBoxEmpty_bt5gj")
+Button/styles/focus = SubResource("StyleBoxFlat_djlse")
 Button/styles/hover = SubResource("StyleBoxEmpty_3fpfm")
-Button/styles/normal = SubResource("StyleBoxEmpty_r3mhu")
+Button/styles/normal = SubResource("StyleBoxEmpty_bbya6")
 Button/styles/pressed = SubResource("StyleBoxEmpty_nt1q6")

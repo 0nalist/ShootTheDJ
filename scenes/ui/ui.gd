@@ -33,14 +33,20 @@ func _ready():
 	#BeatManager.sixteenth.connect(_on_sixteenth)
 	pass
 
-@onready var pistol_cooldown_label = $Control/MarginContainer/PistolCooldown
 
-#@onready var pistol_cooldown_label = $"Control/PistolCooldown"
+
+
+
+
+
+##This should probably all be housed in a pistolui script
+
+#Remember to change this if i change label node
+@onready var pistol_cooldown_label = $Control/MarginContainer/PistolCooldown
 
 func _on_pistol_cooldown_started(beats_left: int):
 	pistol_cooldown_label.modulate = Color(1, 0, 0)
 	pistol_cooldown_label.text = str(beats_left)
-	
 
 func _on_pistol_cooldown_updated(beats_left: int):
 	if beats_left <= 0:

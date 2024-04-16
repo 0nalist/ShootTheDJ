@@ -85,7 +85,7 @@ theme_override_constants/shadow_outline_size = 12
 theme_override_constants/line_spacing = 18
 theme_override_fonts/font = ExtResource("6_hitcf")
 theme_override_font_sizes/font_size = 69
-text = "SHOOT THE DJ"
+text = "bang THE DJ"
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer"]
 visible = false
@@ -144,6 +144,7 @@ size_flags_stretch_ratio = 0.0
 focus_neighbor_top = NodePath("../QuitGameButton")
 focus_neighbor_bottom = NodePath("../OptionsButton")
 focus_next = NodePath("../OptionsButton")
+theme = ExtResource("1_1cfbn")
 text = "START"
 
 [node name="OptionsButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonsVbox"]
@@ -155,10 +156,12 @@ size_flags_stretch_ratio = 0.0
 focus_neighbor_top = NodePath("../StartGameButton")
 focus_neighbor_bottom = NodePath("../QuitGameButton")
 focus_next = NodePath("../QuitGameButton")
+theme = ExtResource("1_1cfbn")
 text = "OPTIONS"
 
 [node name="CreditsButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonsVbox"]
 layout_mode = 2
+theme = ExtResource("1_1cfbn")
 text = "CREDITS"
 
 [node name="QuitGameButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonsVbox"]
@@ -169,6 +172,7 @@ size_flags_vertical = 4
 size_flags_stretch_ratio = 0.0
 focus_neighbor_top = NodePath("../OptionsButton")
 focus_neighbor_bottom = NodePath("../StartGameButton")
+theme = ExtResource("1_1cfbn")
 text = "QUIT GAME"
 
 [node name="ColorRect2" type="ColorRect" parent="MarginContainer/VBoxContainer"]

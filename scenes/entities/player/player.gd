@@ -36,17 +36,21 @@ Game mechanics
 Specialized shopkeepers
 
 
+POWERUPS
+
+Flutter - pistols slow down fall speed (CURRENTLY IMPLEMENTED, need to gate)
+
+
 
 '''
 
 signal collected(collectable)
 signal pistol_cooldown_started(pistol_beats_left)
 signal pistol_cooldown_updated(pistol_beats_left)
-signal pistol_shooting_started(pistol_beats_left)
-signal pistol_shooting_updated(pistol_beats_left)
 
-func collect(collectable):
-	collected.emit(collectable)
+signal shotgun_charge_started(shotgun_beats_left)
+signal shotgun_charge_updated(shotgun_beats_left)
+
 
 # ======== PLAYER BODY PARTS ======== #
 @onready var head = $Head
@@ -148,12 +152,11 @@ func _ready():
 var holding_pistol := false
 var pistol_on_cooldown := false
 
-
 var pistol_firing := false
 var pistol_firing_duration: int = 16 #BEATS
 var pistol_sixteenths_elapsed: int = 0 #sixteenths
 
-var pistol_cooldown_beats: int = 4 
+var pistol_cooldown_beats: int = 8 
 var pistol_cooldown_current_beat: int = 0 
 var pistol_beats_left: int = 0
 
@@ -489,6 +492,8 @@ func handle_jump(dir):
 			velocity.y += Jump_Velocity * WALL_JUMP_DAMPER
 
 
+func collect(collectable):
+	collected.emit(collectable)
 
 var can_jump := true
 var camera_can_move := true
@@ -497,6 +502,7 @@ var is_crouching := false
 func can_climb():
 	if !$Head/ChestRay3D.is_colliding():
 		return false
+		#print("cant climb")### DEBUG
 	for ray in $Head/ReachRays.get_children():
 		if ray.is_colliding():
 			return false

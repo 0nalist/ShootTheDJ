@@ -18,8 +18,6 @@ var player: Player
 '''
 
 
-
-
 func _on_main_menu_start_game() -> void:
 	start_game.emit()
 	player = get_tree().get_first_node_in_group("player")
@@ -32,10 +30,6 @@ func _ready():
 	#BeatManager.beat.connect(_on_beat)
 	#BeatManager.sixteenth.connect(_on_sixteenth)
 	pass
-
-
-
-
 
 
 

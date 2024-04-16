@@ -383,7 +383,6 @@ func _input(event):
 		
 	# FIRE PISTOL INPUT
 	if event.is_action("fire_pistol"):
-		print("Fired pistol")
 		if event.is_pressed():
 			### RETURN TO HERE TO CONTINUE PISTOL
 			pass
@@ -410,41 +409,6 @@ func _input(event):
 		
 		
 		
-		'''# FIRE SHOTGUN INPUTOLD 1
-	if holding_shotgun and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
-		if event.is_pressed():
-			var current_time = Time.get_ticks_msec() / 1000.0  # Current time in seconds
-			# Check if the click is within the double-click threshold
-			if current_time - last_shotgun_click_time < DOUBLE_CLICK_THRESHOLD:
-				# Toggle automatic firing mode
-				toggle_shotgun_automatic()
-				print("Shotgun automatic mode toggled:", shotgun_automatic)
-			else:
-				# Normal shotgun firing logic
-				if not shotgun_automatic and not shotgun_cooldown:
-					if current_sixteenth in (dead_shot_pat + close_enough_pat):
-						fire_shotgun(current_sixteenth in dead_shot_pat)
-						shotgun_cooldown = true
-					else:
-						# Queue the next shot if the current sixteenth is not on any pattern
-						queue_shotgun_shot()
-			# Update the last click time
-			last_shotgun_click_time = current_time
-		else:
-			if not shotgun_automatic:
-				# Reset logic if needed when the button is released
-				print("Shotgun fire button released")
-	'''
-	
-	
-	#old 2
-	'''if event.is_action_pressed("fire_shotgun"):
-		if not event.is_echo():
-			if current_sixteenth in (dead_shot_pat + close_enough_pat):
-				fire_shotgun(current_sixteenth in dead_shot_pat)
-			elif not shotgun_automatic:
-				queue_shotgun_shot()'''
-		
 		
 	if Input.is_action_just_pressed("slide"):
 		slide()
@@ -453,14 +417,6 @@ func _input(event):
 	if Input.is_action_just_pressed("esc"):
 		pass
 
-'''
-func camera_look(movement: Vector2):
-	camera_rotation += movement
-	camera_rotation.y = clamp(camera_rotation.y, -1.5, 1.6)
-	transform.basis = Basis()
-	main_camera.transform.basis = Basis()
-	rotate_object_local(Vector3(0,1,0), -camera_rotation.x)
-	main_camera.rotate_object_local(Vector3(1,0,0), -camera_rotation.y)'''
 
 func _headbob(time) -> Vector3:
 	var pos = Vector3.ZERO

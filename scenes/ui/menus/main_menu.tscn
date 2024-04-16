@@ -161,6 +161,8 @@ text = "OPTIONS"
 
 [node name="CreditsButton" type="Button" parent="MarginContainer/VBoxContainer/ButtonsVbox"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme = ExtResource("1_1cfbn")
 text = "CREDITS"
 

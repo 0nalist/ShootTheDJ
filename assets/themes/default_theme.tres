@@ -5,7 +5,18 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kmaca"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_djlse"]
-bg_color = Color(0.647059, 0.619608, 0, 1)
+content_margin_left = 0.0
+content_margin_top = 0.0
+bg_color = Color(0.623529, 0.576471, 0.698039, 0.392157)
+border_blend = true
+corner_radius_top_left = 9
+corner_radius_top_right = 9
+corner_radius_bottom_right = 9
+corner_radius_bottom_left = 9
+expand_margin_left = 2.0
+expand_margin_right = 1.0
+shadow_size = 2
+shadow_offset = Vector2(2, 2)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3fpfm"]
 

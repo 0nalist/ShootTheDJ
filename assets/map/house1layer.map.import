@@ -1,0 +1,14 @@
+[remap]
+
+importer="qodot.map"
+type="Resource"
+uid="uid://csifi2k8tljft"
+path="res://.godot/imported/house1layer.map-29d030e3e9188b182b506f41bb87b28d.tres"
+
+[deps]
+
+source_file="res://assets/map/house1layer.map"
+dest_files=["res://.godot/imported/house1layer.map-29d030e3e9188b182b506f41bb87b28d.tres"]
+
+[params]
+

@@ -6,7 +6,8 @@ class_name Player
 #
 # rhythm is STILL tied to processing speed :( But we did begin moving audio to BeatManager, which could help optimize
 #
-# h velocity not conserved when jumping out of slide
+# h velocity not conserved when falling from slide
+###Will solve with player state machine at some point
 #
 # Resizing the screen in game does not resize subviewport
 #
@@ -21,7 +22,7 @@ class_name Player
 # Double Jump-- Scratch that-- SHOTGUN JUMP !!!
 # stairs... ramps? Would be nice to have some step up logic to avoid getting caught on snags -- good game juice
 # smaller collision box on slide
-# optimize enemies--lag when too many too close
+# optimize enemies--lag when too many too close ##Navigation seems to be the CPU hog -- learn about threading to fix
 '''
 Ideas!
 
@@ -45,9 +46,9 @@ Flutter - pistols slow down fall speed (CURRENTLY IMPLEMENTED, need to gate)
 '''
 
 signal collected(collectable)
+
 signal pistol_cooldown_started(pistol_beats_left)
 signal pistol_cooldown_updated(pistol_beats_left)
-
 signal shotgun_charge_started(shotgun_beats_left)
 signal shotgun_charge_updated(shotgun_beats_left)
 
@@ -148,6 +149,54 @@ func _ready():
 	shotgun_cooldown_timer.wait_time = shotgun_cooldown_time
 
 
+# ========= B E A T S H O T   L O G I C ========== #
+
+var current_sixteenth: int = 0
+
+const DOUBLE_CLICK_THRESHOLD = 0.25  # 250 milliseconds between clicks
+
+
+func _on_sixteenth(sixteenth):
+	current_sixteenth = sixteenth
+	#print(sixteenth)
+	
+	if sixteenth in [1,5,9,13]:
+		debug_kick()
+	
+	if pistol_firing and holding_pistol and not pistol_on_cooldown:
+		pistol_sixteenths_elapsed += 1
+		check_pistol_shots()
+	#else:
+	#	pistol_cooldown_counter += 1
+	#	if pistol_cooldown_counter / 4 >= pistol_cooldown_duration:
+	#		pistol_on_cooldown = false
+	#		pistol_cooldown_counter = 0
+	
+	#SHOTGUN check
+	if shotgun_automatic and current_sixteenth in dead_shot_pat and not shotgun_cooldown:
+		fire_shotgun(false)  # Pass true for critical hit
+
+func process_queued_shots():
+	for j in range(shotgun_shot_queue.size()):
+		if shotgun_shot_queue[j] == current_sixteenth:
+			fire_shotgun(current_sixteenth in dead_shot_pat)
+			shotgun_shot_queue.remove_at(j)
+			break
+
+
+func debug_kick():
+	one_kick_punch.play()
+	gun_camera.punch_fist()
+
+
+
+
+
+
+
+
+
+
 #NEW PISTOL LOGIC
 var holding_pistol := false
 var pistol_on_cooldown := false
@@ -214,15 +263,17 @@ func update_pistol_cooldown():
 
 
 
-# ========= B E A T S H O T   L O G I C ========== #
 
-var current_sixteenth: int = 0
-var shotgun_cooldown_time = BeatManager.sixteenth_duration * 3.89
-const DOUBLE_CLICK_THRESHOLD = 0.25  # 250 milliseconds between clicks
 
-#PISTOL variables
 
-#SHOTGUN variables
+# ===== NEW SHOTGUN handling =====
+
+
+
+
+
+
+# ====== OLD SHOTGUN functions ========
 var dead_shot_pat = [5, 13]
 var close_enough_pat = [4, 6, 12, 14]
 var shotgun_shot_queue = []  # Queue for shotgun shots
@@ -230,45 +281,8 @@ var last_shotgun_click_time := 0.0
 var shotgun_cooldown = false
 var shotgun_automatic = false  # Toggle for automatic firing
 @onready var shotgun_cooldown_timer = $Head/MainCamera/GunRay/ShotgunCooldownTimer
+var shotgun_cooldown_time = BeatManager.sixteenth_duration * 3.89
 
-
-func _on_sixteenth(sixteenth):
-	current_sixteenth = sixteenth
-	#print(sixteenth)
-	
-	if sixteenth in [1,5,9,13]:
-		debug_kick()
-	
-	if pistol_firing and holding_pistol and not pistol_on_cooldown:
-		pistol_sixteenths_elapsed += 1
-		check_pistol_shots()
-	#else:
-	#	pistol_cooldown_counter += 1
-	#	if pistol_cooldown_counter / 4 >= pistol_cooldown_duration:
-	#		pistol_on_cooldown = false
-	#		pistol_cooldown_counter = 0
-	
-	#SHOTGUN check
-	if shotgun_automatic and current_sixteenth in dead_shot_pat and not shotgun_cooldown:
-		fire_shotgun(false)  # Pass true for critical hit
-
-func process_queued_shots():
-	for j in range(shotgun_shot_queue.size()):
-		if shotgun_shot_queue[j] == current_sixteenth:
-			fire_shotgun(current_sixteenth in dead_shot_pat)
-			shotgun_shot_queue.remove_at(j)
-			break
-
-
-func debug_kick():
-	one_kick_punch.play()
-	gun_camera.punch_fist()
-
-
-# ===== PISTOL functions =====
-
-
-# ====== SHOTGUN functions ========
 
 func fire_shotgun(is_critical):
 	if shotgun_cooldown or !holding_shotgun:

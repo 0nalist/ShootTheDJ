@@ -51,7 +51,7 @@ func fire_pistol():
 	pistol_animation_player.queue("fire")
 	#one_hihat_1.play()
 
-func punch():
+func punch_fist():
 	fist_animation_player.play("punch")
 
 
@@ -63,4 +63,6 @@ func equip_pistol():
 	$FPSRig/Pistol.visible = true
 	pistol_animation_player.queue("equip")
 
-
+func equip_left_fist():
+	$FPSRig/Fist.visible = true
+	fist_animation_player.play("equip")

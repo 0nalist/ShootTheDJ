@@ -161,8 +161,9 @@ func _on_sixteenth(sixteenth):
 	#print(sixteenth)
 	
 	if sixteenth in [1,5,9,13]:
-		debug_kick()
-		gun_camera.punch()
+		kick_punch()
+		gun_camera.punch_fist()
+	
 	
 	if pistol_firing and holding_pistol and not pistol_on_cooldown:
 		pistol_sixteenths_elapsed += 1
@@ -185,9 +186,14 @@ func process_queued_shots():
 			break
 
 
-func debug_kick():
+func kick_punch():
+	gun_camera.punch_fist()
 	one_kick_punch.play()
-#	gun_camera.punch_fist()
+	if melee_ray.is_colliding() and melee_ray.get_collider().has_method("take_damage"):
+		print("punched")
+		melee_ray.get_collider().take_damage(right_fist_damage)
+		heal(.1)
+
 
 
 
@@ -528,6 +534,7 @@ func equip_shotgun():
 
 func equip_right_fist():
 	holding_right_fist = true
+	gun_camera.equip_left_fist()
 
 func start_stop_weapons_2slot():
 	if not two_shooting:
@@ -609,7 +616,7 @@ func shoot_play_kick_punch():
 	if melee_ray.is_colliding() and melee_ray.get_collider().has_method("take_damage"):
 		melee_ray.get_collider().take_damage(right_fist_damage)
 		heal(.1)
-		nudge_bass_cutoff_filter(-10)
+		#nudge_bass_cutoff_filter(-10)
 		print("punch")
 	velocity *= 0.8
 

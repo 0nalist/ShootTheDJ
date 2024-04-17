@@ -1,6 +1,7 @@
-[gd_scene load_steps=176 format=3 uid="uid://bfd5pgdhro81v"]
+[gd_scene load_steps=177 format=3 uid="uid://bfd5pgdhro81v"]
 
 [ext_resource type="Shader" path="res://assets/art/shaders/cel shader/outline.gdshader" id="1_tyol4"]
+[ext_resource type="Texture2D" uid="uid://c1jsx5x7x5ixc" path="res://textures/PaintedRetroTextures/Concrete/s2 Concrete Base Grey.png" id="1_y1jv5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3usw2"]
 
@@ -42,10 +43,11 @@ shader = ExtResource("1_tyol4")
 next_pass = SubResource("ShaderMaterial_wxboo")
 diffuse_mode = 3
 specular_mode = 1
-albedo_color = Color(0.635294, 0.635294, 0.635294, 1)
-metallic = 0.05
-metallic_specular = 0.43
-roughness = 0.23
+albedo_texture = ExtResource("1_y1jv5")
+albedo_texture_force_srgb = true
+metallic = 0.02
+metallic_specular = 0.0
+roughness = 0.0
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ppm30"]
 data = PackedVector3Array(-1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1, -1, -1, 1, 1, -1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, 1, 1, 1, -1, 1, 1)

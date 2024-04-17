@@ -48,7 +48,6 @@ func _process(delta):
 	if running:
 		var current_time = Time.get_ticks_msec() / 1000.0  # Get current time in seconds
 		var time_elapsed = current_time - last_update_time
-		print(time_elapsed)
 		last_update_time = current_time
 		accumulated_time += time_elapsed
 

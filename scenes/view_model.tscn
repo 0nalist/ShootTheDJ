@@ -1,4 +1,4 @@
-[gd_scene load_steps=193 format=3 uid="uid://dw3mbmktjqhkq"]
+[gd_scene load_steps=195 format=3 uid="uid://dw3mbmktjqhkq"]
 
 [ext_resource type="Script" path="res://scenes/view_model.gd" id="1_f2b3u"]
 [ext_resource type="Texture2D" uid="uid://dc1dnhek3x6nv" path="res://assets/art/weapons/PSX RETRO/psx textures/Shotgun_Texture.png" id="1_g03ht"]
@@ -2213,11 +2213,71 @@ tracks/1/keys = {
 "values": [Vector3(0.714694, -0.0923883, 1.76368), Vector3(0.714694, -0.0923883, 1.76367), Vector3(0.686899, -0.253799, 1.55644), Vector3(0.57729, -0.501761, 1.22272), Vector3(0.209711, -0.620004, 1.08752), Vector3(0.714694, -0.0923883, 1.76368)]
 }
 
+[sub_resource type="Animation" id="Animation_tch5s"]
+resource_name = "equip"
+length = 0.5
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("whitehand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.0259453, 0.82833, 4.48035)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("whitehand:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.0593412, -0.0925025, 1.76453), Vector3(0.714694, -0.0923883, 1.76368)]
+}
+
+[sub_resource type="Animation" id="Animation_8a6ow"]
+resource_name = "unequip"
+length = 0.5
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("whitehand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.0259453, 0.82833, 4.48035)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("whitehand:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.714694, -0.0923883, 1.76368), Vector3(0.0593412, -0.0925025, 1.76453)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xgcs4"]
 _data = {
 "IDLE": SubResource("Animation_a2k80"),
 "RESET": SubResource("Animation_m8wsa"),
-"punch": SubResource("Animation_yghp3")
+"equip": SubResource("Animation_tch5s"),
+"punch": SubResource("Animation_yghp3"),
+"unequip": SubResource("Animation_8a6ow")
 }
 
 [node name="view_model_camera" type="Camera3D"]

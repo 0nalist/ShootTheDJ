@@ -88,6 +88,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="Head/MainCamera/SubViewportContainer"]
 world_3d = SubResource("World3D_tipn4")
@@ -95,6 +96,7 @@ transparent_bg = true
 handle_input_locally = false
 screen_space_aa = 1
 canvas_item_default_texture_filter = 0
+size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
 [node name="view_model_camera" parent="Head/MainCamera/SubViewportContainer/SubViewport" instance=ExtResource("5_a167m")]

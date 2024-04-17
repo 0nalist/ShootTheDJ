@@ -11,8 +11,6 @@ NOT AVOIDING LAG lagging beat
 	Should I move more beat logic here?
 	Moving math intensive low priority functions (eg enemy navigation) to deprioritized threads could help
 
-
-
 '''
 
 
@@ -43,13 +41,14 @@ var audio_samples = {
 func _ready():
 	set_process(true)  # Make sure processing is enabled
 	connect("play_sound", play_sound_effect,)
-	connect 
+	#connect 
 
 
 func _process(delta):
 	if running:
 		var current_time = Time.get_ticks_msec() / 1000.0  # Get current time in seconds
 		var time_elapsed = current_time - last_update_time
+		print(time_elapsed)
 		last_update_time = current_time
 		accumulated_time += time_elapsed
 

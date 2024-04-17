@@ -255,7 +255,7 @@ func start_pistol_cooldown():
 	pistol_cooldown_started.emit(pistol_cooldown_current_beat)
 
 func update_pistol_cooldown():
-	if pistol_on_cooldown or pistol_firing:
+	if pistol_on_cooldown or pistol_fill_firing:
 		pistol_cooldown_current_beat -= 1
 		pistol_cooldown_updated.emit(pistol_cooldown_current_beat)
 		if pistol_cooldown_current_beat == 0:

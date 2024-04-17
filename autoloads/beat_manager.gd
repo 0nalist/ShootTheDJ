@@ -31,7 +31,7 @@ var current_sixteenth := 1  # Start counting from 1
 var running := false  # Control variable to start/stop beat calculation
 
 
-var audio_samples = { 
+var drum_samples = { 
 	"CLAP": preload("res://assets/audio/samples/claponeshot.ogg"),
 	"ONEHIHATHIT": preload("res://assets/audio/samples/onehihathit.ogg"),
 	"ONEKICK": preload("res://assets/audio/samples/onekick.ogg"),
@@ -79,9 +79,9 @@ func set_bpm(new_bpm):
 
 
 func play_sound_effect(sound_name):
-	if audio_samples.has(sound_name):
+	if drum_samples.has(sound_name):
 		var sound_player = AudioStreamPlayer.new()  # Create a new AudioStreamPlayer
-		sound_player.stream = audio_samples[sound_name]  # Set its stream
+		sound_player.stream = drum_samples[sound_name]  # Set its stream
 		add_child(sound_player)  # Add it to the scene
 		sound_player.play()  # Play the sound
 		# Automatically remove it after playback finishes
@@ -146,18 +146,16 @@ func handle_sounds(collectable_resource) -> void:
 		"coin":
 			var sound_to_play = house_fourths[randi() % house_fourths.size()]
 			#MAKE THIS QUEUE SOUND TO PLAY ON NEXT BAR OR BEAT
-			house_fourth_player.stream = sound_to_play
-			house_fourth_player.play()
+			sound_to_play.play()
 			
 		"weapon":
 			pass
 
-@onready var house_fourth_player = $ipod/HouseFourthPlayer
-var house_fourths = [
-	preload("res://assets/audio/pickups/coins/housefourth1.ogg"),
-	preload("res://assets/audio/pickups/coins/housefourth2.ogg"),
-	preload("res://assets/audio/pickups/coins/househit3.ogg")
-	 ]
+var house_fourths = {
+	"HOUSE4th1" = preload("res://assets/audio/pickups/coins/housefourth1.ogg"),
+	"HOUSE4th2" = preload("res://assets/audio/pickups/coins/housefourth2.ogg"),
+	"HOUSE4th3" = preload("res://assets/audio/pickups/coins/househit3.ogg")
+	 }
 
 
 

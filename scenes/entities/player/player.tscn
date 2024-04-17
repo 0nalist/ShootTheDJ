@@ -74,10 +74,11 @@ collision_mask = 9
 script = ExtResource("1_ih33w")
 
 [node name="Head" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0119123, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.63904, 0)
 
 [node name="MainCamera" type="Camera3D" parent="Head"]
 unique_name_in_owner = true
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -0.0828292, 0)
 cull_mask = 524285
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="Head/MainCamera"]

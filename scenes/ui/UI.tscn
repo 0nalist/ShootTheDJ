@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bw2kfry8rswke"]
+[gd_scene load_steps=6 format=3 uid="uid://bw2kfry8rswke"]
 
 [ext_resource type="Script" path="res://scenes/ui/ui.gd" id="1_7bepc"]
 [ext_resource type="PackedScene" uid="uid://c0ydpigp41uuv" path="res://scenes/ui/HUD/health_ui.tscn" id="2_82dk7"]
 [ext_resource type="PackedScene" uid="uid://nb8fh2swgkg5" path="res://scenes/ui/menus/main_menu.tscn" id="2_l3m3k"]
+[ext_resource type="FontFile" uid="uid://boix1hm1wtya1" path="res://assets/themes/SansPosterBold.ttf" id="3_etvtw"]
 [ext_resource type="PackedScene" uid="uid://ci2ynjtansxsh" path="res://scenes/ui/HUD/coins_ui.tscn" id="3_u7dj5"]
 
 [node name="UI" type="CanvasLayer"]
@@ -60,7 +61,9 @@ size_flags_vertical = 0
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
-text = "PISTOL COOLDOWN "
+theme_override_fonts/font = ExtResource("3_etvtw")
+theme_override_font_sizes/font_size = 48
+text = "16"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer"]
 layout_mode = 2

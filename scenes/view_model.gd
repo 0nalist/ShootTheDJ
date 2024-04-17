@@ -4,6 +4,7 @@ extends Camera3D
 @onready var fps_rig = $FPSRig
 @onready var shotgun_animation_player = $FPSRig/Shotun/ShotgunAnimationPlayer
 @onready var pistol_animation_player = $FPSRig/Pistol/PistolAnimationPlayer
+@onready var fist_animation_player = $FPSRig/Fist/FistAnimationPlayer
 
 @onready var one_hihat_1 = $ipod/OneHihat1
 @onready var open_hi_hat_hit = $ipod/OpenHiHatHit
@@ -38,9 +39,9 @@ func sway(sway_amount):
 
 
 #TEMP FOR 2D fist
-@onready var right_fist_sprite_3d = $FPSRig/GunManager/RightFistSprite3D
-func punch_fist():
-	right_fist_sprite_3d.play("punch")
+#@onready var right_fist_sprite_3d = $FPSRig/GunManager/RightFistSprite3D
+#func punch_fist():
+	#right_fist_sprite_3d.play("punch")
 
 
 func fire_shotgun():
@@ -49,6 +50,10 @@ func fire_shotgun():
 func fire_pistol():
 	pistol_animation_player.queue("fire")
 	#one_hihat_1.play()
+
+func punch():
+	fist_animation_player.play("punch")
+
 
 func equip_shotgun():
 	$FPSRig/Shotun.visible = true

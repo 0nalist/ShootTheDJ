@@ -57,23 +57,17 @@ theme = ExtResource("2_5eq7r")
 theme_override_font_sizes/font_size = 32
 text = "RESTART"
 
-[node name="SaveButton" type="Button" parent="Panel/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("2_5eq7r")
-theme_override_font_sizes/font_size = 32
-text = "SAVE"
-
-[node name="LoadButton" type="Button" parent="Panel/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("2_5eq7r")
-theme_override_font_sizes/font_size = 32
-text = "LOAD"
-
 [node name="OptionsButton" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_5eq7r")
 theme_override_font_sizes/font_size = 32
 text = "OPTIONS"
+
+[node name="SaveButton" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_5eq7r")
+theme_override_font_sizes/font_size = 32
+text = "SAVE"
 
 [node name="QuitButton" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2

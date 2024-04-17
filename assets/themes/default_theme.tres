@@ -26,7 +26,7 @@ shadow_offset = Vector2(2, 2)
 
 [resource]
 default_font = ExtResource("1_ij3i4")
-default_font_size = 16
+default_font_size = 19
 Button/colors/font_focus_color = Color(0.87451, 0.670588, 0.152941, 1)
 Button/colors/font_hover_color = Color(1, 0.952941, 0.105882, 1)
 Button/colors/font_pressed_color = Color(0.294118, 0.294118, 0.372549, 1)

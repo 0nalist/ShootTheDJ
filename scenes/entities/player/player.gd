@@ -134,7 +134,7 @@ func calculate_movement_parameters()->void:
 
 
 func _ready():
-	$Head/MainCamera/SubViewportContainer/SubViewport.size = DisplayServer.window_get_size() # ALSO DO THIS ON RESIZING
+	#$Head/MainCamera/SubViewportContainer/SubViewport.size = DisplayServer.window_get_size() # ALSO DO THIS ON RESIZING
 	# Connect to BeatManager
 	BeatManager.sixteenth.connect(_on_sixteenth)
 	BeatManager.beat.connect(_on_beat)
@@ -162,6 +162,7 @@ func _on_sixteenth(sixteenth):
 	
 	if sixteenth in [1,5,9,13]:
 		debug_kick()
+		gun_camera.punch()
 	
 	if pistol_firing and holding_pistol and not pistol_on_cooldown:
 		pistol_sixteenths_elapsed += 1
@@ -186,13 +187,7 @@ func process_queued_shots():
 
 func debug_kick():
 	one_kick_punch.play()
-	gun_camera.punch_fist()
-
-
-
-
-
-
+#	gun_camera.punch_fist()
 
 
 
@@ -211,6 +206,8 @@ var pistol_beats_left: int = 0
 
 var pistol_fill_firing := false
 var pistol_fill_counter : int= 0
+
+#var pistol_depleting:= false
 
 var pistol_pat = [3, 7, 11, 15]
 var pistol_fill_pat = [1,2,4,5,6,8,9,10,12,13,14,16]
@@ -245,6 +242,7 @@ func process_pistol_input():
 		return
 	if pistol_firing:
 		pistol_fill_firing = true
+		#pistol_depleting = true
 	if not pistol_firing:
 		pistol_firing = true
 		pistol_sixteenths_elapsed = 0
@@ -255,11 +253,12 @@ func start_pistol_cooldown():
 	pistol_cooldown_started.emit(pistol_cooldown_current_beat)
 
 func update_pistol_cooldown():
-	if pistol_on_cooldown or pistol_fill_firing:
+	if pistol_on_cooldown or pistol_firing:#pistol_depleting:
 		pistol_cooldown_current_beat -= 1
 		pistol_cooldown_updated.emit(pistol_cooldown_current_beat)
 		if pistol_cooldown_current_beat == 0:
 			pistol_on_cooldown = false
+			#pistol_depleting = false
 
 
 

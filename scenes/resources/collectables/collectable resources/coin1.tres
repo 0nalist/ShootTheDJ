@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_i23bh")
-collectable_name = ""
+collectable_name = "coin"
 scene = ExtResource("1_wxv2q")
 scale = 0.2
 tag = "Currency"

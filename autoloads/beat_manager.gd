@@ -20,6 +20,11 @@ signal beat()
 signal sixteenth(current_sixteenth)
 #signal finished(sound_player)
 
+
+@onready var house_fourth_player = $HouseFourthPlayer
+
+
+
 var bpm: float = 120.0
 #GETSET
 
@@ -36,12 +41,15 @@ var drum_samples = {
 	"ONEHIHATHIT": preload("res://assets/audio/samples/onehihathit.ogg"),
 	"ONEKICK": preload("res://assets/audio/samples/onekick.ogg"),
 	"OPENHIHAT": preload("res://assets/audio/samples/openhihat.ogg"),
+	"HOUSE4th1": preload("res://assets/audio/pickups/coins/housefourth1.ogg"),
 }
 
 func _ready():
 	set_process(true)  # Make sure processing is enabled
 	connect("play_sound", play_sound_effect,)
+	beat.connect(_on_beat)
 	#connect 
+	
 
 
 func _process(delta):
@@ -61,7 +69,7 @@ func _process(delta):
 				current_sixteenth += 1
 			if current_sixteenth in [1,5,9,13]:
 				emit_signal("beat")
-				print(beat)
+
 
 func start_beat_count():
 	running = true
@@ -88,23 +96,66 @@ func play_sound_effect(sound_name):
 
 func _on_sound_finished(sound_player):
 	sound_player.queue_free()
+	print("SOUND PLAYER CLEANED")
 
 #Pretty sure this does nothing, no connections
 func _on_Player_shoot(weapon_type):
 	if weapon_type == "pistol":
 		play_sound_effect("ONEHIHATHIT")
-		print("PLAYERSHOOTPIST")
 	elif weapon_type == "shotgun":
 		play_sound_effect("CLAP")
-		print("PLAYERSHOOTSHOTGUN")
+
+
+### MY Queueing
+var sound_to_play
+
+var queued_sound: bool = false
+
+func _on_beat():
+	print("BEAT")
+	if queued_sound:
+		play_sound_effect("HOUSE4th1")
+		print("TRYING TO PLAY QUEUED SOUND")
+		queued_sound = false
+	
+	
+	'''print(sound_to_play)
+	if sound_to_play != null:
+		print("Attempting to set stream in Beat_Manager_Class: ", house_fourth_player)
+	if house_fourth_player:
+		house_fourth_player.stream = sound_to_play
+		print("played sound " + str(sound_to_play))
+		house_fourth_player.play()
+	else:
+		print("house_fourth_player is not ready or available in Beat_Manager_Class.")'''
+
+
+func queue_next_beat(collectable_name) -> void:
+	match collectable_name:
+		"":
+			return
+		"coin":
+			#print("sound to play before " + str(sound_to_play))
+			sound_to_play = house_fourths[randi() % house_fourths.size()]
+			#print("sound to play set as " + str(sound_to_play))
+			queued_sound = true
+			#MAKE THIS QUEUE SOUND TO PLAY ON NEXT BAR OR BEAT
+			#sound_to_play.play()
+			
+		"weapon":
+			pass
+
+
+var house_fourths = [
+	preload("res://assets/audio/pickups/coins/housefourth1.ogg"),
+	preload("res://assets/audio/pickups/coins/housefourth2.ogg"),
+	preload("res://assets/audio/pickups/coins/househit3.ogg")
+	 ]
 
 
 
-
-
-
-### QUEUEING BELOW
-
+### QUEUEING BELOW # I THINK THIS WAS CHATGPT, I will rewrite in a way i understand
+'''
 class BeatAction:
 	var target_sixteenth: int
 	var action_data: Dictionary
@@ -133,28 +184,12 @@ func process_queue():
 func execute_action(action_data: Dictionary):
 	# Implement action execution logic here
 	print("Executing action:", action_data)
-
+'''
 
 ##### ITEMS #######
 
 
-func handle_sounds(collectable_resource) -> void:
-	match collectable_resource.collectable_name:
-		"":
-			return
-		"coin":
-			var sound_to_play = house_fourths[randi() % house_fourths.size()]
-			#MAKE THIS QUEUE SOUND TO PLAY ON NEXT BAR OR BEAT
-			sound_to_play.play()
-			
-		"weapon":
-			pass
 
-var house_fourths = {
-	"HOUSE4th1" = preload("res://assets/audio/pickups/coins/housefourth1.ogg"),
-	"HOUSE4th2" = preload("res://assets/audio/pickups/coins/housefourth2.ogg"),
-	"HOUSE4th3" = preload("res://assets/audio/pickups/coins/househit3.ogg")
-	 }
 
 
 

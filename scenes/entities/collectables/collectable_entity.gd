@@ -14,18 +14,23 @@ extends Area3D
 #Not a bug but a to do:
 # Make it so YellowSpash is always rendered behing 3d model scene
 
-
+### YIKES I should probably redo this system entirely
 
 
 func _ready():
+	visible = true
+	collision_shape_3d.disabled = false
 	#set_texture()
 	if collectable_resource.tag == "Weapon":
 		yellow_splash.visible = true
 	else:
 		yellow_splash.visible = false
+		
 	var instance = collectable_resource.scene.instantiate()
 	add_child(instance)
+	
 	area_entered.connect(on_area_entered)
+	
 	scale *= collectable_resource.scale
 	yellow_splash.scale /= scale
 	
@@ -35,19 +40,22 @@ func _ready():
 	
 
 
-func _process(delta):
-	rotation.y += 0.05
+func physics_process(delta):
+	rotation.y += 0.05 * delta
 
 
+@onready var collision_shape_3d = $CollisionShape3D
 
 func on_area_entered(area: Area3D) -> void:
 	if area.owner.is_in_group("player"):
 		SignalBus.collected.emit(collectable_resource)
-		
 		handle_sounds()
+		visible = false
+		collision_shape_3d.disabled = true
+		await get_tree().create_timer(.5).timeout
 		queue_free()
 
-# I PROBABLY NEED TO DO AN "IF SOUND AND ANIM FINISHED: QUEUE
+# I PROBABLY NEED TO DO AN "IF SOUND AND ANIM FINISHED: QUEUE_FREE
 
 '''OLD. but keep
 signal collect_entity
@@ -74,6 +82,9 @@ func handle_animations() -> void:
 
 
 func handle_sounds() -> void:
+	BeatManager.queue_next_beat(collectable_resource.collectable_name)
+	
+	'''
 	match collectable_resource.collectable_name:
 		"":
 			return
@@ -91,4 +102,4 @@ var house_fourths = [
 	preload("res://assets/audio/pickups/coins/housefourth1.ogg"),
 	preload("res://assets/audio/pickups/coins/housefourth2.ogg"),
 	preload("res://assets/audio/pickups/coins/househit3.ogg")
-	 ]
+	 ]'''

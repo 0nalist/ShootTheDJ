@@ -23,6 +23,8 @@ func _on_main_menu_start_game() -> void:
 	#player.pistol_entered_cooldown.connect(_on_pistol_cooldown_started)
 	player.pistol_cooldown_started.connect(_on_pistol_cooldown_started)
 	player.pistol_cooldown_updated.connect(_on_pistol_cooldown_updated)
+	
+	pistol_cooldown_label.text = str(player.pistol_firing_duration)
 
 
 func _ready():
@@ -43,6 +45,6 @@ func _on_pistol_cooldown_started(beats_left: int):
 func _on_pistol_cooldown_updated(beats_left: int):
 	if beats_left <= 0:
 		pistol_cooldown_label.modulate = Color(0, 1, 0)
-		var posbeats = 16 + beats_left
+		var posbeats = player.pistol_firing_duration + beats_left
 		pistol_cooldown_label.text = str(posbeats)
 	else: pistol_cooldown_label.text = str(beats_left)

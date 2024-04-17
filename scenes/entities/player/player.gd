@@ -192,7 +192,10 @@ func kick_punch():
 	if melee_ray.is_colliding() and melee_ray.get_collider().has_method("take_damage"):
 		print("punched")
 		melee_ray.get_collider().take_damage(right_fist_damage)
-		heal(.1)
+		heal(.1)#lifesteal
+	var backward_direction = -global_transform.basis.z
+	var push_force = backward_direction * 5
+	velocity += push_force
 
 
 
@@ -203,7 +206,7 @@ var holding_pistol := false
 var pistol_on_cooldown := false
 
 var pistol_firing := false
-var pistol_firing_duration: int = 16 #BEATS
+var pistol_firing_duration: int = 24 #BEATS
 var pistol_sixteenths_elapsed: int = 0 #sixteenths
 
 var pistol_cooldown_beats: int = 8 
@@ -235,7 +238,7 @@ func fire_pistol():
 	gun_camera.fire_pistol()  # Assuming this method manages the animation
 	if gun_ray.is_colliding() and gun_ray.get_collider().has_method("take_damage"):
 		gun_ray.get_collider().take_damage(pistol_damage)
-		heal(.1)
+		heal(.1)#lifesteal
 	if pistol_fill_firing:
 		velocity *= 0.45
 		pistol_fill_counter += 1
@@ -268,13 +271,7 @@ func update_pistol_cooldown():
 
 
 
-
-
-
 # ===== NEW SHOTGUN handling =====
-
-
-
 
 
 
@@ -301,9 +298,14 @@ func fire_shotgun(is_critical):
 	gun_camera.fire_shotgun()  # Animation handling
 	if gun_ray.is_colliding() and gun_ray.get_collider().has_method("take_damage"):
 		gun_ray.get_collider().take_damage(damage)
-		heal(.1)
+		heal(.1)#lifesteal
 	shotgun_cooldown = true
 	shotgun_cooldown_timer.start()
+	
+	
+	var backward_direction = -global_transform.basis.z
+	var push_force = backward_direction * 15
+	velocity -= push_force
 
 
 func _on_shotgun_cooldown_timer_timeout():
@@ -536,6 +538,8 @@ func equip_right_fist():
 	holding_right_fist = true
 	gun_camera.equip_left_fist()
 
+
+'''
 func start_stop_weapons_2slot():
 	if not two_shooting:
 		two_shooting = true
@@ -565,6 +569,8 @@ func cycle_three():
 	three_slot_current = (three_slot_current + 1) % kick_pat.size()
 	if three_slot_current > kick_pat.size():
 		three_slot_current = 0
+'''
+
 
 var hat_patterns: Array = [[],[],[]]
 var user_hats: Array = []
@@ -588,6 +594,8 @@ func drum_machine_factory_reset():
 	kick_pat[0] = [1,11]
 	kick_pat[1] = [1,5,9,13]'''
 
+
+'''
 func shoot_play_closed_hihat():
 	#one_hi_hat_hit.play()
 	#gun_camera.fire_pistol()
@@ -618,7 +626,7 @@ func shoot_play_kick_punch():
 		heal(.1)
 		#nudge_bass_cutoff_filter(-10)
 		print("punch")
-	velocity *= 0.8
+	velocity *= 0.8'''
 
 func nudge_bass_cutoff_filter(value):
 	pass

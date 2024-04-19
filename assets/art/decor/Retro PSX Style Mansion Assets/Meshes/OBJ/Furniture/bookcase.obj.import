@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://buxg0br7a2dsu"
+path="res://.godot/imported/bookcase.obj-77d50f193428de36a9afa640b8acb93c.mesh"
+
+[deps]
+
+files=["res://.godot/imported/bookcase.obj-77d50f193428de36a9afa640b8acb93c.mesh"]
+
+source_file="res://assets/art/decor/Retro PSX Style Mansion Assets/Meshes/OBJ/Furniture/bookcase.obj"
+dest_files=["res://.godot/imported/bookcase.obj-77d50f193428de36a9afa640b8acb93c.mesh", "res://.godot/imported/bookcase.obj-77d50f193428de36a9afa640b8acb93c.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

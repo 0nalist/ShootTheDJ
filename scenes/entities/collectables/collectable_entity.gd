@@ -51,7 +51,7 @@ func on_area_entered(area: Area3D) -> void:
 		SignalBus.collected.emit(collectable_resource)
 		handle_sounds()
 		visible = false
-		collision_shape_3d.disabled = true
+		#collision_shape_3d.disabled = true ##Throws error "can't change state while flushing queries"
 		await get_tree().create_timer(.5).timeout
 		queue_free()
 

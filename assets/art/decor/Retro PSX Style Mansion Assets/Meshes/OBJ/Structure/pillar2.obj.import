@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cea7368ny1eoc"
+path="res://.godot/imported/pillar2.obj-1b4a2aa884b0b293f366d260df3df9ea.mesh"
+
+[deps]
+
+files=["res://.godot/imported/pillar2.obj-1b4a2aa884b0b293f366d260df3df9ea.mesh"]
+
+source_file="res://assets/art/decor/Retro PSX Style Mansion Assets/Meshes/OBJ/Structure/pillar2.obj"
+dest_files=["res://.godot/imported/pillar2.obj-1b4a2aa884b0b293f366d260df3df9ea.mesh", "res://.godot/imported/pillar2.obj-1b4a2aa884b0b293f366d260df3df9ea.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

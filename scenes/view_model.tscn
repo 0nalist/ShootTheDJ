@@ -2123,22 +2123,10 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("whitehand:scale")
+tracks/1/path = NodePath("whitehand:rotation")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector3(0.07, 0.07, 0.07), Vector3(0.07, 0.07, 0.07)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("whitehand:rotation")
-tracks/2/interp = 2
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.3, 0.7, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
@@ -2162,55 +2150,14 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("whitehand:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0.07, 0.07, 0.07)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("whitehand:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0.620954, -0.0722857, 1.79298)]
-}
-
-[sub_resource type="Animation" id="Animation_yghp3"]
-resource_name = "punch"
-length = 0.38
-step = 0.025
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("whitehand:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.125, 0.15, 0.175, 0.375),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(-0.0259453, 0.82833, 4.48035), Vector3(-0.0201905, 0.78062, 4.20083), Vector3(-0.0054993, 0.764511, 4.19647), Vector3(-0.00842015, 0.773628, 4.23703), Vector3(0.034187, 0.758434, 4.13514), Vector3(-0.0259453, 0.82833, 4.48035)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/path = NodePath("whitehand:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.125, 0.15, 0.175, 0.375),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0.714694, -0.0923883, 1.76368), Vector3(0.714694, -0.0923883, 1.76367), Vector3(0.686899, -0.253799, 1.55644), Vector3(0.57729, -0.501761, 1.22272), Vector3(0.209711, -0.620004, 1.08752), Vector3(0.714694, -0.0923883, 1.76368)]
+"values": [Vector3(0.620954, -0.0722857, 1.79298)]
 }
 
 [sub_resource type="Animation" id="Animation_tch5s"]
@@ -2240,6 +2187,35 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0.0593412, -0.0925025, 1.76453), Vector3(0.714694, -0.0923883, 1.76368)]
+}
+
+[sub_resource type="Animation" id="Animation_yghp3"]
+resource_name = "punch"
+length = 0.38
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("whitehand:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.125, 0.15, 0.175, 0.375),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.0259453, 0.82833, 4.48035), Vector3(-0.0201905, 0.78062, 4.20083), Vector3(-0.0054993, 0.764511, 4.19647), Vector3(-0.00842015, 0.773628, 4.23703), Vector3(0.034187, 0.758434, 4.13514), Vector3(-0.0259453, 0.82833, 4.48035)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("whitehand:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.125, 0.375),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.714694, -0.0923883, 1.76368), Vector3(0.714694, -0.0923883, 1.76367), Vector3(0.686899, -0.253799, 1.55644), Vector3(0.714694, -0.0923883, 1.76368)]
 }
 
 [sub_resource type="Animation" id="Animation_8a6ow"]
@@ -2569,7 +2545,7 @@ one_shot = true
 transform = Transform3D(1, 0, 0, 0, 0.985745, -0.168249, 0, 0.168249, 0.985745, 0, -0.344102, -5.26781)
 
 [node name="whitehand" type="Node3D" parent="FPSRig/Fist"]
-transform = Transform3D(-0.018254, -0.0674528, -0.00411183, 0.0555332, -0.0125457, -0.0407268, 0.0385079, -0.0138825, 0.056784, -0.0259453, 0.830175, 4.49117)
+transform = Transform3D(-0.018254, -0.0674528, -0.00411184, 0.0555332, -0.0125457, -0.0407268, 0.0385079, -0.0138824, 0.056784, -0.0259453, 0.830175, 4.49117)
 
 [node name="hand" type="MeshInstance3D" parent="FPSRig/Fist/whitehand"]
 transform = Transform3D(1, 5.96046e-08, 2.98023e-08, -2.98023e-08, 1, 1.49012e-08, 0, -1.49012e-08, 1, -1.76629, 0.566542, -0.592361)
@@ -2674,6 +2650,120 @@ skeleton = NodePath("")
 surface_material_override/0 = ExtResource("2_kys57")
 
 [node name="FistAnimationPlayer" type="AnimationPlayer" parent="FPSRig/Fist"]
+libraries = {
+"": SubResource("AnimationLibrary_xgcs4")
+}
+
+[node name="FarLeftFist" type="Node3D" parent="FPSRig"]
+transform = Transform3D(-0.672121, 0.729886, -0.124578, -0.740441, -0.66254, 0.113084, 1.85353e-09, 0.168249, 0.985745, -0.639636, 0.0393883, -5.61174)
+visible = false
+
+[node name="whitehand" type="Node3D" parent="FPSRig/FarLeftFist"]
+transform = Transform3D(-0.0260772, -0.0963612, -0.00587405, 0.0793331, -0.0179224, -0.0581811, 0.0550113, -0.0198321, 0.08112, -0.0259453, 0.830175, 4.49117)
+
+[node name="hand" type="MeshInstance3D" parent="FPSRig/FarLeftFist/whitehand"]
+transform = Transform3D(1, 5.96046e-08, 2.98023e-08, -2.98023e-08, 1, 1.49012e-08, 0, -1.49012e-08, 1, -1.76629, 0.566542, -0.592361)
+mesh = SubResource("ArrayMesh_21ggu")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_kys57")
+
+[node name="arm_lower" type="MeshInstance3D" parent="FPSRig/FarLeftFist/whitehand/hand"]
+transform = Transform3D(0.999968, -0.00776306, 0.00153661, 0.00775136, 0.999942, 0.0075389, -0.00159481, -0.00752677, 0.99997, 0.244099, -0.144696, -0.289249)
+mesh = SubResource("ArrayMesh_c753e")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_kys57")
+
+[node name="index_0" type="MeshInstance3D" parent="FPSRig/FarLeftFist/whitehand/hand"]
+transform = Transform3D(0.848945, -0.446629, 0.282514, -0.376556, -0.136122, 0.916339, -0.370807, -0.884304, -0.283741, 0.544256, -0.161447, -1.79186)
+mesh = SubResource("ArrayMesh_3r057")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_kys57")
+
+[node name="index_1" type="MeshInstance3D" parent="FPSRig/FarLeftFist/whitehand/hand/index_0"]
+transform = Transform3D(-0.895488, -0.301772, 0.327162, 0.234232, 0.305514, 0.922929, -0.378466, 0.903104, -0.202899, -6.19888e-06, -8.58307e-06, -0.520086)
+mesh = SubResource("ArrayMesh_s7qk6")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_kys57")
+
+[node name="index_2" type="MeshInstance3D" parent="FPSRig/FarLeftFist/whitehand/hand/index_0/index_1"]
+transform = Transform3D(0.924397, -0.228094, 0.305716, 0.122227, -0.582096, -0.803881, 0.361317, 0.780472, -0.510209, 0.00323963, -0.00712252, -0.497184)
+mesh = SubResource("ArrayMesh_w4uvw")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_kys57")
+
+[node name="middle_0" type="MeshInstance3D" parent="FPSRig/FarLeftFist/whitehand/hand"]
+transform = Transform3D(0.961706, -0.131019, 0.240738, -0.274022, -0.441241, 0.854529, -0.00573519, -0.887773, -0.460246, 0.215042, -0.0923676, -1.97122)
+mesh = SubResource("ArrayMesh_3ogrs")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_kys57")
+
+[node name="middle_1" type="MeshInstance3D" parent="FPSRig/FarLeftFist/whitehand/hand/middle_0"]
+transform = Transform3D(0.9182, 0.214597, 0.332953, -0.389279, 0.333326, 0.858694, 0.0732912, -0.918064, 0.389598, 9.53674e-07, -4.76837e-07, -0.59545)
+mesh = SubResource("ArrayMesh_k0smd")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_kys57")
+
+[node name="middle_2" type="MeshInstance3D" parent="FPSRig/FarLeftFist/whitehand/hand/middle_0/middle_1"]
+transform = Transform3D(0.771416, -0.0379886, -0.635196, 0.627483, -0.120468, 0.769255, -0.105743, -0.99199, -0.0690935, 1.90735e-06, 4.76837e-07, -0.576577)
+mesh = SubResource("ArrayMesh_kqpyj")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_kys57")
+
+[node name="pinky_0" type="MeshInstance3D" parent="FPSRig/FarLeftFist/whitehand/hand"]
+transform = Transform3D(0.981939, -0.0997449, 0.160764, -0.189191, -0.513055, 0.837248, -0.00102878, -0.852541, -0.522659, -0.579141, -0.00597, -1.90571)
+mesh = SubResource("ArrayMesh_rnufh")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_kys57")
+
+[node name="pinky_1" type="MeshInstance3D" parent="FPSRig/FarLeftFist/whitehand/hand/pinky_0"]
+transform = Transform3D(0.944566, -0.161788, 0.285692, -0.266211, 0.131891, 0.954849, -0.192163, -0.977972, 0.0815095, 0.0142469, 0.086482, -0.473413)
+mesh = SubResource("ArrayMesh_05wli")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_kys57")
+
+[node name="pinky_2" type="MeshInstance3D" parent="FPSRig/FarLeftFist/whitehand/hand/pinky_0/pinky_1"]
+transform = Transform3D(0.555966, -0.819658, -0.138061, 0.259755, 0.0135495, 0.965579, -0.789575, -0.572691, 0.220444, 0, 0, -0.484158)
+mesh = SubResource("ArrayMesh_4cjh2")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_kys57")
+
+[node name="ring_0" type="MeshInstance3D" parent="FPSRig/FarLeftFist/whitehand/hand"]
+transform = Transform3D(0.981939, -0.099745, 0.160765, -0.189191, -0.513055, 0.837247, -0.0010289, -0.852541, -0.522659, -0.243116, -0.0811667, -1.92518)
+mesh = SubResource("ArrayMesh_ch0ug")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_kys57")
+
+[node name="ring_1" type="MeshInstance3D" parent="FPSRig/FarLeftFist/whitehand/hand/ring_0"]
+transform = Transform3D(0.890259, -0.425965, 0.161238, -0.0920284, 0.178477, 0.979631, -0.446065, -0.886962, 0.11969, 0.0279646, 0.0793915, -0.651805)
+mesh = SubResource("ArrayMesh_25k68")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_kys57")
+
+[node name="ring_2" type="MeshInstance3D" parent="FPSRig/FarLeftFist/whitehand/hand/ring_0/ring_1"]
+transform = Transform3D(0.782577, -0.44797, -0.432316, 0.324054, -0.299816, 0.897273, -0.531567, -0.842279, -0.089463, 0, -1.19209e-07, -0.558439)
+mesh = SubResource("ArrayMesh_gd4xd")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_kys57")
+
+[node name="thumb_0" type="MeshInstance3D" parent="FPSRig/FarLeftFist/whitehand/hand"]
+transform = Transform3D(-0.433175, 1.09738, -0.211984, -1.10973, -0.395239, 0.221616, 0.132991, 0.276341, 1.15878, 0.47156, -0.0687211, -0.365426)
+mesh = SubResource("ArrayMesh_gp4uo")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_kys57")
+
+[node name="thumb_1" type="MeshInstance3D" parent="FPSRig/FarLeftFist/whitehand/hand/thumb_0"]
+transform = Transform3D(0.890703, 0.363812, 0.272561, -0.376959, 0.926218, -0.00444391, -0.254068, -0.0987854, 0.962129, 0.469169, -0.0705967, -0.664894)
+mesh = SubResource("ArrayMesh_80i44")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_kys57")
+
+[node name="thumb_2" type="MeshInstance3D" parent="FPSRig/FarLeftFist/whitehand/hand/thumb_0/thumb_1"]
+transform = Transform3D(0.423893, 0.697518, 0.577739, -0.866327, 0.126198, 0.483271, 0.264181, -0.705367, 0.657773, 0.286444, 0, -0.397434)
+mesh = SubResource("ArrayMesh_a0vj6")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_kys57")
+
+[node name="FarLeftFistAnimationPlayer" type="AnimationPlayer" parent="FPSRig/FarLeftFist"]
 libraries = {
 "": SubResource("AnimationLibrary_xgcs4")
 }

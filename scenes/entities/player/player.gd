@@ -194,7 +194,7 @@ func kick_punch():
 		melee_ray.get_collider().take_damage(right_fist_damage)
 		heal(.1)#lifesteal
 	var backward_direction = -global_transform.basis.z
-	var push_force = backward_direction * 5
+	var push_force = backward_direction * 3
 	velocity += push_force
 
 
@@ -206,10 +206,10 @@ var holding_pistol := false
 var pistol_on_cooldown := false
 
 var pistol_firing := false
-var pistol_firing_duration: int = 24 #BEATS
+var pistol_firing_duration: int = 32 #BEATS
 var pistol_sixteenths_elapsed: int = 0 #sixteenths
 
-var pistol_cooldown_beats: int = 8 
+var pistol_cooldown_beats: int = 16 
 var pistol_cooldown_current_beat: int = 0 
 var pistol_beats_left: int = 0
 
@@ -304,7 +304,7 @@ func fire_shotgun(is_critical):
 	
 	
 	var backward_direction = -global_transform.basis.z
-	var push_force = backward_direction * 15
+	var push_force = backward_direction * 8
 	velocity -= push_force
 
 
@@ -471,6 +471,7 @@ func handle_jump(dir):
 
 func collect(collectable):
 	collected.emit(collectable)
+	print("COLLECTABLE EMITTED: " + str(collectable))
 
 var can_jump := true
 var camera_can_move := true
@@ -593,40 +594,6 @@ func drum_machine_factory_reset():
 	snare_pat[0] = [5,13]
 	kick_pat[0] = [1,11]
 	kick_pat[1] = [1,5,9,13]'''
-
-
-'''
-func shoot_play_closed_hihat():
-	#one_hi_hat_hit.play()
-	#gun_camera.fire_pistol()
-	if gun_ray.is_colliding() and gun_ray.get_collider().has_method("take_damage"):
-		gun_ray.get_collider().take_damage(pistol_damage)
-		print("hihathit")
-		heal(.1)
-	velocity *= 0.95
-
-func shoot_play_shotgun():
-	#clap.play()
-	gun_camera.fire_shotgun()
-	var backward_direction = -global_transform.basis.z
-	var push_force = backward_direction * 25
-	velocity -= push_force
-	if gun_ray.is_colliding() and gun_ray.get_collider().has_method("take_damage"):
-		gun_ray.get_collider().take_damage(right_fist_damage)
-		heal(.1)
-	print(gun_ray.get_collider())
-
-func shoot_play_kick_punch():
-	#one_kick_punch.play()
-	var backward_direction = -global_transform.basis.z
-	var push_force = backward_direction * 15
-	velocity += push_force
-	if melee_ray.is_colliding() and melee_ray.get_collider().has_method("take_damage"):
-		melee_ray.get_collider().take_damage(right_fist_damage)
-		heal(.1)
-		#nudge_bass_cutoff_filter(-10)
-		print("punch")
-	velocity *= 0.8'''
 
 func nudge_bass_cutoff_filter(value):
 	pass

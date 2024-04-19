@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bkcto1jr048pc"
+path="res://.godot/imported/floor0.obj-a998a9a22259e5f2040f02546bcd722a.mesh"
+
+[deps]
+
+files=["res://.godot/imported/floor0.obj-a998a9a22259e5f2040f02546bcd722a.mesh"]
+
+source_file="res://assets/art/decor/Retro PSX Style Mansion Assets/Meshes/OBJ/Structure/floor0.obj"
+dest_files=["res://.godot/imported/floor0.obj-a998a9a22259e5f2040f02546bcd722a.mesh", "res://.godot/imported/floor0.obj-a998a9a22259e5f2040f02546bcd722a.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

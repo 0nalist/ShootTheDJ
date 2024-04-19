@@ -21,7 +21,7 @@ signal sixteenth(current_sixteenth)
 #signal finished(sound_player)
 
 
-@onready var house_fourth_player = $HouseFourthPlayer
+#@onready var house_fourth_player = $HouseFourthPlayer
 
 
 

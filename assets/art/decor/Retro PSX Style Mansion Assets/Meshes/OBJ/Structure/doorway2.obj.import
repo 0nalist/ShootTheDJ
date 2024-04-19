@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://di0b13um0ughv"
+path="res://.godot/imported/doorway2.obj-ed2685d9ef7505e16384c6b121e1c915.mesh"
+
+[deps]
+
+files=["res://.godot/imported/doorway2.obj-ed2685d9ef7505e16384c6b121e1c915.mesh"]
+
+source_file="res://assets/art/decor/Retro PSX Style Mansion Assets/Meshes/OBJ/Structure/doorway2.obj"
+dest_files=["res://.godot/imported/doorway2.obj-ed2685d9ef7505e16384c6b121e1c915.mesh", "res://.godot/imported/doorway2.obj-ed2685d9ef7505e16384c6b121e1c915.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

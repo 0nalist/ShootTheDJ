@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bbauxpni4d6f1"
+path="res://.godot/imported/chandelier.obj-a3bdb2b4e8fdb844ba4db78c3b84483d.mesh"
+
+[deps]
+
+files=["res://.godot/imported/chandelier.obj-a3bdb2b4e8fdb844ba4db78c3b84483d.mesh"]
+
+source_file="res://assets/art/decor/Retro PSX Style Mansion Assets/Meshes/OBJ/Decor/chandelier.obj"
+dest_files=["res://.godot/imported/chandelier.obj-a3bdb2b4e8fdb844ba4db78c3b84483d.mesh", "res://.godot/imported/chandelier.obj-a3bdb2b4e8fdb844ba4db78c3b84483d.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

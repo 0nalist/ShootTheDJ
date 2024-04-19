@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bdjd2jqv11cfi"
+path="res://.godot/imported/master_bed.obj-fdf1893976442fad11a4f203b9478b0a.mesh"
+
+[deps]
+
+files=["res://.godot/imported/master_bed.obj-fdf1893976442fad11a4f203b9478b0a.mesh"]
+
+source_file="res://assets/art/decor/Retro PSX Style Mansion Assets/Meshes/OBJ/Furniture/master_bed.obj"
+dest_files=["res://.godot/imported/master_bed.obj-fdf1893976442fad11a4f203b9478b0a.mesh", "res://.godot/imported/master_bed.obj-fdf1893976442fad11a4f203b9478b0a.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

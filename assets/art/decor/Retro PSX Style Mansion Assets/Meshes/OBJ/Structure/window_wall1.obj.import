@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dpisjya5hk2pc"
+path="res://.godot/imported/window_wall1.obj-30a61fe46702ec0963c9dc6e8a2cfd13.mesh"
+
+[deps]
+
+files=["res://.godot/imported/window_wall1.obj-30a61fe46702ec0963c9dc6e8a2cfd13.mesh"]
+
+source_file="res://assets/art/decor/Retro PSX Style Mansion Assets/Meshes/OBJ/Structure/window_wall1.obj"
+dest_files=["res://.godot/imported/window_wall1.obj-30a61fe46702ec0963c9dc6e8a2cfd13.mesh", "res://.godot/imported/window_wall1.obj-30a61fe46702ec0963c9dc6e8a2cfd13.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

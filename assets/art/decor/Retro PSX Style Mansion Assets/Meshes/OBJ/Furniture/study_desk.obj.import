@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ccletmypu35hh"
+path="res://.godot/imported/study_desk.obj-93bc9002fb4ed21b70f9c14e35f73e62.mesh"
+
+[deps]
+
+files=["res://.godot/imported/study_desk.obj-93bc9002fb4ed21b70f9c14e35f73e62.mesh"]
+
+source_file="res://assets/art/decor/Retro PSX Style Mansion Assets/Meshes/OBJ/Furniture/study_desk.obj"
+dest_files=["res://.godot/imported/study_desk.obj-93bc9002fb4ed21b70f9c14e35f73e62.mesh", "res://.godot/imported/study_desk.obj-93bc9002fb4ed21b70f9c14e35f73e62.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bmxlp7nqlpv3r"
+path="res://.godot/imported/harp.obj-8503c4578eacbc5b1fa4c1812c0dc282.mesh"
+
+[deps]
+
+files=["res://.godot/imported/harp.obj-8503c4578eacbc5b1fa4c1812c0dc282.mesh"]
+
+source_file="res://assets/art/decor/Retro PSX Style Mansion Assets/Meshes/OBJ/Items/harp.obj"
+dest_files=["res://.godot/imported/harp.obj-8503c4578eacbc5b1fa4c1812c0dc282.mesh", "res://.godot/imported/harp.obj-8503c4578eacbc5b1fa4c1812c0dc282.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

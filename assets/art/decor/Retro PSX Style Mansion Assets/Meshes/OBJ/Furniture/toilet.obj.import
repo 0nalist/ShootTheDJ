@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://d2sq2tvnc3wfe"
+path="res://.godot/imported/toilet.obj-7201fb2b4b3771ac211d42da39ec554f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/toilet.obj-7201fb2b4b3771ac211d42da39ec554f.mesh"]
+
+source_file="res://assets/art/decor/Retro PSX Style Mansion Assets/Meshes/OBJ/Furniture/toilet.obj"
+dest_files=["res://.godot/imported/toilet.obj-7201fb2b4b3771ac211d42da39ec554f.mesh", "res://.godot/imported/toilet.obj-7201fb2b4b3771ac211d42da39ec554f.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

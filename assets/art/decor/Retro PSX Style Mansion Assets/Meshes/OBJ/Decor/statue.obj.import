@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bpixfn1ysitju"
+path="res://.godot/imported/statue.obj-9e20285806ff98312404d4ccf1273844.mesh"
+
+[deps]
+
+files=["res://.godot/imported/statue.obj-9e20285806ff98312404d4ccf1273844.mesh"]
+
+source_file="res://assets/art/decor/Retro PSX Style Mansion Assets/Meshes/OBJ/Decor/statue.obj"
+dest_files=["res://.godot/imported/statue.obj-9e20285806ff98312404d4ccf1273844.mesh", "res://.godot/imported/statue.obj-9e20285806ff98312404d4ccf1273844.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

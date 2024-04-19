@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b7cjxppwbgewd"
+path="res://.godot/imported/rug2.obj-d82b5ca08d264e3bf261df9a027e531b.mesh"
+
+[deps]
+
+files=["res://.godot/imported/rug2.obj-d82b5ca08d264e3bf261df9a027e531b.mesh"]
+
+source_file="res://assets/art/decor/Retro PSX Style Mansion Assets/Meshes/OBJ/Decor/rug2.obj"
+dest_files=["res://.godot/imported/rug2.obj-d82b5ca08d264e3bf261df9a027e531b.mesh", "res://.godot/imported/rug2.obj-d82b5ca08d264e3bf261df9a027e531b.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

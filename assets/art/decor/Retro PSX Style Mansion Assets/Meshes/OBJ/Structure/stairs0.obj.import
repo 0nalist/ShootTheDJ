@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b2fyj3s7reyfw"
+path="res://.godot/imported/stairs0.obj-d49d5d6f8de34f5c31d5a3ff4409d136.mesh"
+
+[deps]
+
+files=["res://.godot/imported/stairs0.obj-d49d5d6f8de34f5c31d5a3ff4409d136.mesh"]
+
+source_file="res://assets/art/decor/Retro PSX Style Mansion Assets/Meshes/OBJ/Structure/stairs0.obj"
+dest_files=["res://.godot/imported/stairs0.obj-d49d5d6f8de34f5c31d5a3ff4409d136.mesh", "res://.godot/imported/stairs0.obj-d49d5d6f8de34f5c31d5a3ff4409d136.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

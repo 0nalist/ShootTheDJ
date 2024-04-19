@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://biii84xsv14ga"
+path="res://.godot/imported/candle_holder.obj-67d5e128a8010b9e1019c03f8ee73002.mesh"
+
+[deps]
+
+files=["res://.godot/imported/candle_holder.obj-67d5e128a8010b9e1019c03f8ee73002.mesh"]
+
+source_file="res://assets/art/decor/Retro PSX Style Mansion Assets/Meshes/OBJ/Decor/candle_holder.obj"
+dest_files=["res://.godot/imported/candle_holder.obj-67d5e128a8010b9e1019c03f8ee73002.mesh", "res://.godot/imported/candle_holder.obj-67d5e128a8010b9e1019c03f8ee73002.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

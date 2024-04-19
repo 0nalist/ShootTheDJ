@@ -5,6 +5,8 @@ extends Camera3D
 @onready var shotgun_animation_player = $FPSRig/Shotun/ShotgunAnimationPlayer
 @onready var pistol_animation_player = $FPSRig/Pistol/PistolAnimationPlayer
 @onready var fist_animation_player = $FPSRig/Fist/FistAnimationPlayer
+@onready var far_left_fist_animation_player = $FPSRig/FarLeftFist/FarLeftFistAnimationPlayer
+
 
 @onready var one_hihat_1 = $ipod/OneHihat1
 @onready var open_hi_hat_hit = $ipod/OpenHiHatHit
@@ -53,6 +55,7 @@ func fire_pistol():
 
 func punch_fist():
 	fist_animation_player.play("punch")
+	far_left_fist_animation_player.play("punch")
 
 
 func equip_shotgun():

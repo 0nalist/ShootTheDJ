@@ -82,8 +82,8 @@ var dead = false
 
 # STAMINA SYSTEM #
 var stamina_recovery = 0.5
-var jump_stamina_cost = 15.0
-var slide_stamina_cost = 17.0
+var jump_stamina_cost = 10.0
+var slide_stamina_cost = 12.0
 
 # CAMERA SETTINGS
 var mouse_sens = 0.05
@@ -504,7 +504,7 @@ func slide():
 	if sliding: return
 	if stamina <= slide_stamina_cost: return
 	else:
-		if is_on_floor():
+		#if is_on_floor():
 			sliding = true
 			stamina -= slide_stamina_cost
 			var preslide_speed = accel

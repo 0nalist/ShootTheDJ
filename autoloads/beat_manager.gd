@@ -53,22 +53,22 @@ func _ready():
 
 
 func _process(delta):
-	if running:
-		var current_time = Time.get_ticks_msec() / 1000.0  # Get current time in seconds
-		var time_elapsed = current_time - last_update_time
-		last_update_time = current_time
-		accumulated_time += time_elapsed
-
-		while accumulated_time >= sixteenth_duration:
-			accumulated_time -= sixteenth_duration
-			emit_signal("sixteenth", current_sixteenth)
-			if current_sixteenth >= 16:
-				print("bar")
-				current_sixteenth = 1  # Reset after reaching 16
-			else:
-				current_sixteenth += 1
-			if current_sixteenth in [1,5,9,13]:
-				emit_signal("beat")
+	if not running:
+		return
+	var current_time = Time.get_ticks_msec() / 1000.0  # Get current time in seconds
+	var time_elapsed = current_time - last_update_time
+	last_update_time = current_time
+	accumulated_time += time_elapsed
+	while accumulated_time >= sixteenth_duration:
+		accumulated_time -= sixteenth_duration
+		emit_signal("sixteenth", current_sixteenth)
+		if current_sixteenth >= 16:
+			print("bar")
+			current_sixteenth = 1  # Reset after reaching 16
+		else:
+			current_sixteenth += 1
+		if current_sixteenth in [1,5,9,13]:
+			emit_signal("beat")
 
 
 func start_beat_count():
@@ -112,9 +112,8 @@ var sound_to_play
 var queued_sound: bool = false
 
 func _on_beat():
-	print("BEAT")
 	if queued_sound:
-		play_sound_effect("HOUSE4th1")
+		play_sound_effect(sound_to_play)
 		print("TRYING TO PLAY QUEUED SOUND")
 		queued_sound = false
 	

@@ -39,7 +39,7 @@
 [ext_resource type="Texture2D" uid="uid://dgt7qfvf2pb0k" path="res://textures/RetroPixel/GRASS_1A.PNG" id="40_lyui3"]
 [ext_resource type="PackedScene" uid="uid://bfd5pgdhro81v" path="res://graybox_1.tscn" id="40_ncraf"]
 [ext_resource type="Texture2D" uid="uid://cxuytgjn7lybp" path="res://textures/RetroPixel/TILE_2C.PNG" id="41_0htud"]
-[ext_resource type="PackedScene" uid="uid://cv1fpb3oqpp01" path="res://the_house.tscn" id="41_4rdoa"]
+[ext_resource type="PackedScene" uid="uid://bilp1o42ktupt" path="res://the_house_assets.tscn" id="41_3yoc4"]
 [ext_resource type="Texture2D" uid="uid://bblbh0pibkyds" path="res://textures/RetroPixel/WARN_1A.PNG" id="41_r2pna"]
 
 [sub_resource type="Gradient" id="Gradient_uqpse"]
@@ -1212,6 +1212,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.2481, 60.6393, 35.3337)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.6351, 60.1166, 49.69)
 collectable_resource = ExtResource("30_hxx0d")
 
+[node name="CollectableEntity5" parent="CollectableContainer" instance=ExtResource("29_wert2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.6007, 60.1166, 49.69)
+collectable_resource = ExtResource("30_hxx0d")
+
+[node name="CollectableEntity6" parent="CollectableContainer" instance=ExtResource("29_wert2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.334, 57.6686, 56.9445)
+collectable_resource = ExtResource("30_hxx0d")
+
+[node name="CollectableEntity7" parent="CollectableContainer" instance=ExtResource("29_wert2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.0798, 60.0101, 59.1827)
+collectable_resource = ExtResource("30_hxx0d")
+
 [node name="CollectableEntity" parent="CollectableContainer" instance=ExtResource("29_wert2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.8886, 59.9028, 56.3152)
 collectable_resource = ExtResource("31_y2s66")
@@ -1243,12 +1255,13 @@ transform = Transform3D(-0.579102, 0, 0.375154, 0, 0.69, 0, -0.375154, 0, -0.579
 transform = Transform3D(0.715181, 0, 0.69894, 0, 1, 0, -0.69894, 0, 0.715181, -36.8075, 59.3258, 51.6662)
 
 [node name="GrayBox" type="Node3D" parent="."]
-transform = Transform3D(0.0215008, 0, 0.999769, 0, 1, 0, -0.999769, 0, 0.0215008, 280.342, 38.4342, -41.7343)
+transform = Transform3D(0.0215008, 0, 0.999769, 0, 1, 0, -0.999769, 0, 0.0215008, 999.192, 38.4342, -41.7343)
 
 [node name="graybox1" parent="GrayBox" instance=ExtResource("40_ncraf")]
 transform = Transform3D(0.600001, 0, -1.86265e-09, 0, 0.6, 0, 1.86265e-09, 0, 0.600001, -21.9985, 18.6852, -135.742)
 
 [node name="QodotisGarbage" type="Node3D" parent="."]
+visible = false
 
 [node name="Map" type="Node3D" parent="QodotisGarbage"]
 transform = Transform3D(0.00268776, 0, -0.999996, 0, 1, 0, 0.999996, 0, 0.00268776, -39.0665, 71.9122, -309.595)
@@ -1718,7 +1731,9 @@ mesh = SubResource("ArrayMesh_fr5xx")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="QodotisGarbage/Map/QodotMap/entity_22_func_group/entity_22_mesh_instance/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_6ocpb")
 
-[node name="TheHouseAssets" parent="." instance=ExtResource("41_4rdoa")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -105.752, 62.8912, -4.59941)
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="TheHouseAssets" parent="Node3D" instance=ExtResource("41_3yoc4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.6764, 61.6557, -30.9881)
 
 [editable path="Level2/Enemy39"]

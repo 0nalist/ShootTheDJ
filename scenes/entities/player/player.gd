@@ -68,6 +68,9 @@ var dead = false
 @onready var gun_ray = $Head/MainCamera/GunRay
 @onready var melee_ray = $Head/MainCamera/MeleeRay
 
+@onready var reticle = $HUD/Reticle
+
+
 # ==== = SOUNDS = ==== #
 @onready var one_hi_hat_hit = $ipod/OneHihat1
 @onready var open_hi_hat_hit = $ipod/OpenHiHatHit
@@ -93,8 +96,8 @@ const BOB_AMP = .09
 var t_bob = 0.0
 
 # Movement calculated from acceleration and friction instead of speed
-var accel = 90.0
-const FRICTION = .85
+var accel = 220.0
+const FRICTION = .75
 var Jump_Velocity: float = 17.3
 
 # WALLJUMP KIT
@@ -192,6 +195,7 @@ func kick_punch():
 	if melee_ray.is_colliding() and melee_ray.get_collider().has_method("take_damage"):
 		print("punched")
 		melee_ray.get_collider().take_damage(right_fist_damage)
+		#reticle.RETICAL_LINES.default_color #PUT LINE HERE TO CHANGE RETICLE COLOR ON HIT
 		heal(.1)#lifesteal
 	var backward_direction = -global_transform.basis.z
 	var push_force = backward_direction * 3
@@ -509,11 +513,12 @@ func slide():
 			stamina -= slide_stamina_cost
 			var preslide_speed = accel
 			accel *= slide_speed
+			#velocity *= slide_speed #doesnt work
 			get_tree().create_tween().tween_property(main_camera, "position:y", main_camera.position.y-.8, slide_time/2 )
 			await get_tree().create_timer(slide_time).timeout
+			get_tree().create_tween().tween_property(main_camera, "position:y", main_camera.position.y+.8 , slide_time/2 )
 			if current_state != AIR:
 				accel = preslide_speed
-			get_tree().create_tween().tween_property(main_camera, "position:y", main_camera.position.y+.8 , slide_time/2 )
 			await get_tree().create_timer(slide_cooldown).timeout
 			sliding = false
 

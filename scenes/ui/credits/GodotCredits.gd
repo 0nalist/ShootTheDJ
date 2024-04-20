@@ -59,6 +59,7 @@ var credits = [
 		"Sam"
 	],[
 		"Art & Assets",
+		"The Mansion Gate (https://skfb.ly/otCXO) by finaltouch_1a is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).",
 		"Wildenza -- PSX Asset Pack",
 		"Gabrielonstartdesk -- Nun PSX style Lowpoly (https://skfb.ly/oMBzG)",
 		"Lukky -- Arms Mesh",

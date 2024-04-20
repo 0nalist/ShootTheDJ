@@ -16,8 +16,9 @@ NOT AVOIDING LAG lagging beat
 
 
 signal play_sound(name)
-signal beat()
 signal sixteenth(current_sixteenth)
+signal beat()
+signal bar()
 #signal finished(sound_player)
 
 
@@ -42,7 +43,16 @@ var drum_samples = {
 	"ONEKICK": preload("res://assets/audio/samples/onekick.ogg"),
 	"OPENHIHAT": preload("res://assets/audio/samples/openhihat.ogg"),
 	"HOUSE4th1": preload("res://assets/audio/pickups/coins/housefourth1.ogg"),
+	"HOUSE4th2": preload("res://assets/audio/pickups/coins/housefourth2.ogg"),
+	"HOUSE4th3": preload("res://assets/audio/pickups/coins/househit3.ogg"),
 }
+
+var house_fourths = [
+	preload("res://assets/audio/pickups/coins/housefourth1.ogg"),
+	preload("res://assets/audio/pickups/coins/housefourth2.ogg"),
+	preload("res://assets/audio/pickups/coins/househit3.ogg")
+	 ]
+
 
 func _ready():
 	set_process(true)  # Make sure processing is enabled
@@ -64,6 +74,7 @@ func _process(delta):
 		emit_signal("sixteenth", current_sixteenth)
 		if current_sixteenth >= 16:
 			print("bar")
+			emit_signal("bar")
 			current_sixteenth = 1  # Reset after reaching 16
 		else:
 			current_sixteenth += 1
@@ -128,16 +139,22 @@ func _on_beat():
 	else:
 		print("house_fourth_player is not ready or available in Beat_Manager_Class.")'''
 
+var sound_queued_on_bar = false
+var sound_queued_for_bar
+
+func _on_bar():
+	if sound_queued_on_bar:
+		play_sound_effect(sound_queued_for_bar)
+
+
 
 func queue_next_beat(collectable_name) -> void:
 	match collectable_name:
 		"":
 			return
 		"coin":
-			#print("sound to play before " + str(sound_to_play))
-			sound_to_play = house_fourths[randi() % house_fourths.size()]
-			#print("sound to play set as " + str(sound_to_play))
-			queued_sound = true
+			var index = randi() % house_fourths.size()  # Choose a random index
+			sound_to_play = ["HOUSE4th1", "HOUSE4th2", "HOUSE4th3"][index]
 			#MAKE THIS QUEUE SOUND TO PLAY ON NEXT BAR OR BEAT
 			#sound_to_play.play()
 			
@@ -145,11 +162,7 @@ func queue_next_beat(collectable_name) -> void:
 			pass
 
 
-var house_fourths = [
-	preload("res://assets/audio/pickups/coins/housefourth1.ogg"),
-	preload("res://assets/audio/pickups/coins/housefourth2.ogg"),
-	preload("res://assets/audio/pickups/coins/househit3.ogg")
-	 ]
+
 
 
 

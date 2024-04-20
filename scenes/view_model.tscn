@@ -58,6 +58,7 @@ next_pass = SubResource("ShaderMaterial_i0e25")
 diffuse_mode = 3
 specular_mode = 1
 albedo_texture = ExtResource("1_g03ht")
+roughness = 0.0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_hidmf"]
 _surfaces = [{
@@ -838,6 +839,7 @@ shader = ExtResource("3_a1kj4")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ohtup"]
 next_pass = SubResource("ShaderMaterial_cmek8")
 albedo_texture = ExtResource("5_bmog4")
+roughness = 0.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n1a38"]
 

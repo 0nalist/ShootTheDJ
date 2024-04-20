@@ -1,6 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://bhg2324v3ytlt"]
+[gd_scene load_steps=19 format=3 uid="uid://bhg2324v3ytlt"]
 
 [ext_resource type="Script" path="res://scenes/entities/player/player.gd" id="1_ih33w"]
+[ext_resource type="Script" path="res://scenes/entities/player/subviewport.gd" id="2_upd57"]
 [ext_resource type="AudioStream" uid="uid://5nhko3ym0mka" path="res://assets/audio/samples/onehihathit.ogg" id="3_2uqs6"]
 [ext_resource type="AudioStream" uid="uid://odf84ih83rrw" path="res://assets/audio/samples/openhihat.ogg" id="4_mtbnb"]
 [ext_resource type="PackedScene" uid="uid://dw3mbmktjqhkq" path="res://scenes/view_model.tscn" id="5_a167m"]
@@ -12,21 +13,6 @@
 [ext_resource type="PackedScene" uid="uid://c3tql2mce7gn4" path="res://scenes/player_stat_handler.tscn" id="8_cv4ps"]
 [ext_resource type="FontFile" uid="uid://boix1hm1wtya1" path="res://assets/themes/SansPosterBold.ttf" id="9_by3j0"]
 [ext_resource type="PackedScene" uid="uid://cv5kq374nfp3f" path="res://assets/Characters/chad/chad.tscn" id="11_nh5ux"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3g17x"]
-
-[sub_resource type="Sky" id="Sky_ljs5c"]
-sky_material = SubResource("ProceduralSkyMaterial_3g17x")
-
-[sub_resource type="Environment" id="Environment_gwakr"]
-background_mode = 2
-background_energy_multiplier = 1.86
-sky = SubResource("Sky_ljs5c")
-ssao_enabled = true
-glow_enabled = true
-
-[sub_resource type="World3D" id="World3D_tipn4"]
-environment = SubResource("Environment_gwakr")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_n1olw"]
 height = 1.71139
@@ -92,13 +78,13 @@ size_flags_vertical = 3
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="Head/MainCamera/SubViewportContainer"]
-world_3d = SubResource("World3D_tipn4")
 transparent_bg = true
 handle_input_locally = false
 screen_space_aa = 1
 canvas_item_default_texture_filter = 0
 size = Vector2i(960, 540)
 render_target_update_mode = 4
+script = ExtResource("2_upd57")
 
 [node name="view_model_camera" parent="Head/MainCamera/SubViewportContainer/SubViewport" instance=ExtResource("5_a167m")]
 

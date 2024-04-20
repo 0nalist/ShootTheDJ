@@ -1,8 +1,7 @@
-[gd_scene load_steps=376 format=3 uid="uid://bilp1o42ktupt"]
+[gd_scene load_steps=375 format=3 uid="uid://bilp1o42ktupt"]
 
 [ext_resource type="Texture2D" uid="uid://dul4sybk5u2k4" path="res://assets/art/decor/Retro PSX Style Mansion Assets/Textures/piano_texture.png" id="1_picr5"]
 [ext_resource type="Shader" path="res://assets/art/shaders/cel shader/outline.gdshader" id="1_s16in"]
-[ext_resource type="Shader" path="res://assets/art/shaders/thinoutline.gdshader" id="2_7ule0"]
 [ext_resource type="Texture2D" uid="uid://cwx1whuj52u0" path="res://assets/art/decor/Retro PSX Style Mansion Assets/Textures/harp_texture.png" id="3_f8iej"]
 [ext_resource type="Shader" path="res://assets/art/shaders/wavy.gdshader" id="4_720yp"]
 [ext_resource type="Texture2D" uid="uid://i5h5y065w1yb" path="res://assets/art/decor/Retro PSX Style Mansion Assets/Textures/floor0_texture.png" id="4_q2sjw"]
@@ -3376,9 +3375,7 @@ shadow_mesh = SubResource("ArrayMesh_ygq7r")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bqjvk"]
 render_priority = 0
-shader = ExtResource("2_7ule0")
-shader_parameter/outline_color = null
-shader_parameter/outline_width = 1.0
+shader = ExtResource("1_s16in")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ktcrw"]
 next_pass = SubResource("ShaderMaterial_bqjvk")
@@ -4360,6 +4357,7 @@ next_pass = SubResource("ShaderMaterial_eq5ka")
 diffuse_mode = 3
 specular_mode = 1
 albedo_texture = ExtResource("4_q2sjw")
+roughness = 0.84
 uv1_scale = Vector3(10, 10, 10)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_k730n"]

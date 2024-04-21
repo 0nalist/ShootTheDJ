@@ -1,6 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://bhg2324v3ytlt"]
+[gd_scene load_steps=21 format=3 uid="uid://bhg2324v3ytlt"]
 
 [ext_resource type="Script" path="res://scenes/entities/player/player.gd" id="1_ih33w"]
+[ext_resource type="Environment" uid="uid://ciq4fdqs6dlc2" path="res://scenes/standard_world_environment.tres" id="2_l54ao"]
 [ext_resource type="Script" path="res://scenes/entities/player/subviewport.gd" id="2_upd57"]
 [ext_resource type="AudioStream" uid="uid://5nhko3ym0mka" path="res://assets/audio/samples/onehihathit.ogg" id="3_2uqs6"]
 [ext_resource type="AudioStream" uid="uid://odf84ih83rrw" path="res://assets/audio/samples/openhihat.ogg" id="4_mtbnb"]
@@ -13,6 +14,9 @@
 [ext_resource type="PackedScene" uid="uid://c3tql2mce7gn4" path="res://scenes/player_stat_handler.tscn" id="8_cv4ps"]
 [ext_resource type="FontFile" uid="uid://boix1hm1wtya1" path="res://assets/themes/SansPosterBold.ttf" id="9_by3j0"]
 [ext_resource type="PackedScene" uid="uid://cv5kq374nfp3f" path="res://assets/Characters/chad/chad.tscn" id="11_nh5ux"]
+
+[sub_resource type="World3D" id="World3D_i33gg"]
+environment = ExtResource("2_l54ao")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_n1olw"]
 height = 1.71139
@@ -78,6 +82,8 @@ size_flags_vertical = 3
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="Head/MainCamera/SubViewportContainer"]
+own_world_3d = true
+world_3d = SubResource("World3D_i33gg")
 transparent_bg = true
 handle_input_locally = false
 screen_space_aa = 1
@@ -304,6 +310,7 @@ visible = false
 
 [node name="Chad" parent="." instance=ExtResource("11_nh5ux")]
 transform = Transform3D(-0.2, 0, -1.74846e-08, 0, 0.2, 0, 1.74846e-08, 0, -0.2, 0.0438089, -0.906829, 0.682025)
+visible = false
 
 [connection signal="timeout" from="Head/MainCamera/GunRay/PistolCooldownTimer" to="." method="_on_pistol_cooldown_timer_timeout"]
 [connection signal="timeout" from="Head/MainCamera/GunRay/ShotgunCooldownTimer" to="." method="_on_shotgun_cooldown_timer_timeout"]

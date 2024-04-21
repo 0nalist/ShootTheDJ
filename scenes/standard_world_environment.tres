@@ -1,0 +1,31 @@
+[gd_resource type="Environment" load_steps=6 format=3 uid="uid://ciq4fdqs6dlc2"]
+
+[sub_resource type="Gradient" id="Gradient_uqpse"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ro1p8"]
+noise_type = 0
+domain_warp_enabled = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_mvvfv"]
+seamless = true
+seamless_blend_skirt = 0.467
+color_ramp = SubResource("Gradient_uqpse")
+noise = SubResource("FastNoiseLite_ro1p8")
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_w0dpf"]
+sky_top_color = Color(0.427451, 0.368627, 0.8, 1)
+sky_cover = SubResource("NoiseTexture2D_mvvfv")
+sun_angle_max = 34.78
+sun_curve = 0.33287
+
+[sub_resource type="Sky" id="Sky_y8vj0"]
+sky_material = SubResource("ProceduralSkyMaterial_w0dpf")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_y8vj0")
+volumetric_fog_density = 0.0
+volumetric_fog_emission_energy = 33.51
+volumetric_fog_gi_inject = 1.08
+volumetric_fog_anisotropy = 0.9
+volumetric_fog_ambient_inject = 1.03
